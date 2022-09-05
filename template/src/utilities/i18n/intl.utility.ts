@@ -1,8 +1,10 @@
-import { createIntl, createIntlCache, IntlShape } from "react-intl";
+import { createIntl, createIntlCache, IntlShape } from 'react-intl';
 
-import en from "./en.json";
-import es from "./es.json";
-import { Locale } from "./enums/locale.enum";
+import { ReactNode } from 'react';
+import en from './en.json';
+import { Locale } from './enums/locale.enum';
+import es from './es.json';
+import { getDefaultLocale, setDefaultLocale } from './helpers';
 
 const messages: Record<Locale, Record<string, string>> = {
   en: en as Record<string, string>,
@@ -21,7 +23,7 @@ class Intl {
         messages,
         defaultLocale: navigator.language,
       },
-      cache
+      cache,
     );
   }
 
@@ -32,20 +34,18 @@ class Intl {
         messages: messages[locale],
         defaultLocale: navigator.language,
       },
-      cache
+      cache,
     );
+
+    setDefaultLocale(locale);
   }
 
-  translate(...args: Parameters<typeof this.intl.formatMessage>) {
-    this.intl.formatMessage(...args);
+  translate(...args: Parameters<typeof this.intl.formatMessage>): ReactNode {
+    return this.intl.formatMessage(...args);
   }
 }
 
-function generalizeLocale(value: string): Locale {
-  return value.slice(0, 2) as Locale;
-}
-
-const defaultLocale = generalizeLocale(navigator.language);
+const defaultLocale = getDefaultLocale();
 
 const intl = new Intl(defaultLocale, messages[defaultLocale]);
 
