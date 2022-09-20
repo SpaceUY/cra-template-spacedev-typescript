@@ -1,5 +1,11 @@
+import { ToastContainer } from 'components/Toast/Toast';
+import { DesignProvider } from 'design/DesignContext';
+import { DesignSystem } from 'design/enums/design-system.enum';
+import { reduxStore } from 'global-state';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider as ReduxProvider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'utilities/i18n/IntlContext';
 import App from './App';
 import './index.css';
@@ -8,12 +14,21 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+
 root.render(
-  <IntlProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </IntlProvider>,
+  <React.StrictMode>
+    <DesignProvider system={DesignSystem.MATERIAL_UI}>
+      <IntlProvider>
+        <ReduxProvider store={reduxStore}>
+          <BrowserRouter>
+            <App />
+
+            <ToastContainer position="bottom-right" />
+          </BrowserRouter>
+        </ReduxProvider>
+      </IntlProvider>
+    </DesignProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

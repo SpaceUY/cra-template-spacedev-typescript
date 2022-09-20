@@ -1,24 +1,17 @@
-export function isNumber(value: unknown): value is number {
-  return typeof value === 'number';
+import isArray from 'lodash/isArray';
+import isEmpty from 'lodash/isEmpty';
+import isFunction from 'lodash/isFunction';
+import isNil from 'lodash/isNil';
+import isNumber from 'lodash/isNumber';
+import isString from 'lodash/isString';
+import noop from 'lodash/noop';
+
+function wait(timeMs: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, timeMs);
+  });
 }
 
-export function isString(value: unknown): value is string {
-  return typeof value === 'string';
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function isFunction(value: unknown): value is Function {
-  return typeof value === 'function';
-}
-
-export function noop(): void {
-  // no-op function
-}
-
-export function isNil(value: unknown): value is undefined | null {
-  if (typeof value === 'undefined') {
-    return true;
-  }
-
-  return value === null;
-}
+export { isNil, isArray, isNumber, isString, isFunction, noop, isEmpty, wait };

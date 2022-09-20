@@ -1,49 +1,31 @@
-import { ChangeEvent, useContext } from 'react';
-import { Locale } from 'utilities/i18n/enums/locale.enum';
-import { intl } from 'utilities/i18n/intl.utility';
+import { AppBar } from 'examples/components/AppBar/AppBar';
+import { useContext } from 'react';
+import { Router } from 'Router';
+import styled from 'styled-components';
 import { IntlContext } from 'utilities/i18n/IntlContext';
-import './App.css';
+
+const StyledDiv = styled.div`
+  padding: 2rem;
+  background-color: ${({ theme }) => theme.background.back};
+  min-height: 100vh;
+
+  a {
+    color: ${({ theme }) => theme.palette.primary.main};
+  }
+`;
 
 function App() {
-  const intlContext = useContext(IntlContext);
-
-  function handleLocaleChange(evt: ChangeEvent<HTMLSelectElement>) {
-    const locale = evt.target.value as Locale;
-
-    intlContext.setLocale(locale);
-  }
+  // necessary to force a render when locale is updated
+  useContext(IntlContext);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          {intl.translate(
-            { id: 'Welcome to the <a>SpaceDev</a> CRA template' },
-            {
-              a: (label) => (
-                <a
-                  href="https://www.spacedev.io/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {label}
-                </a>
-              ),
-            },
-          )}
-        </p>
+    <StyledDiv>
+      <AppBar />
 
-        <select
-          name="locale"
-          id="locale-select"
-          value={intlContext.locale}
-          onChange={handleLocaleChange}
-        >
-          <option value="en">English</option>
-          <option value="es">Español</option>
-        </select>
-      </header>
-    </div>
+      <main>
+        <Router />
+      </main>
+    </StyledDiv>
   );
 }
 

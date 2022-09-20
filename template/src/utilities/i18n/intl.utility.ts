@@ -1,6 +1,5 @@
 import { createIntl, createIntlCache, IntlShape } from 'react-intl';
 
-import { ReactNode } from 'react';
 import en from './en.json';
 import { Locale } from './enums/locale.enum';
 import es from './es.json';
@@ -40,8 +39,8 @@ class Intl {
     setDefaultLocale(locale);
   }
 
-  translate(...args: Parameters<typeof this.intl.formatMessage>): ReactNode {
-    return this.intl.formatMessage(...args);
+  translate(...args: Parameters<typeof this.intl.formatMessage>): string {
+    return this.intl.formatMessage(...args) as string;
   }
 }
 

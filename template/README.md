@@ -1,60 +1,99 @@
-# CRA starter template
-
-By:
+Create React App Starter Template by:
 
 [![SpaceDev](https://uploads-ssl.webflow.com/61e097dd988731696768be21/62042f55a072ef02ab1d11a2_logo%20del%20mismo%20taman%CC%83o%20que%20el%20texto.svg)](https://www.spacedev.io/)
 
-## Basic
-
-### Getting Started with Create React App
+# Basic
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-#### Available Scripts
+**Available Scripts:**
 
 In the project directory, you can run:
 
-##### `yarn start`
+```bash
+yarn start # Runs the app in the development mode
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+yarn test # Launches the test runner in the interactive watch mode
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+yarn build # Builds the app for production to the build folder
 
-##### `yarn test`
+yarn serve # Opens the production version on the default browser
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Learn More:**
 
-##### `yarn build`
+- You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- To learn React, check out the [React documentation](https://reactjs.org/).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Environment Configuration
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**.env**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+REACT_APP_API_URL=http://localhost:5000
+```
 
-#### Learn More
+- `REACT_APP_API_URL` will be used to point to the API. If not present the requests will be directed to app's domain.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Styled Components
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Naming Scheme**
 
-## Advanced
+`Styled` + `OptionalDescription` + `HtmlElementName_OR_ComponentBeingExtended`
+
+**Examples:**
+
+```typescript
+// navite components
+const StyledDiv = styled.div;
+const StyledP = styled.p;
+```
+
+```typescript
+// custom components
+const StyledButton = styled(Button);
+const StyledModalFooter = styled(ModalFooter);
+```
+
+If you are styling multiple elements of the same type or think one needs some clarification then you should include an OptionalDescription
+
+**Examples:**
+
+```typescript
+const StyledFooDiv = styled.div;
+const StyledBarDiv = styled.div;
+const StyledBatDiv = styled.div``;
+```
+
+This structure immediately lets any reader know:
+
+- this is not a component with any functionality, it is only being named for style purposes
+- what type of native element is being used to prevent any html semantic mistakes
+
+## Icons
+
+**Material Icons**
+
+- Get from https://mui.com/material-ui/material-icons/
+- Follow [this example](./src/examples/components/main-content/Catalog/Icons/icons/ClipboardIcon.tsx)
+
+**Feather Icons**
+
+- Get from https://feathericons.com/
+- Follow [this example](./src/examples/components/main-content/Catalog/Icons/icons/NotificationIcon.tsx)
+
+# Advanced
 
 > **Note:** if you can't make sense of what's detailed here you shouoldn't be making decisions regarding the following subjects
 
-### What is State?
+## State Management
+
+**What is State?**
 
 - The _state_ is the business-related data.
 - No UI related data (the app theme is an exception here)
 - No error handling
 - ...
-
-### State Management
 
 We indentified 3 different types or levels of state
 
@@ -71,7 +110,7 @@ We indentified 3 different types or levels of state
   - Located on the component level
   - Handled with the `useState` hook
 
-### Syncing State Between Non-connected Components
+**Syncing State Between Non-connected Components**
 
 Use the pub-sub (aka observer) pattern for this. Remember to always unsubscribe from all subscriptions once they are no longer needed.
 

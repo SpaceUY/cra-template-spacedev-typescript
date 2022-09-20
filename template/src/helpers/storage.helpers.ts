@@ -1,14 +1,19 @@
+import { StorageItem } from 'enums/storage-item.enum';
+
 type TargetStorage = typeof window.localStorage | typeof window.sessionStorage;
 
-function get<T = unknown>(targetStorage: TargetStorage, key: string): T | null;
 function get<T = unknown>(
   targetStorage: TargetStorage,
-  key: string,
+  key: StorageItem,
+): T | null;
+function get<T = unknown>(
+  targetStorage: TargetStorage,
+  key: StorageItem,
   defaultValue: T,
 ): T;
 function get<T = unknown>(
   targetStorage: TargetStorage,
-  key: string,
+  key: StorageItem,
   defaultValue?: T,
 ): unknown {
   try {
@@ -31,13 +36,13 @@ type Serializable = number | string | boolean | Object | Array<unknown> | null;
 
 function set(
   targetStorage: TargetStorage,
-  key: string,
+  key: StorageItem,
   value: Serializable,
 ): void {
   targetStorage.setItem(key, JSON.stringify(value));
 }
 
-function remove(targetStorage: TargetStorage, key: string): void {
+function remove(targetStorage: TargetStorage, key: StorageItem): void {
   targetStorage.removeItem(key);
 }
 
@@ -45,15 +50,15 @@ function clear(targetStorage: TargetStorage): void {
   targetStorage.clear();
 }
 
-function localGet<T = unknown>(key: string): T | null;
-function localGet<T = unknown>(key: string, defaultValue: T): T;
-function localGet<T = unknown>(key: string, defaultValue?: T): any {
+function localGet<T = unknown>(key: StorageItem): T | null;
+function localGet<T = unknown>(key: StorageItem, defaultValue: T): T;
+function localGet<T = unknown>(key: StorageItem, defaultValue?: T): unknown {
   return get(window.localStorage, key, defaultValue);
 }
 
-function sessionGet<T = unknown>(key: string): T | null;
-function sessionGet<T = unknown>(key: string, defaultValue: T): T;
-function sessionGet<T = unknown>(key: string, defaultValue?: T): any {
+function sessionGet<T = unknown>(key: StorageItem): T | null;
+function sessionGet<T = unknown>(key: StorageItem, defaultValue: T): T;
+function sessionGet<T = unknown>(key: StorageItem, defaultValue?: T): unknown {
   return get(window.sessionStorage, key, defaultValue);
 }
 
@@ -61,20 +66,20 @@ export const storage = {
   local: {
     get: localGet,
 
-    set: (key: string, value: Serializable) =>
+    set: (key: StorageItem, value: Serializable) =>
       set(window.localStorage, key, value),
 
-    remove: (key: string) => remove(window.localStorage, key),
+    remove: (key: StorageItem) => remove(window.localStorage, key),
 
     clear: () => clear(window.localStorage),
   },
   session: {
     get: sessionGet,
 
-    set: (key: string, value: Serializable) =>
+    set: (key: StorageItem, value: Serializable) =>
       set(window.sessionStorage, key, value),
 
-    remove: (key: string) => remove(window.sessionStorage, key),
+    remove: (key: StorageItem) => remove(window.sessionStorage, key),
 
     clear: () => clear(window.sessionStorage),
   },
