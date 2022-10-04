@@ -35,6 +35,7 @@ const StyledNavLink = styled(NavLink)`
   transition: all 200ms linear;
   color: ${({ theme }) => theme.palette.primary.main};
   text-transform: uppercase;
+  font-family: ${({ theme }) => theme.fontFamily};
 
   &:not(:last-child) {
     margin-right: 0.5rem;

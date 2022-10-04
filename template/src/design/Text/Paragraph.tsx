@@ -9,4 +9,6 @@ export const Paragraph = styled.p<TextProps>`
   line-height: ${({ theme }) => theme.components.text.p.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.p.color[color]};
+
+  font-family: ${({ theme }) => theme.components.text.p.fontFamily};
 `;

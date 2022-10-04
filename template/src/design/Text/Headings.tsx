@@ -9,6 +9,7 @@ export const H1 = styled.h1<TextProps>`
   line-height: ${({ theme }) => theme.components.text.h1.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.h1.color[color]};
+  font-family: ${({ theme }) => theme.components.text.h1.fontFamily};
 `;
 
 export const H2 = styled.h2<TextProps>`
@@ -18,6 +19,7 @@ export const H2 = styled.h2<TextProps>`
   line-height: ${({ theme }) => theme.components.text.h2.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.h2.color[color]};
+  font-family: ${({ theme }) => theme.components.text.h2.fontFamily};
 `;
 
 export const H3 = styled.h3<TextProps>`
@@ -27,6 +29,7 @@ export const H3 = styled.h3<TextProps>`
   line-height: ${({ theme }) => theme.components.text.h3.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.h3.color[color]};
+  font-family: ${({ theme }) => theme.components.text.h3.fontFamily};
 `;
 
 export const H4 = styled.h4<TextProps>`
@@ -36,6 +39,7 @@ export const H4 = styled.h4<TextProps>`
   line-height: ${({ theme }) => theme.components.text.h4.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.h3.color[color]};
+  font-family: ${({ theme }) => theme.components.text.h3.fontFamily};
 `;
 
 export const H5 = styled.h5<TextProps>`
@@ -45,6 +49,7 @@ export const H5 = styled.h5<TextProps>`
   line-height: ${({ theme }) => theme.components.text.h5.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.h3.color[color]};
+  font-family: ${({ theme }) => theme.components.text.h3.fontFamily};
 `;
 
 export const H6 = styled.h6<TextProps>`
@@ -54,4 +59,5 @@ export const H6 = styled.h6<TextProps>`
   line-height: ${({ theme }) => theme.components.text.h6.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.h3.color[color]};
+  font-family: ${({ theme }) => theme.components.text.h3.fontFamily};
 `;

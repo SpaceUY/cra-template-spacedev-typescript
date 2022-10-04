@@ -38,5 +38,10 @@
   "Color": "Color",
   "Variant": "Variante",
   "State": "Estado",
-  "Icons": "Íconos"
+  "Icons": "Íconos",
+  "Making Requests": "Haciendo Solicitudes",
+  "As part of this page's load we make a request to a mockup endpoint.": "Como parte de la carga de esta página hacemos una solicitud un endpoint de prueba.",
+  "In order to make sure the response data fulfill the expectations we have about its structure and typing we use a response validator.": "Para asegurarnos de que los datos de la respuesta cumplen con la esttructura que esperamos que tengan usamos un validador de respuesta",
+  "This is how a request looks like:": "Así es como se ve una solicitud:",
+  "<strong>User</strong> entity:": "Entidad <strong>User</strong>:"
 }

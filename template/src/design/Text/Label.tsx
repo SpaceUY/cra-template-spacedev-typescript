@@ -9,4 +9,5 @@ export const Label = styled.label<TextProps>`
   line-height: ${({ theme }) => theme.components.text.label.lineHeight};
   color: ${({ theme, color = 'main' }) =>
     color === 'inherit' ? 'inherit' : theme.components.text.label.color[color]};
+  font-family: ${({ theme }) => theme.components.text.label.fontFamily};
 `;

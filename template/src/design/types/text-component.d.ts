@@ -4,5 +4,6 @@ export type TextComponent = {
   color: Color;
   lineHeight: number;
   fontSize: number;
-  fontWeight: number;
+  fontWeight: 100 | 400 | 700;
+  fontFamily: string;
 };

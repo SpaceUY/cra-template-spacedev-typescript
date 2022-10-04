@@ -36,5 +36,8 @@ export function mapThemeToMaterial(theme: Theme) {
       info: mapColorToMaterial(theme.palette.info),
       success: mapColorToMaterial(theme.palette.success),
     },
+    typography: {
+      fontFamily: theme.fontFamily,
+    },
   };
 }

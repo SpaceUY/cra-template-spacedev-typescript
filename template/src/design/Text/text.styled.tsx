@@ -6,6 +6,6 @@ export const baseStyles = css`
   }
 
   & > strong {
-    font-weight: 400;
+    font-weight: 700;
   }
 `;

@@ -24,6 +24,7 @@
     "@mui/styled-engine-sc": "^5.10.3",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
+    "class-validator": "^0.13.2",
     "color-convert": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "fast-safe-stringify": "^2.1.1",

@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import { ResponseValidator } from 'utilities/http/validator/response-validator.class';
 
 type SafeAxiosError = {
   code?: string;
@@ -34,4 +35,10 @@ export function getSafeAxiosError(axiosError: AxiosError): SafeAxiosError {
   }
 
   return safeError;
+}
+
+export function isResponseValidator(
+  validator: unknown,
+): validator is ResponseValidator {
+  return !!validator && validator instanceof ResponseValidator;
 }

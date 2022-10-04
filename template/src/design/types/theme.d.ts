@@ -6,6 +6,7 @@ export type Theme = {
   mode: ThemeMode;
   palette: Palette;
   baseSize: number; // must match 1rem
+  fontFamily: string;
   components: {
     text: {
       p: TextComponent;

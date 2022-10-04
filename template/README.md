@@ -2,6 +2,14 @@ Create React App Starter Template by:
 
 [![SpaceDev](https://uploads-ssl.webflow.com/61e097dd988731696768be21/62042f55a072ef02ab1d11a2_logo%20del%20mismo%20taman%CC%83o%20que%20el%20texto.svg)](https://www.spacedev.io/)
 
+# Upcoming
+
+- force theme
+- force locale
+- breackpoints
+- input invert
+- date handling
+
 # Basic
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -31,6 +39,10 @@ yarn serve # Opens the production version on the default browser
 
 ```bash
 REACT_APP_API_URL=http://localhost:5000
+# sets the target for the API calls, by default it will be the same domain in which the app is loaded
+
+REACT_APP_VALIDATION_ERROR_AS_WARNING=true
+# controls whether the validation errors are logged as warnings or errors, by default will be true
 ```
 
 - `REACT_APP_API_URL` will be used to point to the API. If not present the requests will be directed to app's domain.
@@ -69,6 +81,10 @@ This structure immediately lets any reader know:
 
 - this is not a component with any functionality, it is only being named for style purposes
 - what type of native element is being used to prevent any html semantic mistakes
+
+## [HTTP requests](./docs/HTTP.md)
+
+## [Fonts](./docs/FONTS.md)
 
 ## Icons
 
