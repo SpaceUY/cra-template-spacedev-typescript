@@ -1,7 +1,7 @@
-import { DesignContext } from 'design/DesignContext';
 import { isColor } from 'design/helpers/type.helpers';
+import { useTheme } from 'design/hooks/useTheme';
 import { IconProps } from 'design/types/icon-props';
-import { FC, useContext, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 type Props = IconProps & {
   material?: JSX.Element;
@@ -16,8 +16,9 @@ export const Icon: FC<Props> = ({
   small = false,
   medium = true,
   large = false,
+  className,
 }) => {
-  const { theme } = useContext(DesignContext);
+  const theme = useTheme();
 
   const _size = useMemo(() => {
     switch (true) {
@@ -49,6 +50,7 @@ export const Icon: FC<Props> = ({
         {...materialIcon.props}
         htmlColor={_color}
         sx={{ fontSize: size ?? _size * theme.baseSize }}
+        className={className}
       />
     );
   }
@@ -59,6 +61,7 @@ export const Icon: FC<Props> = ({
         {...featherIcon.props}
         color={_color}
         size={size ?? _size * theme.baseSize}
+        className={className}
       />
     );
   }

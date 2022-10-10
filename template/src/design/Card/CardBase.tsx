@@ -17,10 +17,11 @@ export const CardBase: FC<Props> = ({
   children,
   component,
   variant = 'default',
+  ...rest
 }) => {
   if (variant === 'default') {
     return (
-      <StyledDefaultCardWrapperArticle as={component}>
+      <StyledDefaultCardWrapperArticle as={component} {...rest}>
         {children}
       </StyledDefaultCardWrapperArticle>
     );

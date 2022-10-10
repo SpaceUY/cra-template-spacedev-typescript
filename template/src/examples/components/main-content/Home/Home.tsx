@@ -3,7 +3,7 @@ import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { LanguageSelector } from 'examples/components/LanguageSelector/LanguageSelector';
-import { User } from 'examples/entities/user.class';
+import { UserDto } from 'examples/dtos/user.dto';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { Align } from 'layout';
 import { FC, useContext, useEffect } from 'react';
@@ -22,13 +22,15 @@ export const Home: FC = () => {
 
   useEffect(() => {
     http
-      .get<User[]>(
+      .get<UserDto[]>(
         'https://jsonplaceholder.typicode.com/users',
-        new ResponseValidator(User, {
+        new ResponseValidator(UserDto, {
           validateList: true,
         }),
       )
-      .then((data) => console.log('data', data))
+      .then((users) =>
+        console.log('users:', users.map((item) => item.name).join(', ')),
+      )
       .catch(genericErrorHandler);
   }, []);
 
@@ -36,7 +38,9 @@ export const Home: FC = () => {
     <>
       <Text.h2>
         {intl.translate(
-          { id: 'Welcome to the <a>SpaceDev</a> <abbr>CRA</abbr> template' },
+          {
+            id: 'Welcome to the <a>SpaceDev</a> <abbr>CRA</abbr> template',
+          },
           {
             a: (label) => (
               <a
@@ -122,6 +126,25 @@ export const Home: FC = () => {
 
           <Text.p>
             {intl.translate({
+              id: 'If you open the console you should see something like this:',
+            })}
+          </Text.p>
+
+          <br />
+
+          <Well>
+            <StyledPre>
+              <code>
+                {`users: Leanne Graham, Ervin Howell, Clementine Bauch, Patricia Lebsack, Chelsey Dietrich,
+Mrs. Dennis Schulist, Kurtis Weissnat, Nicholas Runolfsdottir V, Glenna Reichert, Clementina DuBuque`}
+              </code>
+            </StyledPre>
+          </Well>
+
+          <br />
+
+          <Text.p>
+            {intl.translate({
               id: 'This is how a request looks like:',
             })}
           </Text.p>
@@ -133,14 +156,17 @@ export const Home: FC = () => {
               <code>
                 {`
 useEffect(() => {
-  http.get<User[]>(
-    'https://jsonplaceholder.typicode.com/users',
-    new ResponseValidator(User, {
+  http
+    .get<UserDto[]>(
+      'https://jsonplaceholder.typicode.com/users',
+      new ResponseValidator(UserDto, {
         validateList: true,
       }),
-      )
-      .then((data) => console.log('data', data))
-      .catch(genericErrorHandler);
+    )
+    .then((users) =>
+      console.log('users:', users.map((item) => item.name).join(', ')),
+    )
+    .catch(genericErrorHandler);
 }, []);
     `}
               </code>
@@ -152,7 +178,7 @@ useEffect(() => {
           <Text.p>
             {intl.translate(
               {
-                id: '<strong>User</strong> entity:',
+                id: '<strong>User</strong> DTO:',
               },
               {
                 strong: (label) => <strong>{label}</strong>,
@@ -166,18 +192,44 @@ useEffect(() => {
             <StyledPre>
               <code>
                 {`
-import { Address } from './address.class';
-import { Company } from './company.class';
+import { IsEmail, IsNumber, IsString, ValidateNested } from 'class-validator';
+import { BaseDto } from 'utilities/http/base.dto';
+import { AddressDto } from './address.dto';
+import { CompanyDto } from './company.dto';
 
-export class User {
+export class UserDto extends BaseDto {
+  @IsNumber()
   id!: number;
+
+  @IsString()
   name!: string;
+
+  @IsString()
   username!: string;
+
+  @IsEmail()
   email!: string;
-  address!: Address;
-  pone!: string;
+
+  @ValidateNested()
+  address!: AddressDto;
+
+  @IsString()
+  phone!: string;
+
+  @IsString()
   website!: string;
-  company!: Company;
+
+  @ValidateNested()
+  company!: CompanyDto;
+
+  constructor(data: any) {
+    super();
+
+    Object.assign(this, data);
+
+    this.address = new AddressDto(data.address);
+    this.company = new CompanyDto(data.company);
+  }
 }
 `}
               </code>

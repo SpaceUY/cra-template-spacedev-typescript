@@ -54,6 +54,7 @@ export const NumberInput = (props: InputProps<number>): JSX.Element | null => {
         error={!!error}
         fullWidth={fullWidth}
         size={size}
+        type="number"
       />
     );
   }

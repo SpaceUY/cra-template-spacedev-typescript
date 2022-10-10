@@ -20,6 +20,8 @@
   "Email Address": "Email Address",
   "Password": "Password",
   "Required field": "Required field",
+  "Must be a valid email": "Must be a valid email",
+  "Must be at least 8 charactes long": "Must be at least 8 charactes long",
   "Login": "Login",
   "Logout": "Logout",
   "Welcome {userName}": "Welcome {userName}",
@@ -43,5 +45,6 @@
   "As part of this page's load we make a request to a mockup endpoint.": "As part of this page's load we make a request to a mockup endpoint.",
   "In order to make sure the response data fulfill the expectations we have about its structure and typing we use a response validator.": "In order to make sure the response data fulfill the expectations we have about its structure and typing we use a response validator.",
   "This is how a request looks like:": "This is how a request looks like:",
-  "<strong>User</strong> entity:": "<strong>User</strong> entity:"
+  "<strong>User</strong> DTO:": "<strong>User</strong> DTO:",
+  "If you open the console you should see something like this:": "If you open the console you should see something like this:"
 }

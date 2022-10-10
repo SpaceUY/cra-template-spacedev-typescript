@@ -1,12 +1,12 @@
 import { TextField } from '@mui/material';
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
+import { StatusText } from 'design/input/StatusText/StatusText';
 import { Text } from 'design/Text';
 import { InputProps } from 'design/types/input-props';
 import { noop } from 'helpers/nodash.helpers';
 import { Align } from 'layout';
 import { ChangeEvent, useCallback, useContext } from 'react';
-import { StatusText } from '../StatusText/StatusText';
 
 type Props = InputProps<string> & { type: 'text' | 'password' | 'email' };
 

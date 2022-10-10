@@ -28,6 +28,16 @@ const StyledA = styled.a`
   line-height: 1.5rem;
 `;
 
+/**
+ * #####       ####
+ *   #    ###  #   #  ###
+ *   #   #   # #   # #   #
+ *   #   #   # #   # #   #
+ *   #    ###  ####   ###
+ *
+ * ToDo: check why color doesn't apply on StyledNavLink
+ */
+
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   padding: 0.5rem 1rem;

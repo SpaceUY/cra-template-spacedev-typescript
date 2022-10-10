@@ -270,9 +270,9 @@ class Http {
     return response.data;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  private async runValidation<Method extends (...args: any) => any>(
-    response: AxiosResponse<any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private async runValidation<Method extends (...args: any) => unknown>(
+    response: AxiosResponse<unknown>,
     configOrValidator?: Parameters<Method>[1] | ResponseValidator,
     validator?: ResponseValidator,
   ): Promise<void> {
@@ -281,7 +281,7 @@ class Http {
       : validator;
 
     if (_validator) {
-      await _validator.validateResponseOrFail(response);
+      await _validator.validateResponse(response);
     }
   }
 }

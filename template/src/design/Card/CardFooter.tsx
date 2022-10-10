@@ -14,6 +14,10 @@ type Props = FcDefaultProps & {
   component?: 'div' | 'span' | 'region' | 'article' | 'header' | 'footer';
 };
 
-export const CardFooter: FC<Props> = ({ children, component }) => {
-  return <StyledCardFooterDiv as={component}>{children}</StyledCardFooterDiv>;
+export const CardFooter: FC<Props> = ({ children, component, ...rest }) => {
+  return (
+    <StyledCardFooterDiv as={component} {...rest}>
+      {children}
+    </StyledCardFooterDiv>
+  );
 };

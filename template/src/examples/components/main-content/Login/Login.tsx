@@ -30,10 +30,10 @@ const initialValues = {
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email()
+    .email(intl.translate({ id: 'Must be a valid email' }))
     .required(intl.translate({ id: 'Required field' })),
   password: Yup.string()
-    .min(8)
+    .min(8, intl.translate({ id: 'Must be at least 8 charactes long' }))
     .required(intl.translate({ id: 'Required field' })),
 });
 

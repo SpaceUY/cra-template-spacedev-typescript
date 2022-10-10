@@ -41,11 +41,9 @@ yarn serve # Opens the production version on the default browser
 REACT_APP_API_URL=http://localhost:5000
 # sets the target for the API calls, by default it will be the same domain in which the app is loaded
 
-REACT_APP_VALIDATION_ERROR_AS_WARNING=true
-# controls whether the validation errors are logged as warnings or errors, by default will be true
+REACT_APP_VALIDATION_ERROR_BREAKS_RESPONSE=false
+# controls whether the validation errors will stop the response from reaching the request point
 ```
-
-- `REACT_APP_API_URL` will be used to point to the API. If not present the requests will be directed to app's domain.
 
 ## Styled Components
 
@@ -74,13 +72,53 @@ If you are styling multiple elements of the same type or think one needs some cl
 ```typescript
 const StyledFooDiv = styled.div;
 const StyledBarDiv = styled.div;
-const StyledBatDiv = styled.div``;
+const StyledBatDiv = styled.div;
 ```
 
 This structure immediately lets any reader know:
 
 - this is not a component with any functionality, it is only being named for style purposes
 - what type of native element is being used to prevent any html semantic mistakes
+
+## Using the theme
+
+If you need to use a `theme` value inside of a component, use the `useTheme` hook from `design/hooks/useTheme` instead of importing theme directly.
+
+The `useTheme` hooks pulls directly from the `DesignProvider`, which will enable global changes to theme across the application without needing to refresh the page. `DesignProvider` is the source of truth for the app.
+
+```typescript
+// Bad
+import { theme } from '...';
+
+function MyComponent() {
+  return <Comp color={theme.palette.primary} />;
+}
+
+// Good
+import { useTheme } from 'design/hooks/useTheme';
+
+function MyComponent() {
+  const theme = useTheme();
+
+  return <Comp color={theme.palette.primary} />;
+}
+```
+
+For `styled-components`, use the injected theme:
+
+```typescript
+// Bad
+import { theme } from '...';
+
+const StyledDiv = styled.div`
+  color: ${theme.baseColors.someColor};
+`;
+
+// Good
+const StyledDiv = styled.div`
+  color: ${({ theme }) => theme.baseColors.someColor};
+`;
+```
 
 ## [HTTP requests](./docs/HTTP.md)
 

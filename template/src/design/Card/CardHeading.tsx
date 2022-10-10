@@ -93,6 +93,7 @@ export const CardHeading: FC<Props> = ({
   h4 = false,
   h5 = false,
   h6 = false,
+  ...rest
 }) => {
   const level = useMemo(() => {
     return getHeadingLevel(h1, h2, h3, h4, h5, h6);
@@ -102,7 +103,7 @@ export const CardHeading: FC<Props> = ({
 
   if (isString(children)) {
     return (
-      <StyledCardHeaderDiv as={component}>
+      <StyledCardHeaderDiv as={component} {...rest}>
         <HeadingComponent>{children}</HeadingComponent>
       </StyledCardHeaderDiv>
     );

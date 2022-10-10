@@ -10,6 +10,10 @@ type Props = FcDefaultProps & {
   component?: 'div' | 'span' | 'region' | 'article' | 'header' | 'footer';
 };
 
-export const CardBody: FC<Props> = ({ children, component }) => {
-  return <StyledCardBodyDiv as={component}>{children}</StyledCardBodyDiv>;
+export const CardBody: FC<Props> = ({ children, component, ...rest }) => {
+  return (
+    <StyledCardBodyDiv as={component} {...rest}>
+      {children}
+    </StyledCardBodyDiv>
+  );
 };
