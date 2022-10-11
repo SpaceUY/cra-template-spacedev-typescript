@@ -1,14 +1,7 @@
-import { IsString } from 'class-validator';
 import { wait } from 'helpers/nodash.helpers';
 import { redact } from 'helpers/text.helpers';
 import { http } from 'utilities/http/http';
-import { ResponseValidator } from 'utilities/http/validator/response-validator.class';
 import { logger } from 'utilities/logger/Logger';
-
-class User {
-  @IsString()
-  name!: string;
-}
 
 export async function login(email: string, password: string): Promise<string> {
   try {
@@ -28,7 +21,7 @@ export async function login(email: string, password: string): Promise<string> {
 
 export async function getUserInfo(): Promise<{ name: string }> {
   try {
-    await http.get('/user/info', new ResponseValidator(User));
+    await http.get('/user/info');
   } catch (error) {
     logger.warn('Failed request for demo purposes', {
       path: '/user/info',

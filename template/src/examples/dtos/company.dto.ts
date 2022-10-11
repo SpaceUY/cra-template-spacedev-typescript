@@ -3,17 +3,19 @@ import { BaseDto } from 'utilities/http/base.dto';
 
 export class CompanyDto extends BaseDto {
   @IsString()
-  name!: string;
+  name: string;
 
   @IsString()
-  catchPhrase!: string;
+  catchPhrase: string;
 
   @IsString()
-  bs!: string;
+  bs: string;
 
-  constructor(data: unknown) {
-    super();
+  constructor(data: any) {
+    super(data);
 
-    Object.assign(this, data);
+    this.name = data.name;
+    this.catchPhrase = data.catchPhrase;
+    this.bs = data.bs;
   }
 }

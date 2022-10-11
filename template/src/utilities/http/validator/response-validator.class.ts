@@ -1,15 +1,12 @@
 import { AxiosResponse } from 'axios';
-import {
-  validateOrReject,
-  ValidationError as ClassValidationError,
-} from 'class-validator';
+import { ValidationError as ClassValidationError } from 'class-validator';
 import { ValidationError } from 'errors/validation.error';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { isArray } from 'helpers/nodash.helpers';
 import { BaseDto } from '../base.dto';
 
-export class ResponseValidator {
-  private type: BaseDto;
+export class ResponseValidator<T extends typeof BaseDto = typeof BaseDto> {
+  private type: T;
 
   private validateList: boolean;
 
@@ -19,7 +16,7 @@ export class ResponseValidator {
     : false;
 
   constructor(
-    type: BaseDto,
+    type: T,
     options?: {
       validateList?: boolean;
     },
@@ -60,10 +57,10 @@ export class ResponseValidator {
 
   private async _validateItem(payload?: unknown): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const validator = new (this.type as any)(payload);
+    const validator: BaseDto = new (this.type as any)(payload);
 
     if (payload) {
-      await validateOrReject(validator);
+      await validator.validateOrFail();
     }
   }
 

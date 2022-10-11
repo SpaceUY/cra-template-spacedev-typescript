@@ -5,34 +5,38 @@ import { CompanyDto } from './company.dto';
 
 export class UserDto extends BaseDto {
   @IsNumber()
-  id!: number;
+  id: number;
 
   @IsString()
-  name!: string;
+  name: string;
 
   @IsString()
-  username!: string;
+  username: string;
 
   @IsEmail()
-  email!: string;
-
-  @ValidateNested()
-  address!: AddressDto;
+  email: string;
 
   @IsString()
-  phone!: string;
+  phone: string;
 
   @IsString()
-  website!: string;
+  website: string;
 
   @ValidateNested()
-  company!: CompanyDto;
+  address: AddressDto;
+
+  @ValidateNested()
+  company: CompanyDto;
 
   constructor(data: any) {
-    super();
+    super(data);
 
-    Object.assign(this, data);
-
+    this.id = data.id;
+    this.name = data.name;
+    this.username = data.username;
+    this.email = data.email;
+    this.phone = data.phone;
+    this.website = data.website;
     this.address = new AddressDto(data.address);
     this.company = new CompanyDto(data.company);
   }

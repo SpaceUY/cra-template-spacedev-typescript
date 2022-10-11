@@ -9,6 +9,7 @@ Create React App Starter Template by:
 - breackpoints
 - input invert
 - date handling
+- config
 
 # Basic
 

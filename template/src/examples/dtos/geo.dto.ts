@@ -3,13 +3,15 @@ import { BaseDto } from 'utilities/http/base.dto';
 
 export class GeoDto extends BaseDto {
   @IsString()
-  lat!: string;
+  lat: string;
 
   @IsString()
-  lng!: string;
+  lng: string;
 
   constructor(data: any) {
-    super();
-    Object.assign(this, data);
+    super(data);
+
+    this.lat = data.lat;
+    this.lng = data.lng;
   }
 }
