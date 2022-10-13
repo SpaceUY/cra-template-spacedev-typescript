@@ -1,6 +1,7 @@
 import { ProtectedRoute } from 'components/ProtectedRoute/ProtectedRoute';
 import { Text } from 'design';
 import { AppRoute } from 'enums/app-route.enum';
+import Blockchain from 'examples/components/main-content/Blockchain/Blockchain';
 import { Catalog } from 'examples/components/main-content/Catalog/Catalog';
 import { Home } from 'examples/components/main-content/Home/Home';
 import { Login } from 'examples/components/main-content/Login/Login';
@@ -20,7 +21,7 @@ export const Router: FC = () => {
           </ProtectedRoute>
         }
       />
-
+      <Route path={AppRoute.BLOCKCHAIN} element={<Blockchain />} />
       <Route
         path={AppRoute.CATALOG}
         element={

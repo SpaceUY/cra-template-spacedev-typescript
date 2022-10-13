@@ -24,6 +24,8 @@
   "Must be at least 8 charactes long": "Must be at least 8 charactes long",
   "Login": "Login",
   "Logout": "Logout",
+  "Connect wallet": "Connect wallet",
+  "Disconnect":"Disconnect",
   "Welcome {userName}": "Welcome {userName}",
   "Any email will do": "Any email will do",
   "Any text with at least 8 characters will do": "Any text with at least 8 characters will do",
@@ -46,5 +48,15 @@
   "In order to make sure the response data fulfill the expectations we have about its structure and typing we use a response validator.": "In order to make sure the response data fulfill the expectations we have about its structure and typing we use a response validator.",
   "This is how a request looks like:": "This is how a request looks like:",
   "<strong>User</strong> DTO:": "<strong>User</strong> DTO:",
-  "If you open the console you should see something like this:": "If you open the console you should see something like this:"
+  "If you open the console you should see something like this:": "If you open the console you should see something like this:",
+  "Harmony": "Harmony",
+  "Account connected:":"Account connected:",
+  "Chain id":"Chain id",
+  "None":"None",
+  "Change network":"Change network",
+  "Blockchain":"Blockchain",
+  "Metamask":"Metamask",
+  "Wallet Connect":"Wallet Connect",
+  "Coinbase Wallet":"Coinbase Wallet",
+  "Wrong Network":"Wrong Network"
 }

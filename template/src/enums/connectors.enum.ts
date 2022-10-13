@@ -1,0 +1,5 @@
+export enum ConnectorItem {
+  COINBASE = 'COINBASE',
+  WALLETCONNECT = 'WALLETCONNECT',
+  INJECTED = 'INJECTED',
+}

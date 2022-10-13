@@ -1,17 +1,19 @@
+import { useWeb3React } from '@web3-react/core';
 import { Button, Text } from 'design';
 import { DesignContext } from 'design/DesignContext';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { AppRoute } from 'enums/app-route.enum';
-import { removeAuthTokenAction } from 'global-state/actions';
+import { removeAuthTokenAction, setShowModal } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
+import { selectShowModalBlockchain } from 'global-state/selectors/blockchain.selectors';
 import { rgba } from 'helpers/color.helpers';
 import { Align } from 'layout';
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
-
 import spaceLogoDarkPath from './assets/spacedev-logo-dark.svg';
 import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
 
@@ -71,8 +73,10 @@ export const AppBar: FC = () => {
     theme: { mode },
   } = useContext(DesignContext);
   const authToken = useSelector(selectAuthToken);
+  const location = useLocation();
+  const showModalBlockchain = useSelector(selectShowModalBlockchain);
+  const { account, deactivate, error } = useWeb3React();
   const dispatch = useDispatch();
-
   const spaceLogoPath =
     mode === ThemeMode.LIGHT ? spaceLogoLightPath : spaceLogoDarkPath;
 
@@ -80,6 +84,22 @@ export const AppBar: FC = () => {
     dispatch(removeAuthTokenAction());
   };
 
+  const disconnect = () => {
+    try {
+      deactivate();
+      localStorage.removeItem('walletConnected');
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  useEffect(() => {
+    if (error?.message) {
+      toast.error('Chain not supported');
+    }
+  }, [error?.message]);
+
+  const { pathname } = location;
   return (
     <StyledAlign v-center h-between>
       <StyledH1>
@@ -107,12 +127,37 @@ export const AppBar: FC = () => {
             <StyledNavLink to={AppRoute.STATE}>
               {intl.translate({ id: 'State' })}
             </StyledNavLink>
+            <StyledNavLink to={AppRoute.BLOCKCHAIN}>
+              {intl.translate({ id: 'Blockchain' })}
+            </StyledNavLink>
           </nav>
 
           <Button color="primary" onClick={handleLogout}>
             {intl.translate({ id: 'Logout' })}
           </Button>
         </Align>
+      )}
+      {pathname === '/blockchain' && (
+        <Button
+          color="primary"
+          onClick={
+            error?.message
+              ? () => {
+                  return;
+                }
+              : account
+              ? disconnect
+              : () => {
+                  dispatch(setShowModal(!showModalBlockchain));
+                }
+          }
+        >
+          {error?.message
+            ? intl.translate({ id: 'Wrong Network' })
+            : account
+            ? intl.translate({ id: 'Disconnect' })
+            : intl.translate({ id: 'Connect Wallet' })}
+        </Button>
       )}
     </StyledAlign>
   );

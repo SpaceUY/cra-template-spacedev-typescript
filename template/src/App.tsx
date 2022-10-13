@@ -3,7 +3,12 @@ import { useContext } from 'react';
 import { Router } from 'Router';
 import styled from 'styled-components';
 import { IntlContext } from 'utilities/i18n/IntlContext';
-
+import { Web3ReactProvider } from '@web3-react/core';
+import {
+  ExternalProvider,
+  JsonRpcFetchFunc,
+  Web3Provider,
+} from '@ethersproject/providers';
 const StyledDiv = styled.div`
   padding: 2rem;
   background-color: ${({ theme }) => theme.background.back};
@@ -18,14 +23,19 @@ function App() {
   // necessary to force a render when locale is updated
   useContext(IntlContext);
 
-  return (
-    <StyledDiv>
-      <AppBar />
+  function getLibrary(provider: JsonRpcFetchFunc | ExternalProvider) {
+    return new Web3Provider(provider);
+  }
 
-      <main>
-        <Router />
-      </main>
-    </StyledDiv>
+  return (
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <StyledDiv>
+        <AppBar />
+        <main>
+          <Router />
+        </main>
+      </StyledDiv>
+    </Web3ReactProvider>
   );
 }
 

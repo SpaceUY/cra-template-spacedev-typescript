@@ -21,7 +21,8 @@
   "Password": "Contraseña",
   "Required field": "Campo requerido",
   "Login": "Iniciar sesión",
-  "Logout": "Cerrar sesión",
+  "Connect wallet": "Conectar billetera",
+  "Disconnect":"Desconectar",
   "Welcome {userName}": "Bienvenida/o {userName}",
   "Any email will do": "Cualquier coreo sirve",
   "Any text with at least 8 characters will do": "Cualquier texto con por lo menos 8 caracteres está bien",
@@ -44,5 +45,15 @@
   "In order to make sure the response data fulfill the expectations we have about its structure and typing we use a response validator.": "Para asegurarnos de que los datos de la respuesta cumplen con la esttructura que esperamos que tengan usamos un validador de respuesta",
   "This is how a request looks like:": "Así es como se ve una solicitud:",
   "<strong>User</strong> DTO:": "DTO <strong>User</strong>:",
-  "If you open the console you should see something like this:": "Si abres la consola deberías ver algo así:"
+  "If you open the console you should see something like this:": "Si abres la consola deberías ver algo así:",
+  "Harmony": "Harmony",
+  "Account connected":"Cuenta conectada",
+  "Chain id":"Identificador de cadena",
+  "None":"None",
+  "Change network":"Cambiar de red",
+  "Blockchain":"Blockchain",
+  "Metamask":"Metamask",
+  "Wallet Connect":"Wallet Connect",
+  "Coinbase Wallet":"Coinbase Wallet",
+  "Wrong Network":"Red no valida"
 }
