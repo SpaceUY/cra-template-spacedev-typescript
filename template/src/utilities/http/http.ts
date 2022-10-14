@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { config } from 'config';
 import { HttpStatus } from 'enums/http-status.enum';
 import { StorageItem } from 'enums/storage-item.enum';
 import { HttpError } from 'errors/http.error';
@@ -13,7 +14,7 @@ import { getSafeAxiosError } from './http.helpers';
 import { ResponseValidator } from './validator/response-validator.class';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL ?? '',
+  baseURL: config.http.baseURL,
 });
 
 axiosInstance.interceptors.request.use(

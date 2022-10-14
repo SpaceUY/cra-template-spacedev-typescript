@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
@@ -14,4 +15,14 @@ function wait(timeMs: number): Promise<void> {
   });
 }
 
-export { isNil, isArray, isNumber, isString, isFunction, noop, isEmpty, wait };
+export {
+  isNil,
+  isArray,
+  isNumber,
+  isString,
+  isFunction,
+  noop,
+  isEmpty,
+  wait,
+  get,
+};
