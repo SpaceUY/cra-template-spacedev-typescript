@@ -8,9 +8,7 @@ import { noop } from 'helpers/nodash.helpers';
 import { Align } from 'layout';
 import { ChangeEvent, useCallback, useContext } from 'react';
 
-export const NumberInput = (
-  props: InputProps<number | ''>,
-): JSX.Element | null => {
+export const NumberInput = (props: InputProps<number | ''>): JSX.Element => {
   const { onChange = noop, name, ...rest } = props;
 
   const { system } = useContext(DesignContext);
