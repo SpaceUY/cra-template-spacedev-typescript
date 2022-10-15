@@ -1,4 +1,5 @@
 import { ThemeMode } from 'design/enums/theme-mode.enum';
+import { Color } from './color';
 import { Palette } from './palette';
 import { TextComponent } from './text-component';
 
@@ -24,6 +25,9 @@ export type Theme = {
         medium: number;
         large: number;
       };
+    };
+    input: {
+      invertColor: Color;
     };
   };
   background: {

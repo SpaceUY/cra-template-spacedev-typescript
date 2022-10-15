@@ -75,6 +75,9 @@ export const getBaseTheme = (
         large: 2.25,
       },
     },
+    input: {
+      invertColor: palette.white,
+    },
   },
   borderRadius: {
     large: 1,

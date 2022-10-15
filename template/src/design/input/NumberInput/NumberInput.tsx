@@ -1,27 +1,17 @@
-import { TextField } from '@mui/material';
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
+import { StatusText } from 'design/input/StatusText/StatusText';
+import { TextInput } from 'design/input/TextInput/TextInput';
 import { Text } from 'design/Text';
 import { InputProps } from 'design/types/input-props';
 import { noop } from 'helpers/nodash.helpers';
 import { Align } from 'layout';
 import { ChangeEvent, useCallback, useContext } from 'react';
-import { StatusText } from '../StatusText/StatusText';
 
-export const NumberInput = (props: InputProps<number>): JSX.Element | null => {
-  const {
-    name,
-    id,
-    onChange = noop,
-    label,
-    value,
-    disabled,
-    required,
-    helperText,
-    error,
-    fullWidth = false,
-    size,
-  } = props;
+export const NumberInput = (
+  props: InputProps<number | ''>,
+): JSX.Element | null => {
+  const { onChange = noop, name, ...rest } = props;
 
   const { system } = useContext(DesignContext);
 
@@ -34,7 +24,7 @@ export const NumberInput = (props: InputProps<number>): JSX.Element | null => {
       onChange({
         target: {
           name,
-          value: Number(evt.target.value),
+          value: evt.target.value,
         },
       });
     },
@@ -43,21 +33,20 @@ export const NumberInput = (props: InputProps<number>): JSX.Element | null => {
 
   if (system === DesignSystem.MATERIAL_UI) {
     return (
-      <TextField
-        id={id}
-        label={label}
-        value={value}
+      <TextInput
+        // This is safe since the return will have a target prop
+        // @ts-ignore
         onChange={handleChange}
-        disabled={disabled}
-        required={required}
-        helperText={error ? error.toString() : helperText}
-        error={!!error}
-        fullWidth={fullWidth}
-        size={size}
+        name={name}
+        {...rest}
+        // This is safe since number is actually a valid type
+        // @ts-ignore
         type="number"
       />
     );
   }
+
+  const { label, value, disabled, required, error, helperText } = rest;
 
   return (
     <Align column>
