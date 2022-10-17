@@ -13,9 +13,12 @@ const messages: Record<Locale, Record<string, string>> = {
 const cache = createIntlCache();
 
 class Intl {
+  private locale: Locale;
   private intl: IntlShape;
 
-  constructor(locale: string, messages: Record<string, string>) {
+  constructor(locale: Locale, messages: Record<string, string>) {
+    this.locale = locale;
+
     this.intl = createIntl(
       {
         locale,
@@ -27,6 +30,8 @@ class Intl {
   }
 
   setLocale(locale: Locale): void {
+    this.locale = locale;
+
     this.intl = createIntl(
       {
         locale,
@@ -37,6 +42,10 @@ class Intl {
     );
 
     setDefaultLocale(locale);
+  }
+
+  getLocale(): Locale {
+    return this.locale;
   }
 
   translate(...args: Parameters<typeof this.intl.formatMessage>): string {
