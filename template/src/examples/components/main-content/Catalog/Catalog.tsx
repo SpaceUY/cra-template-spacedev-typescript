@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Buttons } from './Buttons/Buttons';
 import { Icons } from './Icons/Icons';
-import { Selects } from './Selects/Selects';
+import { Inputs } from './Inputs/Inputs';
 import { TextCatalog } from './Text/TextCatalog';
 
 export const Catalog: FC = () => {
@@ -15,7 +15,7 @@ export const Catalog: FC = () => {
 
       <br />
 
-      <Selects />
+      <Inputs />
 
       <br />
 

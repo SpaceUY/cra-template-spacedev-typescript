@@ -17,4 +17,6 @@ export type InputProps<T> = {
   color?: ColorProp;
   size?: 'small' | 'medium';
   variant?: InputVariantProp;
+  invert?: boolean;
+  placeholder?: string;
 };

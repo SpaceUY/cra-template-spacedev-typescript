@@ -55,5 +55,13 @@
   "Metamask":"Metamask",
   "Wallet Connect":"Wallet Connect",
   "Coinbase Wallet":"Coinbase Wallet",
-  "Wrong Network":"Red no valida"
+  "Wrong Network":"Red no valida",
+  "Type something": "Escribe algo",
+  "Type a number": "Escribe un número",
+  "Inputs": "Campos de Ingreso",
+  "All inputs will return the same value type as they receive.": "Todos los campos retornarán el mismo tipo de valor que reciben.",
+  "The <code><TextInput /></code> component will take any <code>string</code> value.": "El componente <code><TextInput /></code> acepta cualquier valor de tipo <code>string</code>.",
+  "The <code><NumberInput /></code> component will take any <code>number</code> or <code>''</code> as its value.": "El componente <code><NumberInput /></code> acepta cualquier valor de tipo <code>number</code> ó <code>\"\"</code> como su valor.",
+  "The <code><Select /></code> component will take any type as an option's type, and return the same value type.": "El componente <code><Select /></code> aceptará cualquier tipo de valor en sus opciones, y retornará el mismo typo de valor.",
+  "The prop <code>invert</code> is usefull when the background is collored and doesn't react with the theme mode changes.": "La prop <code>invert</code> es útil cuando el fondo es coloreado o no responde a los cambios del modo del tema."
 }
