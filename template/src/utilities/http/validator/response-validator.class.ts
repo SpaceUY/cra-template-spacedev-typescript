@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { ValidationError as ClassValidationError } from 'class-validator';
+import { config } from 'config';
 import { ValidationError } from 'errors/validation.error';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { isArray } from 'helpers/nodash.helpers';
@@ -9,11 +10,6 @@ export class ResponseValidator<T extends typeof BaseDto = typeof BaseDto> {
   private type: T;
 
   private validateList: boolean;
-
-  private validationBreaksResponse = process.env
-    .REACT_APP_VALIDATION_ERROR_BREAKS_RESPONSE
-    ? process.env.REACT_APP_VALIDATION_ERROR_BREAKS_RESPONSE !== 'true'
-    : false;
 
   constructor(
     type: T,
@@ -44,7 +40,7 @@ export class ResponseValidator<T extends typeof BaseDto = typeof BaseDto> {
   }
 
   public get shouldThrow(): boolean {
-    return this.validationBreaksResponse;
+    return config.validation.validationBreaksResponse;
   }
 
   private async _validateOrFail(data: unknown): Promise<void> {
