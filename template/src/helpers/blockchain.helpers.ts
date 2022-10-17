@@ -1,9 +1,14 @@
+import {
+  ExternalProvider,
+  JsonRpcFetchFunc,
+  Web3Provider,
+} from '@ethersproject/providers';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { CoinbaseWallet, Injected, WalletConnect } from 'connectors/connectors';
-import { ChainInfo, CHAINS_INFO } from 'connectors/networks';
-import { ConnectorItem } from 'enums/connectors.enum';
+import { CHAINS_INFO } from 'connectors/networks';
+import { ConnectorItem } from 'enums/connector-item.enum';
 import { StorageItem } from 'enums/storage-item.enum';
 import { genericErrorHandler } from './error.helpers';
 import { storage } from './storage.helpers';
@@ -14,7 +19,9 @@ export function getWalletConnected():
   | WalletConnectConnector
   | null {
   const connector = storage.local.get<string>(StorageItem.WALLETCONNECTED);
-  if (!connector) return null;
+  if (!connector) {
+    return null;
+  }
   if (connector === ConnectorItem.COINBASE) {
     return CoinbaseWallet;
   }
@@ -26,9 +33,9 @@ export function getWalletConnected():
 
 export const switchNetwork = async (
   library: Record<string, any>,
-  value: string,
+  value: keyof typeof CHAINS_INFO,
 ) => {
-  const info: ChainInfo = CHAINS_INFO[value];
+  const info = CHAINS_INFO[value];
   try {
     await library.provider.request({
       method: 'wallet_switchEthereumChain',
@@ -56,3 +63,7 @@ export const switchNetwork = async (
     }
   }
 };
+
+export function getLibrary(provider: JsonRpcFetchFunc | ExternalProvider) {
+  return new Web3Provider(provider);
+}

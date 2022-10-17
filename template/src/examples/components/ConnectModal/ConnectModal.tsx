@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setShowModal } from 'global-state/actions';
 import { storage } from 'helpers/storage.helpers';
 import { StorageItem } from 'enums/storage-item.enum';
-import { ConnectorItem } from 'enums/connectors.enum';
+import { ConnectorItem } from 'enums/connector-item.enum';
 import { intl } from 'utilities/i18n/intl.utility';
 import CoinbaseWalletPath from './assets/coinbaseWallet.png';
 import MetamaskPath from './assets/metamask.png';

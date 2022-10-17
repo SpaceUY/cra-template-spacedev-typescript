@@ -1,11 +1,6 @@
-export type ChainInfo = {
-  chainId: string;
-  rpcUrls: string[];
-  chainName: string;
-  nativeCurrency: { name: string; decimals: number; symbol: string };
-  blockExplorerUrls: string[];
-};
-export const CHAINS_INFO: Record<string, ChainInfo> = {
+import { ChainInfo } from './types/chain-info';
+
+export const CHAINS_INFO: { harmony: ChainInfo } = {
   harmony: {
     chainId: '0x63564c40',
     rpcUrls: ['https://api.harmony.one'],

@@ -1,7 +1,9 @@
+import { Web3ReactProvider } from '@web3-react/core';
 import { ToastContainer } from 'components/Toast/Toast';
 import { DesignProvider } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
 import { reduxStore } from 'global-state';
+import { getLibrary } from 'helpers/blockchain.helpers';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -18,17 +20,19 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <DesignProvider system={DesignSystem.MATERIAL_UI}>
-      <IntlProvider>
-        <ReduxProvider store={reduxStore}>
-          <BrowserRouter>
-            <App />
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <DesignProvider system={DesignSystem.MATERIAL_UI}>
+        <IntlProvider>
+          <ReduxProvider store={reduxStore}>
+            <BrowserRouter>
+              <App />
 
-            <ToastContainer position="bottom-right" />
-          </BrowserRouter>
-        </ReduxProvider>
-      </IntlProvider>
-    </DesignProvider>
+              <ToastContainer position="bottom-right" />
+            </BrowserRouter>
+          </ReduxProvider>
+        </IntlProvider>
+      </DesignProvider>
+    </Web3ReactProvider>
   </React.StrictMode>,
 );
 

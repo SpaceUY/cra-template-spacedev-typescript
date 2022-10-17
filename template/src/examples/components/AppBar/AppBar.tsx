@@ -11,11 +11,14 @@ import { Align } from 'layout';
 import { FC, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'components/Toast/Toast';
 import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
 import spaceLogoDarkPath from './assets/spacedev-logo-dark.svg';
 import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
+import { storage } from 'helpers/storage.helpers';
+import { StorageItem } from 'enums/storage-item.enum';
+import { genericErrorHandler } from 'helpers/error.helpers';
 
 const StyledAlign = styled(Align)`
   margin-bottom: 2rem;
@@ -75,7 +78,7 @@ export const AppBar: FC = () => {
   const authToken = useSelector(selectAuthToken);
   const location = useLocation();
   const showModalBlockchain = useSelector(selectShowModalBlockchain);
-  const { account, deactivate, error } = useWeb3React();
+  const { account, deactivate, error: web3ReactError } = useWeb3React();
   const dispatch = useDispatch();
   const spaceLogoPath =
     mode === ThemeMode.LIGHT ? spaceLogoLightPath : spaceLogoDarkPath;
@@ -87,17 +90,17 @@ export const AppBar: FC = () => {
   const disconnect = () => {
     try {
       deactivate();
-      localStorage.removeItem('walletConnected');
-    } catch (ex) {
-      console.log(ex);
+      storage.local.remove(StorageItem.WALLETCONNECTED);
+    } catch (error) {
+      genericErrorHandler(error);
     }
   };
 
   useEffect(() => {
-    if (error?.message) {
+    if (web3ReactError?.message) {
       toast.error('Chain not supported');
     }
-  }, [error?.message]);
+  }, [erroweb3ReactErrorr?.message]);
 
   const { pathname } = location;
   return (
@@ -141,7 +144,7 @@ export const AppBar: FC = () => {
         <Button
           color="primary"
           onClick={
-            error?.message
+            web3ReactError?.message
               ? () => {
                   return;
                 }
@@ -152,7 +155,7 @@ export const AppBar: FC = () => {
                 }
           }
         >
-          {error?.message
+          {web3ReactError?.message
             ? intl.translate({ id: 'Wrong Network' })
             : account
             ? intl.translate({ id: 'Disconnect' })
