@@ -70,7 +70,6 @@ export const TextInput = (props: Props): JSX.Element | null => {
     }
 
     return materialTheme;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [color, materialTheme]);
 
   if (system === DesignSystem.MATERIAL_UI) {
