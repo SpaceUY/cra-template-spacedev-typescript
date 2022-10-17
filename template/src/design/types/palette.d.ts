@@ -8,4 +8,6 @@ export type Palette = {
   info: Color;
   success: Color;
   grey: Color;
+  white: Color;
+  black: Color;
 };

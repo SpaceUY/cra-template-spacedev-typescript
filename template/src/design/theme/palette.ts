@@ -43,4 +43,16 @@ export const palette: Palette = {
     dark: '#333',
     invert: '#fff',
   },
+  white: {
+    main: '#fff',
+    light: '#fff',
+    dark: '#fff',
+    invert: '#fff',
+  },
+  black: {
+    main: '#000',
+    light: '#000',
+    dark: '#000',
+    invert: '#000',
+  },
 };

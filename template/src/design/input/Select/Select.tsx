@@ -10,25 +10,22 @@ import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
 import { mapColorToMaterial } from 'design/helpers/theme.helpers';
 import { isColor } from 'design/helpers/type.helpers';
+import { MuiTextFieldInvert } from 'design/input/MuiTextFieldInvert/MuiTextFieldInvert';
+import { StatusText } from 'design/input/StatusText/StatusText';
 import { Text } from 'design/Text';
-import { ColorProp } from 'design/types/color-prop';
 import { InputProps } from 'design/types/input-props';
 import { noop } from 'helpers/nodash.helpers';
 import { Align } from 'layout';
 import { ChangeEvent, useCallback, useContext, useMemo } from 'react';
 import { FcDefaultProps } from 'types/fc-default-props';
-import { StatusText } from '../StatusText/StatusText';
-
-type InputPropsWithoutColor<T> = Omit<InputProps<T>, 'color'>;
 
 type Props<T> = Omit<FcDefaultProps, 'children'> &
-  InputPropsWithoutColor<T> & {
+  InputProps<T> & {
     options: {
       label: string;
       value: T;
     }[];
     children?: JSX.Element[];
-    color?: ColorProp;
   };
 
 export const Select = <T,>(props: Props<T>): JSX.Element => {
@@ -48,6 +45,7 @@ export const Select = <T,>(props: Props<T>): JSX.Element => {
     color,
     size,
     variant = 'default',
+    invert,
   } = props;
 
   const materialTheme = useTheme();
@@ -97,13 +95,14 @@ export const Select = <T,>(props: Props<T>): JSX.Element => {
     }
 
     return materialTheme;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [color, materialTheme]);
 
   if (system === DesignSystem.MATERIAL_UI) {
+    const MuiTextField = invert ? MuiTextFieldInvert : TextField;
+
     return (
       <ThemeProvider theme={theme}>
-        <TextField
+        <MuiTextField
           id={id}
           name={name}
           label={label}
@@ -124,7 +123,7 @@ export const Select = <T,>(props: Props<T>): JSX.Element => {
               {children ? children[i] : opt.label}
             </MenuItem>
           ))}
-        </TextField>
+        </MuiTextField>
       </ThemeProvider>
     );
   }
