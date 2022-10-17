@@ -109,6 +109,7 @@ export const Login: FC<FcDefaultProps> = () => {
                     value={formik.values.email}
                     error={formik.errors.email}
                     helperText={intl.translate({ id: 'Any email will do' })}
+                    variant="outlined"
                     fullWidth
                   />
 
@@ -123,6 +124,7 @@ export const Login: FC<FcDefaultProps> = () => {
                     helperText={intl.translate({
                       id: 'Any text with at least 8 characters will do',
                     })}
+                    variant="outlined"
                     fullWidth
                   />
                 </Align>
