@@ -7,6 +7,7 @@ const StyledDiv = styled.div`
   border: 1px solid ${({ theme }) => theme.background.back};
   border-radius: ${({ theme }) => theme.borderRadius.small}rem;
   padding: 0.5rem;
+  overflow-x: auto;
 `;
 
 export const Well: FC<FcDefaultProps> = ({ children, ...rest }) => {

@@ -7,7 +7,7 @@ Create React App Starter Template by:
 **1. Init project**
 
 ```bash
-npx create-react-app your-project-name --template space-ts
+npx create-react-app your-project-name --template spacedev-typescript
 ```
 
 **2. Read**
