@@ -42,7 +42,7 @@ const Blockchain = () => {
 
       <br />
       <Text.h2>
-        {intl.translate({ id: 'Chain id: {chainID}' }, { chainId })}
+        {intl.translate({ id: 'Chain id: {chainId}' }, { chainId })}
       </Text.h2>
       <br />
       <div>

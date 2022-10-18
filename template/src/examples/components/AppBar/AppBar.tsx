@@ -19,6 +19,7 @@ import { StorageItem } from 'enums/storage-item.enum';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { noop } from 'helpers/nodash.helpers';
 import { ConnectModal } from '../ConnectModal/ConnectModal';
+import { storage } from 'helpers/storage.helpers';
 
 const StyledAlign = styled(Align)`
   margin-bottom: 2rem;
@@ -90,7 +91,7 @@ export const AppBar: FC = () => {
   const disconnect = () => {
     try {
       deactivate();
-      localStorage.removeItem(StorageItem.WALLETCONNECTED);
+      storage.local.remove(StorageItem.WALLETCONNECTED);
     } catch (error) {
       genericErrorHandler(error);
     }
@@ -117,7 +118,7 @@ export const AppBar: FC = () => {
       return () => noop;
     }
     if (account) {
-      return () => disconnect;
+      return () => disconnect();
     }
     return () => {
       setBlockchainModal(true);

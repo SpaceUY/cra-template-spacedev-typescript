@@ -11,14 +11,21 @@ import coinbaseWalletPath from './assets/coinbaseWallet.png';
 import metamaskPath from './assets/metamask.png';
 import walletConnectPath from './assets/walletConnect.png';
 import styled from 'styled-components';
+import { CloseIcon } from './Icons/CloseIcon';
 
 const StyledDivModal = styled.div`
   display: flex;
   flex-direction: column;
-  width: 400;
-  bgcolor: background.paper;
-  boxshadow: 24;
-  p: 4;
+  width: 400px;
+  background: ${({ theme }) => theme.background.front};
+  padding: 0.7rem;
+`;
+const StyledDivContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const StyledImg = styled.img`
   border-radius: ${({ theme }) => theme.borderRadius.medium};
@@ -30,6 +37,11 @@ const StyledDiv = styled.div`
   align-items: center;
   margin: 0.7rem 0;
 `;
+const StyledDivClose = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: end;
+`;
 type Props = {
   isOpen: boolean;
   setBlockchainModal: Dispatch<SetStateAction<boolean>>;
@@ -39,14 +51,19 @@ export const ConnectModal: FC<Props> = ({ isOpen, setBlockchainModal }) => {
   const { activate } = useWeb3React();
 
   return (
-    <>
-      <Modal
-        onClose={() => {
-          setBlockchainModal(false);
-        }}
-        open={isOpen}
-      >
+    <Modal
+      onClose={() => {
+        setBlockchainModal(false);
+      }}
+      open={isOpen}
+    >
+      <StyledDivContainer>
         <StyledDivModal>
+          <StyledDivClose>
+            <Button onClick={() => setBlockchainModal(false)}>
+              <CloseIcon />
+            </Button>
+          </StyledDivClose>
           <StyledDiv>
             <StyledImg src={coinbaseWalletPath} alt="" height="48" />
             <Button
@@ -92,7 +109,7 @@ export const ConnectModal: FC<Props> = ({ isOpen, setBlockchainModal }) => {
             </Button>
           </StyledDiv>
         </StyledDivModal>
-      </Modal>
-    </>
+      </StyledDivContainer>
+    </Modal>
   );
 };
