@@ -71,6 +71,9 @@ export const MuiTextFieldInvert = (props: Props): JSX.Element => {
       '& .MuiSelect-icon': {
         color: invertColor,
       },
+      '& button.MuiButtonBase-root': {
+        color: invertColor,
+      },
     });
   }, [invertColor]);
 

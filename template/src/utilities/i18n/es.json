@@ -63,5 +63,8 @@
   "The <code><TextInput /></code> component will take any <code>string</code> value.": "El componente <code><TextInput /></code> acepta cualquier valor de tipo <code>string</code>.",
   "The <code><NumberInput /></code> component will take any <code>number</code> or <code>''</code> as its value.": "El componente <code><NumberInput /></code> acepta cualquier valor de tipo <code>number</code> ó <code>\"\"</code> como su valor.",
   "The <code><Select /></code> component will take any type as an option's type, and return the same value type.": "El componente <code><Select /></code> aceptará cualquier tipo de valor en sus opciones, y retornará el mismo typo de valor.",
-  "The prop <code>invert</code> is usefull when the background is collored and doesn't react with the theme mode changes.": "La prop <code>invert</code> es útil cuando el fondo es coloreado o no responde a los cambios del modo del tema."
+  "The prop <code>invert</code> is usefull when the background is collored and doesn't react with the theme mode changes.": "La prop <code>invert</code> es útil cuando el fondo es coloreado o no responde a los cambios del modo del tema.",
+  "No date selected": "No se ha seleccionado una fecha",
+  "The <code><DateTimeInput /></code>, <code><DateInput /></code> and <code><TimeInput /></code> components will take any <code>Date</code> as their value.": "Los componentes <code><DateTimeInput /></code>, <code><DateInput /></code> y <code><TimeInput /></code> aceptan cualquier valor de tipo <code>Date</code>.",
+  "The date display above is localized and will react to the locale being updated on the app.": "La fecha que se puede ver arriba es localizada y responde a los cambios de locale de la aplicación."
 }

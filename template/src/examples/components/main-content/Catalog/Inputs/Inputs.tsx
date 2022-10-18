@@ -1,10 +1,14 @@
 import { Card, NumberInput, Select, Text, TextInput } from 'design';
 import { cardHeadingStyles } from 'design/Card/CardHeading';
 import { InlineCode } from 'design/InlineCode/InlineCode';
+import { DateInput } from 'design/input/DateTime/DateInput';
+import { DateTimeInput } from 'design/input/DateTime/DateTimeInput';
+import { TimeInput } from 'design/input/DateTime/TimeInput';
 import { ColorProp } from 'design/types/color-prop';
 import { InputVariantProp } from 'design/types/input-variant-prop';
 import { ColorSelector } from 'examples/components/ColorSelector/ColorSelector';
 import { VariantSelector } from 'examples/components/VariantSelector/VariantSelector';
+import { DateFormat, formatDate } from 'helpers/date.helpers';
 import { Align } from 'layout';
 import { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
@@ -18,6 +22,9 @@ const cssInputWrapperBase = css`
   padding: 1rem;
   width: 100%;
   max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const StyledInputWrapperDiv = styled.div`
@@ -47,6 +54,7 @@ export const Inputs: FC = () => {
   const [color, setColor] = useState<ColorProp | undefined>();
   const [variant, setVariant] = useState<InputVariantProp>('default');
   const [text, setText] = useState('');
+  const [date, setDate] = useState<Date | null>(null);
   const [number, setNumber] = useState<number | ''>('');
 
   return (
@@ -115,7 +123,7 @@ export const Inputs: FC = () => {
           <StyledColoredInputWrapperDiv>
             <TextInput
               label="<TextInput invert/>"
-              name="demo-text-input"
+              name="demo-text-input-invert"
               value={text}
               onChange={(evt) => setText(evt.target.value)}
               color={color}
@@ -155,7 +163,7 @@ export const Inputs: FC = () => {
           <StyledColoredInputWrapperDiv>
             <NumberInput
               label="<NumberInput invert/>"
-              name="demo-number-input"
+              name="demo-number-input-invert"
               value={number}
               onChange={(evt) => setNumber(evt.target.value)}
               color={color}
@@ -195,10 +203,105 @@ export const Inputs: FC = () => {
           <StyledColoredInputWrapperDiv>
             <Select
               label="<Select invert/>"
-              name="demo-select"
+              name="demo-select-invert"
               options={options}
               value={value}
               onChange={(evt) => setValue(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+              invert
+            />
+          </StyledColoredInputWrapperDiv>
+
+          <Text.h3>
+            DateTime{' '}
+            {date ? (
+              <small>
+                {formatDate(date, DateFormat.combinationOfLocalizadDateAndTime)}
+              </small>
+            ) : (
+              <small> - {intl.translate({ id: 'No date selected' })}</small>
+            )}
+          </Text.h3>
+
+          <Text.p>
+            {intl.translate({
+              id: 'The date display above is localized and will react to the locale being updated on the app.',
+            })}
+          </Text.p>
+
+          <Text.p>
+            {intl.translate(
+              {
+                id: 'The <code><DateTimeInput /></code>, <code><DateInput /></code> and <code><TimeInput /></code> components will take any <code>Date</code> as their value.',
+              },
+              {
+                code: (label) => <InlineCode>{label}</InlineCode>,
+              },
+            )}
+          </Text.p>
+
+          <StyledInputWrapperDiv>
+            <DateTimeInput
+              label="<DateTimeInput />"
+              name="demo-date-time-input"
+              value={date}
+              onChange={(evt) => setDate(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+            />
+
+            <DateInput
+              label="<DateInput />"
+              name="demo-date-input"
+              value={date}
+              onChange={(evt) => setDate(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+            />
+
+            <TimeInput
+              label="<TimeInput />"
+              name="demo-time-input"
+              value={date}
+              onChange={(evt) => setDate(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+            />
+          </StyledInputWrapperDiv>
+
+          <StyledColoredInputWrapperDiv>
+            <DateTimeInput
+              label="<DateTimeInput invert/>"
+              name="demo-date-time-input-invert"
+              value={date}
+              onChange={(evt) => setDate(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+              invert
+            />
+
+            <DateInput
+              label="<DateInput invert/>"
+              name="demo-date-input-invert"
+              value={date}
+              onChange={(evt) => setDate(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+              invert
+            />
+
+            <TimeInput
+              label="<TimeInput invert/>"
+              name="demo-time-input-invert"
+              value={date}
+              onChange={(evt) => setDate(evt.target.value)}
               color={color}
               variant={variant}
               fullWidth
