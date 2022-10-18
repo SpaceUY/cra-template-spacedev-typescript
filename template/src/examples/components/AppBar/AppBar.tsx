@@ -7,7 +7,7 @@ import { removeAuthTokenAction } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
 import { rgba } from 'helpers/color.helpers';
 import { Align } from 'layout';
-import { FC, useContext, useEffect, useMemo } from 'react';
+import { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { toast } from 'components/Toast/Toast';
@@ -18,6 +18,7 @@ import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
 import { StorageItem } from 'enums/storage-item.enum';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { noop } from 'helpers/nodash.helpers';
+import { ConnectModal } from '../ConnectModal/ConnectModal';
 
 const StyledAlign = styled(Align)`
   margin-bottom: 2rem;
@@ -74,6 +75,7 @@ export const AppBar: FC = () => {
   const {
     theme: { mode },
   } = useContext(DesignContext);
+  const [blockchainModal, setBlockchainModal] = useState<boolean>(false);
   const authToken = useSelector(selectAuthToken);
   const location = useLocation();
   const { account, deactivate, error: web3Error } = useWeb3React();
@@ -118,53 +120,59 @@ export const AppBar: FC = () => {
       return () => disconnect;
     }
     return () => {
-      //
+      setBlockchainModal(true);
     };
   }, [web3Error, account]);
 
   const { pathname } = location;
   return (
-    <StyledAlign v-center h-between>
-      <StyledH1>
-        <StyledA
-          href="https://www.spacedev.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="SpaceDev CRA Template"
-        >
-          <img src={spaceLogoPath} alt="" height="48" />
-        </StyledA>
-      </StyledH1>
+    <>
+      <ConnectModal
+        setBlockchainModal={setBlockchainModal}
+        isOpen={blockchainModal}
+      />
+      <StyledAlign v-center h-between>
+        <StyledH1>
+          <StyledA
+            href="https://www.spacedev.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SpaceDev CRA Template"
+          >
+            <img src={spaceLogoPath} alt="" height="48" />
+          </StyledA>
+        </StyledH1>
 
-      {authToken && (
-        <Align v-center gap={0.5}>
-          <nav>
-            <StyledNavLink to={AppRoute.HOME}>
-              {intl.translate({ id: 'Home' })}
-            </StyledNavLink>
+        {authToken && (
+          <Align v-center gap={0.5}>
+            <nav>
+              <StyledNavLink to={AppRoute.HOME}>
+                {intl.translate({ id: 'Home' })}
+              </StyledNavLink>
 
-            <StyledNavLink to={AppRoute.CATALOG}>
-              {intl.translate({ id: 'Catalog' })}
-            </StyledNavLink>
+              <StyledNavLink to={AppRoute.CATALOG}>
+                {intl.translate({ id: 'Catalog' })}
+              </StyledNavLink>
 
-            <StyledNavLink to={AppRoute.STATE}>
-              {intl.translate({ id: 'State' })}
-            </StyledNavLink>
-            <StyledNavLink to={AppRoute.BLOCKCHAIN}>
-              {intl.translate({ id: 'Blockchain' })}
-            </StyledNavLink>
-          </nav>
+              <StyledNavLink to={AppRoute.STATE}>
+                {intl.translate({ id: 'State' })}
+              </StyledNavLink>
+              <StyledNavLink to={AppRoute.BLOCKCHAIN}>
+                {intl.translate({ id: 'Blockchain' })}
+              </StyledNavLink>
+            </nav>
 
-          <Button color="primary" onClick={handleLogout}>
-            {intl.translate({ id: 'Logout' })}
+            <Button color="primary" onClick={handleLogout}>
+              {intl.translate({ id: 'Logout' })}
+            </Button>
+          </Align>
+        )}
+        {pathname === '/blockchain' && (
+          <Button color="primary" onClick={getFunction}>
+            {getText}
           </Button>
-        </Align>
-      )}
-      {pathname === '/blockchain' && (
-        <Button color="primary" onClick={getFunction}>
-          {getText}
-        </Button>
-      )}
-    </StyledAlign>
+        )}
+      </StyledAlign>
+    </>
   );
 };

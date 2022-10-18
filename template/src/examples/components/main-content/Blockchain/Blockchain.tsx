@@ -1,5 +1,4 @@
 import { useWeb3React } from '@web3-react/core';
-import ConnectModal from 'examples/components/ConnectModal/ConnectModal';
 import { useEffect } from 'react';
 import { Select, Text } from 'design';
 import { intl } from 'utilities/i18n/intl.utility';
@@ -37,7 +36,6 @@ const Blockchain = () => {
 
   return (
     <div>
-      <ConnectModal />
       <Text.h2>
         {intl.translate({ id: 'Account connected: {account}' }, { account })}
       </Text.h2>

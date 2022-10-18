@@ -1,10 +1,8 @@
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 import { CoinbaseWallet, Injected, WalletConnect } from 'connectors/connectors';
 import { Button, Modal } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import { storage } from 'helpers/storage.helpers';
 import { StorageItem } from 'enums/storage-item.enum';
 import { ConnectorItem } from 'enums/connector-item.enum';
@@ -32,18 +30,21 @@ const StyledDiv = styled.div`
   align-items: center;
   margin: 0.7rem 0;
 `;
+type Props = {
+  isOpen: boolean;
+  setBlockchainModal: Dispatch<SetStateAction<boolean>>;
+};
 
-export const ConnectModal: FC = () => {
+export const ConnectModal: FC<Props> = ({ isOpen, setBlockchainModal }) => {
   const { activate } = useWeb3React();
-  const dispatch = useDispatch();
 
   return (
     <>
       <Modal
         onClose={() => {
-          dispatch(setShowModal(!showModalBlockchain));
+          setBlockchainModal(false);
         }}
-        open={showModalBlockchain}
+        open={isOpen}
       >
         <StyledDivModal>
           <StyledDiv>
