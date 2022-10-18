@@ -50,6 +50,7 @@
   "<strong>User</strong> DTO:": "<strong>User</strong> DTO:",
   "If you open the console you should see something like this:": "If you open the console you should see something like this:",
   "Harmony": "Harmony",
+  "Arbitrum One": "Arbitrum One",
   "Account connected: {account}":"Account connected: {account}",
   "Chain id: {chainId}":"Chain id: {chainId}",
   "None":"None",

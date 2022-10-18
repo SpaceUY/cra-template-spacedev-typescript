@@ -7,7 +7,14 @@ import { removeAuthTokenAction } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
 import { rgba } from 'helpers/color.helpers';
 import { Align } from 'layout';
-import { FC, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { toast } from 'components/Toast/Toast';
@@ -18,8 +25,8 @@ import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
 import { StorageItem } from 'enums/storage-item.enum';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { noop } from 'helpers/nodash.helpers';
-import { ConnectModal } from '../ConnectModal/ConnectModal';
 import { storage } from 'helpers/storage.helpers';
+import { ConnectModal } from '../ConnectModal/ConnectModal';
 
 const StyledAlign = styled(Align)`
   margin-bottom: 2rem;
@@ -103,7 +110,7 @@ export const AppBar: FC = () => {
     }
   }, [web3Error?.message]);
 
-  const getText = useMemo(() => {
+  const BlockchainButtonLabel = useMemo(() => {
     if (web3Error?.message) {
       return intl.translate({ id: 'Wrong Network' });
     }
@@ -113,16 +120,16 @@ export const AppBar: FC = () => {
     return intl.translate({ id: 'Connect Wallet' });
   }, [web3Error, account]);
 
-  const getFunction = useMemo(() => {
+  const getFunction = useCallback(() => {
     if (web3Error?.message) {
-      return () => noop;
+      return;
     }
+
     if (account) {
-      return () => disconnect();
+      disconnect();
     }
-    return () => {
-      setBlockchainModal(true);
-    };
+
+    setBlockchainModal(true);
   }, [web3Error, account]);
 
   const { pathname } = location;
@@ -168,9 +175,9 @@ export const AppBar: FC = () => {
             </Button>
           </Align>
         )}
-        {pathname === '/blockchain' && (
+        {pathname === AppRoute.BLOCKCHAIN && (
           <Button color="primary" onClick={getFunction}>
-            {getText}
+            {BlockchainButtonLabel}
           </Button>
         )}
       </StyledAlign>

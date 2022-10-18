@@ -47,6 +47,7 @@
   "<strong>User</strong> DTO:": "DTO <strong>User</strong>:",
   "If you open the console you should see something like this:": "Si abres la consola deberías ver algo así:",
   "Harmony": "Harmony",
+  "Arbitrum One": "Arbitrum One",
   "Account connected: {account}":"Cuenta conectada: {account}",
   "Chain id: {chainId}":"Identificador de cadena: {chainId}",
   "None":"None",

@@ -8,6 +8,7 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { CoinbaseWallet, Injected, WalletConnect } from 'connectors/connectors';
 import { CHAINS_INFO } from 'connectors/networks';
+import { ChainInfo } from 'connectors/types/chain-info';
 import { ConnectorItem } from 'enums/connector-item.enum';
 import { StorageItem } from 'enums/storage-item.enum';
 import { genericErrorHandler } from './error.helpers';
@@ -33,13 +34,12 @@ export function getWalletConnected():
 
 export const switchNetwork = async (
   library: Record<string, any>,
-  value: keyof typeof CHAINS_INFO,
+  chainInfo: ChainInfo,
 ) => {
-  const info = CHAINS_INFO[value];
   try {
     await library.provider.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: info.chainId }],
+      params: [{ chainId: chainInfo.chainId }],
     });
   } catch (switchError: any) {
     // 4902 error code indicates the chain is missing on the wallet
@@ -49,11 +49,11 @@ export const switchNetwork = async (
           method: 'wallet_addEthereumChain',
           params: [
             {
-              chainId: info.chainId,
-              chainName: info.chainName,
-              rpcUrls: info.rpcUrls,
-              nativeCurrency: info.nativeCurrency,
-              blockExplorerUrls: info.blockExplorerUrls,
+              chainId: chainInfo.chainId,
+              chainName: chainInfo.chainName,
+              rpcUrls: chainInfo.rpcUrls,
+              nativeCurrency: chainInfo.nativeCurrency,
+              blockExplorerUrls: chainInfo.blockExplorerUrls,
             },
           ],
         });
