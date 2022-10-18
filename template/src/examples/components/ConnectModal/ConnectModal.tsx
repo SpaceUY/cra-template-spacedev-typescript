@@ -2,46 +2,39 @@ import { FC } from 'react';
 
 import { useWeb3React } from '@web3-react/core';
 import { CoinbaseWallet, Injected, WalletConnect } from 'connectors/connectors';
-import { Box, Button, Modal } from '@mui/material';
+import { Button, Modal } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectShowModalBlockchain } from 'global-state/selectors/blockchain.selectors';
 import { useDispatch } from 'react-redux';
-import { setShowModal } from 'global-state/actions';
 import { storage } from 'helpers/storage.helpers';
 import { StorageItem } from 'enums/storage-item.enum';
 import { ConnectorItem } from 'enums/connector-item.enum';
 import { intl } from 'utilities/i18n/intl.utility';
-import CoinbaseWalletPath from './assets/coinbaseWallet.png';
-import MetamaskPath from './assets/metamask.png';
+import coinbaseWalletPath from './assets/coinbaseWallet.png';
+import metamaskPath from './assets/metamask.png';
 import walletConnectPath from './assets/walletConnect.png';
 import styled from 'styled-components';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  display: 'flex',
-  flexDirection: 'column',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
+const StyledDivModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 400;
+  bgcolor: background.paper;
+  boxshadow: 24;
+  p: 4;
+`;
+const StyledImg = styled.img`
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  margin-right: 0.7rem;
+  width: 3.75rem;
+`;
 const StyledDiv = styled.div`
   display: flex;
   align-items: center;
-  margin: 10px 0px;
-`;
-const StyledImg = styled.img`
-  border-radius: 10%;
-  margin-right: 10px;
-  width: 60px;
+  margin: 0.7rem 0;
 `;
 
-const ConnectModal: FC = () => {
+export const ConnectModal: FC = () => {
   const { activate } = useWeb3React();
-  const showModalBlockchain = useSelector(selectShowModalBlockchain);
   const dispatch = useDispatch();
 
   return (
@@ -51,12 +44,10 @@ const ConnectModal: FC = () => {
           dispatch(setShowModal(!showModalBlockchain));
         }}
         open={showModalBlockchain}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <StyledDivModal>
           <StyledDiv>
-            <StyledImg src={CoinbaseWalletPath} alt="" height="48" />
+            <StyledImg src={coinbaseWalletPath} alt="" height="48" />
             <Button
               onClick={() => {
                 activate(CoinbaseWallet);
@@ -85,7 +76,7 @@ const ConnectModal: FC = () => {
           </StyledDiv>
 
           <StyledDiv>
-            <StyledImg src={MetamaskPath} alt="" height="48" />
+            <StyledImg src={metamaskPath} alt="" height="48" />
 
             <Button
               onClick={() => {
@@ -99,10 +90,8 @@ const ConnectModal: FC = () => {
               {intl.translate({ id: ' Metamask' })}
             </Button>
           </StyledDiv>
-        </Box>
+        </StyledDivModal>
       </Modal>
     </>
   );
 };
-
-export default ConnectModal;

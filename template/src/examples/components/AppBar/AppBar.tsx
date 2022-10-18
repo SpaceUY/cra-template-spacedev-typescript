@@ -3,12 +3,11 @@ import { Button, Text } from 'design';
 import { DesignContext } from 'design/DesignContext';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { AppRoute } from 'enums/app-route.enum';
-import { removeAuthTokenAction, setShowModal } from 'global-state/actions';
+import { removeAuthTokenAction } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
-import { selectShowModalBlockchain } from 'global-state/selectors/blockchain.selectors';
 import { rgba } from 'helpers/color.helpers';
 import { Align } from 'layout';
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { toast } from 'components/Toast/Toast';
@@ -16,9 +15,9 @@ import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
 import spaceLogoDarkPath from './assets/spacedev-logo-dark.svg';
 import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
-import { storage } from 'helpers/storage.helpers';
 import { StorageItem } from 'enums/storage-item.enum';
 import { genericErrorHandler } from 'helpers/error.helpers';
+import { noop } from 'helpers/nodash.helpers';
 
 const StyledAlign = styled(Align)`
   margin-bottom: 2rem;
@@ -77,8 +76,7 @@ export const AppBar: FC = () => {
   } = useContext(DesignContext);
   const authToken = useSelector(selectAuthToken);
   const location = useLocation();
-  const showModalBlockchain = useSelector(selectShowModalBlockchain);
-  const { account, deactivate, error: web3ReactError } = useWeb3React();
+  const { account, deactivate, error: web3Error } = useWeb3React();
   const dispatch = useDispatch();
   const spaceLogoPath =
     mode === ThemeMode.LIGHT ? spaceLogoLightPath : spaceLogoDarkPath;
@@ -90,17 +88,39 @@ export const AppBar: FC = () => {
   const disconnect = () => {
     try {
       deactivate();
-      storage.local.remove(StorageItem.WALLETCONNECTED);
+      localStorage.removeItem(StorageItem.WALLETCONNECTED);
     } catch (error) {
       genericErrorHandler(error);
     }
   };
 
   useEffect(() => {
-    if (web3ReactError?.message) {
+    if (web3Error?.message) {
       toast.error('Chain not supported');
     }
-  }, [erroweb3ReactErrorr?.message]);
+  }, [web3Error?.message]);
+
+  const getText = useMemo(() => {
+    if (web3Error?.message) {
+      return intl.translate({ id: 'Wrong Network' });
+    }
+    if (account) {
+      return intl.translate({ id: 'Disconnect' });
+    }
+    return intl.translate({ id: 'Connect Wallet' });
+  }, [web3Error, account]);
+
+  const getFunction = useMemo(() => {
+    if (web3Error?.message) {
+      return () => noop;
+    }
+    if (account) {
+      return () => disconnect;
+    }
+    return () => {
+      //
+    };
+  }, [web3Error, account]);
 
   const { pathname } = location;
   return (
@@ -141,25 +161,8 @@ export const AppBar: FC = () => {
         </Align>
       )}
       {pathname === '/blockchain' && (
-        <Button
-          color="primary"
-          onClick={
-            web3ReactError?.message
-              ? () => {
-                  return;
-                }
-              : account
-              ? disconnect
-              : () => {
-                  dispatch(setShowModal(!showModalBlockchain));
-                }
-          }
-        >
-          {web3ReactError?.message
-            ? intl.translate({ id: 'Wrong Network' })
-            : account
-            ? intl.translate({ id: 'Disconnect' })
-            : intl.translate({ id: 'Connect Wallet' })}
+        <Button color="primary" onClick={getFunction}>
+          {getText}
         </Button>
       )}
     </StyledAlign>
