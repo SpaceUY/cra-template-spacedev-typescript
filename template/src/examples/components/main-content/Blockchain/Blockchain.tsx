@@ -26,8 +26,8 @@ const Blockchain = () => {
       if (walletConnected) {
         try {
           await activate(walletConnected);
-        } catch (ex) {
-          genericErrorHandler(ex);
+        } catch (error) {
+          genericErrorHandler(error);
         }
       }
     };
