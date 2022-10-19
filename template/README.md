@@ -170,3 +170,22 @@ We indentified 3 different types or levels of state
 Use the pub-sub (aka observer) pattern for this. Remember to always unsubscribe from all subscriptions once they are no longer needed.
 
 The pub-sub implementation should be used from the `utilities` folder.
+
+## Blockchain Integration
+
+- Supported networks
+
+  - In order to change the supported networks, change the array inside each injector and then if the network is in there it will work as desired otherwise a error toast will show.
+  - Under the same folder, inside the networks file is where you need to add your supported networks so when the user changes the network it changes on the wallet or otherwise if the network is not already added it takes the information from there to add it to the wallet.
+
+- Connection to wallet
+
+  - Once inside the connectModal component is where we map all the possible wallets to connect to the app. We use the activate method from useWeb3react in order to inject the provider for each case, we also save the connection method in the local in order to reconnect the wallet when refreshing.
+
+- Wrong networks
+
+  - In order to know whether a network is valid or not we use the error property from useWeb3react that return an error message with the supported networks whenever the user changes to a non-supported netwok.
+
+- Change networks
+
+  - To trigger the network change from inside the app we use the library.provider.request method from object library taken again from web3React and send the wallet_switchEthereumChain string. In case the network is already added this will open the change network modal, otherwise it will return am error and in the catch we will send wallet_addEthereumChain string and add the chain with information from the networks file. This is a helper function in which you have to pass the library object from web3React and the name of the chain you want to change to

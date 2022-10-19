@@ -21,7 +21,6 @@ function App() {
   return (
     <StyledDiv>
       <AppBar />
-
       <main>
         <Router />
       </main>
