@@ -105,7 +105,7 @@ export const ConnectModal: FC<Props> = ({ isOpen, setBlockchainModal }) => {
                 );
               }}
             >
-              {intl.translate({ id: ' Metamask' })}
+              {intl.translate({ id: 'Metamask' })}
             </Button>
           </StyledDiv>
         </StyledDivModal>

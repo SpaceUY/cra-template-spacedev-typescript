@@ -1,0 +1,23 @@
+# dependencies
+template/node_modules
+template/.pnp
+template/.pnp.js
+
+# testing
+template/coverage
+
+# production
+template/build
+
+# misc
+template/.DS_Store
+template/.env.local
+template/.env.development.local
+template/.env.test.local
+template/.env.production.local
+
+template/npm-debug.log*
+template/yarn-debug.log*
+template/yarn-error.log*
+
+template/.env
