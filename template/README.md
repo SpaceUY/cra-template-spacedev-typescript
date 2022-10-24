@@ -4,12 +4,20 @@ Create React App Starter Template by:
 
 # Upcoming
 
+## To Do
+
 - force theme
-- force locale
-- breackpoints
-- input invert
-- date handling
-- config
+- breakpoints
+- inputs
+  - checkbox
+  - toggle / switch
+  - radio
+  - autocomplete
+- badge
+
+## Nice to have
+
+- useBreakpoint hook
 
 # Basic
 
@@ -44,6 +52,9 @@ REACT_APP_API_URL=http://localhost:5000
 
 REACT_APP_VALIDATION_ERROR_BREAKS_RESPONSE=false
 # controls whether the validation errors will stop the response from reaching the request point
+
+REACT_APP_LOCALE=sys
+# sets the application default language.
 ```
 
 ## Styled Components
