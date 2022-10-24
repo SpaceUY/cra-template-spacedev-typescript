@@ -1,5 +1,5 @@
 import { styled as styledMui, TextField } from '@mui/material';
-import { useTheme } from 'design/hooks/useTheme';
+import { useTheme } from 'design/hooks/use-theme';
 import { rgba } from 'helpers/color.helpers';
 import { useMemo } from 'react';
 

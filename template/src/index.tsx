@@ -9,11 +9,10 @@ import ReactDOM from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import 'reflect-metadata';
-import { IntlProvider } from 'utilities/i18n/IntlContext';
+import { IntlProvider } from 'utilities/i18n/intl.context';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );

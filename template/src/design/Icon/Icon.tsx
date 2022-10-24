@@ -1,5 +1,5 @@
 import { isColor } from 'design/helpers/type.helpers';
-import { useTheme } from 'design/hooks/useTheme';
+import { useTheme } from 'design/hooks/use-theme';
 import { IconProps } from 'design/types/icon-props';
 import { FC, useMemo } from 'react';
 
