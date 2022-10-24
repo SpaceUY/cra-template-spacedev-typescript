@@ -21,7 +21,14 @@ export const Router: FC = () => {
           </ProtectedRoute>
         }
       />
-      <Route path={AppRoute.BLOCKCHAIN} element={<Blockchain />} />
+      <Route
+        path={AppRoute.BLOCKCHAIN}
+        element={
+        <ProtectedRoute>
+          <Blockchain />
+        </ProtectedRoute>
+        }
+      />
       <Route
         path={AppRoute.CATALOG}
         element={
