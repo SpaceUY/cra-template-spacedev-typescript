@@ -7,7 +7,7 @@ import { Home } from 'examples/components/main-content/Home/Home';
 import { Login } from 'examples/components/main-content/Login/Login';
 import { State } from 'examples/components/main-content/State/State';
 import { FC } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { intl } from 'utilities/i18n/intl.utility';
 
 export const Router: FC = () => {
@@ -48,6 +48,11 @@ export const Router: FC = () => {
       />
 
       <Route path={AppRoute.LOGIN} element={<Login />} />
+
+      <Route
+        path={AppRoute.INDEX}
+        element={<Navigate to={AppRoute.HOME} replace />}
+      />
 
       <Route
         path="*"

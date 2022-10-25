@@ -5,6 +5,7 @@ import { DesignContext } from 'design/DesignContext';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { AppRoute } from 'enums/app-route.enum';
 import { StorageItem } from 'enums/storage-item.enum';
+import { ConnectModal } from 'examples/components/ConnectModal/ConnectModal';
 import { removeAuthTokenAction } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
 import { rgba } from 'helpers/color.helpers';
@@ -23,7 +24,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
-import { ConnectModal } from '../ConnectModal/ConnectModal';
 import spaceLogoDarkPath from './assets/spacedev-logo-dark.svg';
 import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
 
