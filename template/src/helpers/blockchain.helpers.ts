@@ -1,13 +1,12 @@
 import {
   ExternalProvider,
   JsonRpcFetchFunc,
-  Web3Provider,
+  Web3Provider
 } from '@ethersproject/providers';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import { CoinbaseWallet, Injected, WalletConnect } from 'connectors/connectors';
-import { CHAINS_INFO } from 'connectors/networks';
 import { ChainInfo } from 'connectors/types/chain-info';
 import { ConnectorItem } from 'enums/connector-item.enum';
 import { StorageItem } from 'enums/storage-item.enum';

@@ -1,8 +1,8 @@
 import { Select } from 'design';
 import { useContext } from 'react';
 import { Locale } from 'utilities/i18n/enums/locale.enum';
+import { IntlContext } from 'utilities/i18n/intl.context';
 import { intl } from 'utilities/i18n/intl.utility';
-import { IntlContext } from 'utilities/i18n/IntlContext';
 import { LanguageSelectorOption as Option } from './LanguageSelectorOption';
 
 const OPTIONS = [

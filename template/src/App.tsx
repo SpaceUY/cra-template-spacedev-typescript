@@ -2,7 +2,7 @@ import { AppBar } from 'examples/components/AppBar/AppBar';
 import { useContext } from 'react';
 import { Router } from 'Router';
 import styled from 'styled-components';
-import { IntlContext } from 'utilities/i18n/IntlContext';
+import { IntlContext } from 'utilities/i18n/intl.context';
 
 const StyledDiv = styled.div`
   padding: 2rem;

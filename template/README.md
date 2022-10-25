@@ -4,12 +4,20 @@ Create React App Starter Template by:
 
 # Upcoming
 
+## To Do
+
 - force theme
-- force locale
-- breackpoints
-- input invert
-- date handling
-- config
+- breakpoints
+- inputs
+  - checkbox
+  - toggle / switch
+  - radio
+  - autocomplete
+- badge
+
+## Nice to have
+
+- useBreakpoint hook
 
 # Basic
 

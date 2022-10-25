@@ -20,6 +20,5 @@ export function getDefaultLocale(): Locale {
   const locale = generalizeLocale(navigator.language);
 
   storage.local.set(StorageItem.LOCALE, locale);
-
-  return locale;
+  return locale as Locale;
 }

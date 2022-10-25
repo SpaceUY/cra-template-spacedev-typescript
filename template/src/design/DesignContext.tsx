@@ -18,7 +18,7 @@ import {
   getStoredThemeMode,
   mapThemeToMaterial,
 } from './helpers/theme.helpers';
-import { usePrefersColorScheme } from './hooks/usePrefersColorScheme';
+import { usePrefersColorScheme } from './hooks/use-prefers-color-scheme';
 import { darkTheme } from './theme/dark-theme';
 import { lightTheme } from './theme/light-theme';
 import { Theme } from './types/theme';
