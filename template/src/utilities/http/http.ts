@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
   function (response) {
     return response;
   },
-  function (error: AxiosError){
+  function (error: AxiosError) {
     logger.error(new Error(error.message), {
       status: error.code,
       actualError: getSafeAxiosError(error),

@@ -8,7 +8,7 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
-  useState
+  useState,
 } from 'react';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components';
 import { DesignSystem } from './enums/design-system.enum';
@@ -16,7 +16,7 @@ import { ThemeMode } from './enums/theme-mode.enum';
 import {
   getPreferedThemeMode,
   getStoredThemeMode,
-  mapThemeToMaterial
+  mapThemeToMaterial,
 } from './helpers/theme.helpers';
 import { usePrefersColorScheme } from './hooks/use-prefers-color-scheme';
 import { darkTheme } from './theme/dark-theme';

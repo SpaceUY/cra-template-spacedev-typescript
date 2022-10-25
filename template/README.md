@@ -52,9 +52,6 @@ REACT_APP_API_URL=http://localhost:5000
 
 REACT_APP_VALIDATION_ERROR_BREAKS_RESPONSE=false
 # controls whether the validation errors will stop the response from reaching the request point
-
-REACT_APP_LOCALE=sys
-# sets the application default language.
 ```
 
 ## Styled Components
