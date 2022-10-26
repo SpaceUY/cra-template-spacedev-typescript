@@ -10,11 +10,7 @@ export function getStoredThemeMode(): ThemeMode | null {
 }
 
 export function getPreferedThemeMode(): ThemeMode {
-  const isDarkPreferred =
-    window.matchMedia('(prefers-color-scheme: dark)').matches &&
-    config.modeThemes.supportedThemeModes.includes('dark');
-
-  return isDarkPreferred ? ThemeMode.DARK : ThemeMode.LIGHT;
+  return config.themeModes.isDarkPreferred ? ThemeMode.DARK : ThemeMode.LIGHT;
 }
 
 export function mapColorToMaterial(color: Color) {
