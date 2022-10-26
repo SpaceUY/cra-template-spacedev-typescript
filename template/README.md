@@ -130,6 +130,8 @@ const StyledDiv = styled.div`
 
 ## [HTTP requests](./docs/HTTP.md)
 
+## [Theme modes](./docs/THEMEMODES.md)
+
 ## [Fonts](./docs/FONTS.md)
 
 ## Icons
