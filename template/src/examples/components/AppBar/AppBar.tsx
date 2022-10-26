@@ -18,7 +18,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -143,7 +143,7 @@ export const AppBar: FC = () => {
         {authToken && (
           <Align v-center gap={0.5}>
             <nav>
-              <StyledNavLink to={AppRoute.HOME}>
+              <StyledNavLink to={AppRoute.HOME} end>
                 {intl.translate({ id: 'Home' })}
               </StyledNavLink>
 
