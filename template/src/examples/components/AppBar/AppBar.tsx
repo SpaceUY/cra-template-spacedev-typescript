@@ -18,7 +18,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -39,16 +39,6 @@ const StyledA = styled.a`
   text-decoration: none;
   line-height: 1.5rem;
 `;
-
-/**
- * #####       ####
- *   #    ###  #   #  ###
- *   #   #   # #   # #   #
- *   #   #   # #   # #   #
- *   #    ###  ####   ###
- *
- * ToDo: check why color doesn't apply on StyledNavLink when path = '/' related to exact path react-router-dom
- */
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
