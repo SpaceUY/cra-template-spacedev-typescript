@@ -1,3 +1,4 @@
+import { supportedThemeModes } from 'config/mode-theme.config';
 import { Card, Select, Text, Well } from 'design';
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
@@ -29,7 +30,7 @@ export const Home: FC = () => {
         }),
       )
       .then((users) =>
-        console.log('users:', users.map((item) => item.name).join(', ')),
+        console.log('users:', users.map((item) => item.name).join(', '), supportedThemeModes),
       )
       .catch(genericErrorHandler);
   }, []);
