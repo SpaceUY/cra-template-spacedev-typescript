@@ -40,4 +40,11 @@ export type Theme = {
     medium: number;
     large: number;
   };
+  breakpoints: {
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
+    xxl: number;
+  };
 };
