@@ -17,7 +17,6 @@ export class AddressDto extends BaseDto {
   zipcode: string;
 
   @ValidateNested()
-  @Type(() => GeoDto)
   geo: GeoDto;
 
   constructor(data: any) {

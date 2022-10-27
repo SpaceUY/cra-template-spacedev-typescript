@@ -6,97 +6,179 @@ Create React App Starter Template by:
 
 # HTTP requests
 
+## Wihtout Validation
+
 **Use the utility `http`**
 
 ```typescript
-class Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
+class AddressDto {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: GeoDto;
 }
 
+class GeoDto {
+  lat: string;
+  lng: string;
+}
+
+class CompanyDto {
+  name: string;
+  catchPhrase: string;
+  bs: string;
+}
+
+class UserDto {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+  address: AddressDto;
+  company: CompanyDto;
+}
 ...
 
-http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-  .then((data) => console.log('data', data))
-  .catch(genericErrorHandler);
+useEffect(() => {
+  http
+    .get<UserDto[]>(
+      'https://jsonplaceholder.typicode.com/users',
+    )
+    .then((users) =>
+      // do stuff
+    )
+    .catch(genericErrorHandler);
+}, []);
 ```
 
-## Response validation
+## With Validation
 
-> **Note** By default the validation errors will be logged as warnings, if you prefer to see errors you can change that behavior with an environment variable. See [Environment Configuration](#environment-configuration)
+> **Note** By default the validation errors will be logged as warnings and the response allowed to continue, if you prefer to see errors and make the request fail you can change that behavior with an environment variable. See [Environment Configuration](../README.md#environment-configuration)
 
 ```typescript
-class Todo {
-  @IsNumber()
-  userId!: number; // the ! operator is necessary because we are declaring uninitialized variables
-
-  @IsNumber()
-  id!: number;
+class GeoDto extends BaseDto {
+  @IsString()
+  lat: string;
 
   @IsString()
-  title!: string;
+  lng: string;
 
-  @IsBoolean()
-  completed!: boolean;
+  constructor(data: any) {
+    super(data);
+
+    this.lat = data.lat;
+    this.lng = data.lng;
+  }
+}
+
+class AddressDto extends BaseDto {
+  @IsString()
+  street: string;
+
+  @IsString()
+  suite: string;
+
+  @IsString()
+  city: string;
+
+  @IsString()
+  zipcode: string;
+
+  @ValidateNested()
+  geo: GeoDto;
+
+  constructor(data: any) {
+    super(data);
+
+    this.street = data.street;
+    this.suite = data.suite;
+    this.city = data.city;
+    this.zipcode = data.zipcode;
+    this.geo = new GeoDto(data.geo);
+  }
+}
+
+class CompanyDto extends BaseDto {
+  @IsString()
+  name: string;
+
+  @IsString()
+  catchPhrase: string;
+
+  @IsString()
+  bs: string;
+
+  constructor(data: any) {
+    super(data);
+
+    this.name = data.name;
+    this.catchPhrase = data.catchPhrase;
+    this.bs = data.bs;
+  }
+}
+
+class UserDto extends BaseDto {
+  @IsNumber()
+  id: number;
+
+  @IsString()
+  name: string;
+
+  @IsString()
+  username: string;
+
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  phone: string;
+
+  @IsString()
+  website: string;
+
+  @ValidateNested()
+  address: AddressDto;
+
+  @ValidateNested()
+  company: CompanyDto;
+
+  constructor(data: any) {
+    super(data);
+
+    this.id = data.id;
+    this.name = data.name;
+    this.username = data.username;
+    this.email = data.email;
+    this.phone = data.phone;
+    this.website = data.website;
+    this.address = new AddressDto(data.address);
+    this.company = new CompanyDto(data.company);
+  }
 }
 
 ...
 
 const responseValidator = new ResponseValidator(
-  Todo,
-  { validateList: true }, // this options will comunicate to the validation process that the  validations should be done over a list of objects with type Todo. If the response only returns a single object omit the option.
+  UserDto,
+  { validateList: true }, // this option will comunicate to the validation process that the  validations should be done over a list of objects with type Todo. If the response only returns a single object omit the option.
 );
 
 ...
 
-http.get<Todo[]>(
-  'https://jsonplaceholder.typicode.com/todos',
-  responseValidator,
-)
-  .then((data) => console.log('data', data))
-  .catch(genericErrorHandler);
-
-...
-
-http.post<Todo[]>(
-  'https://jsonplaceholder.typicode.com/todos',
-  { /* Todo data */ },
-  responseValidator,
-)
-  .then((data) => console.log('data', data))
-  .catch(genericErrorHandler);
-```
-
-## Validation examples
-
-```typescript
-class Employee {
-  @IsString()
-  name!: string; // required string
-
-  @IsDateString()
-  createdAt!: Date; // required string date
-
-  @IsDateString()
-  @IsOptional()
-  deletedAt?: Date; // optional string date
-}
-
-class Company {
-  @IsString()
-  name!: string; // required string
-
-  @IsDateString()
-  createdAt!: Date; // required string date
-
-  @IsDateString()
-  @IsOptional()
-  deletedAt?: Date; // optional string date
-
-  @IsArray()
-  @ValidateNested()
-  employees!: Employee[]; // required array of employees with nested validation to make sure all items are compliant
-}
+useEffect(() => {
+  http
+    .get<UserDto[]>(
+      'https://jsonplaceholder.typicode.com/users',
+      new ResponseValidator(UserDto, {
+        validateList: true,
+      }),
+    )
+    .then((users) =>
+      console.log('users:', users.map((item) => item.name).join(', ')),
+    )
+    .catch(genericErrorHandler);
+}, []);
 ```
