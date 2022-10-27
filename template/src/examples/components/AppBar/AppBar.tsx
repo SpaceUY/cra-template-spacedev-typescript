@@ -42,16 +42,6 @@ const StyledA = styled.a`
   line-height: 1.5rem;
 `;
 
-/**
- * #####       ####
- *   #    ###  #   #  ###
- *   #   #   # #   # #   #
- *   #   #   # #   # #   #
- *   #    ###  ####   ###
- *
- * ToDo: check why color doesn't apply on StyledNavLink
- */
-
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -73,7 +63,6 @@ const StyledNavLink = styled(NavLink)`
     background-color: ${({ theme }) => rgba(theme.palette.primary.light, 0.15)};
     outline-color: ${({ theme }) => theme.palette.primary.main};
   }
-
   &.active {
     background-color: ${({ theme }) => rgba(theme.palette.primary.main, 0.8)};
     color: ${({ theme }) => theme.palette.primary.invert};
@@ -127,6 +116,7 @@ export const AppBar: FC = () => {
 
   useEffect(() => {
     if (web3Error?.message) {
+      disconnect();
       toast.error('Chain not supported');
     }
   }, [web3Error?.message]);
@@ -175,7 +165,7 @@ export const AppBar: FC = () => {
         {authToken && (
           <Align v-center gap={0.5}>
             <StyledNavDiv>
-              <StyledNavLink to={AppRoute.HOME}>
+              <StyledNavLink to={AppRoute.HOME} end>
                 {intl.translate({ id: 'Home' })}
               </StyledNavLink>
 
