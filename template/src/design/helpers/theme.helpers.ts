@@ -9,7 +9,7 @@ export function getStoredThemeMode(): ThemeMode | null {
   return storage.local.get(StorageItem.THEME_MODE);
 }
 
-export const isDarkPreferred =
+const isDarkPreferred =
   window.matchMedia('(prefers-color-scheme: dark)').matches &&
   config.theme.supportedThemeModes.includes(ThemeMode.DARK);
 
