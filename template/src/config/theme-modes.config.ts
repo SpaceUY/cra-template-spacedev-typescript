@@ -1,10 +1,3 @@
-export const themes = {
-  DARK: 'dark',
-  LIGHT: 'light',
-};
+import { ThemeMode } from 'design/enums/theme-mode.enum';
 
-export const supportedThemeModes = [themes.DARK, themes.LIGHT];
-
-export const isDarkPreferred =
-    window.matchMedia('(prefers-color-scheme: dark)').matches &&
-    supportedThemeModes.includes(themes.DARK);
+export const supportedThemeModes = [ThemeMode.DARK, ThemeMode.LIGHT];
