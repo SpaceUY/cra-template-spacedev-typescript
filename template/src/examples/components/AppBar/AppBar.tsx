@@ -1,11 +1,16 @@
 import { useWeb3React } from '@web3-react/core';
+import { toast } from 'components/Toast/Toast';
 import { Button, Text } from 'design';
 import { DesignContext } from 'design/DesignContext';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { AppRoute } from 'enums/app-route.enum';
+import { StorageItem } from 'enums/storage-item.enum';
+import { ConnectModal } from 'examples/components/ConnectModal/ConnectModal';
 import { removeAuthTokenAction } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
 import { rgba } from 'helpers/color.helpers';
+import { genericErrorHandler } from 'helpers/error.helpers';
+import { storage } from 'helpers/storage.helpers';
 import { Align } from 'layout';
 import {
   FC,
@@ -17,16 +22,10 @@ import {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import { toast } from 'components/Toast/Toast';
 import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
 import spaceLogoDarkPath from './assets/spacedev-logo-dark.svg';
 import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
-import { StorageItem } from 'enums/storage-item.enum';
-import { genericErrorHandler } from 'helpers/error.helpers';
-import { noop } from 'helpers/nodash.helpers';
-import { storage } from 'helpers/storage.helpers';
-import { ConnectModal } from '../ConnectModal/ConnectModal';
 
 const StyledAlign = styled(Align)`
   margin-bottom: 2rem;
@@ -40,16 +39,6 @@ const StyledA = styled.a`
   text-decoration: none;
   line-height: 1.5rem;
 `;
-
-/**
- * #####       ####
- *   #    ###  #   #  ###
- *   #   #   # #   # #   #
- *   #   #   # #   # #   #
- *   #    ###  ####   ###
- *
- * ToDo: check why color doesn't apply on StyledNavLink
- */
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
@@ -72,7 +61,6 @@ const StyledNavLink = styled(NavLink)`
     background-color: ${({ theme }) => rgba(theme.palette.primary.light, 0.15)};
     outline-color: ${({ theme }) => theme.palette.primary.main};
   }
-
   &.active {
     background-color: ${({ theme }) => rgba(theme.palette.primary.main, 0.8)};
     color: ${({ theme }) => theme.palette.primary.invert};
@@ -106,6 +94,7 @@ export const AppBar: FC = () => {
 
   useEffect(() => {
     if (web3Error?.message) {
+      disconnect();
       toast.error('Chain not supported');
     }
   }, [web3Error?.message]);
@@ -154,7 +143,7 @@ export const AppBar: FC = () => {
         {authToken && (
           <Align v-center gap={0.5}>
             <nav>
-              <StyledNavLink to={AppRoute.HOME}>
+              <StyledNavLink to={AppRoute.HOME} end>
                 {intl.translate({ id: 'Home' })}
               </StyledNavLink>
 
