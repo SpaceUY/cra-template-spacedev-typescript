@@ -54,96 +54,53 @@ REACT_APP_VALIDATION_ERROR_BREAKS_RESPONSE=false
 # controls whether the validation errors will stop the response from reaching the request point
 ```
 
-## Styled Components
+## Project Cleanup
 
-**Naming Scheme**
+- `template/src/App.tsx`
 
-`Styled` + `OptionalDescription` + `HtmlElementName_OR_ComponentBeingExtended`
+```diff
+- import { AppBar } from 'examples/components/AppBar/AppBar';
+- import { Router } from 'examples/Router';
+import { useContext } from 'react';
+- import styled from 'styled-components';
+import { IntlContext } from 'utilities/i18n/IntlContext';
 
-**Examples:**
+- const StyledDiv = styled.div`
+-   padding: 2rem;
+-   background-color: ${({ theme }) => theme.background.back};
+-   min-height: 100vh;
+-
+-   a {
+-     color: ${({ theme }) => theme.palette.primary.main};
+-   }
+- `;
 
-```typescript
-// navite components
-const StyledDiv = styled.div;
-const StyledP = styled.p;
-```
+function App() {
+  // necessary to force a render when locale is updated
+  useContext(IntlContext);
 
-```typescript
-// custom components
-const StyledButton = styled(Button);
-const StyledModalFooter = styled(ModalFooter);
-```
-
-If you are styling multiple elements of the same type or think one needs some clarification then you should include an OptionalDescription
-
-**Examples:**
-
-```typescript
-const StyledFooDiv = styled.div;
-const StyledBarDiv = styled.div;
-const StyledBatDiv = styled.div;
-```
-
-This structure immediately lets any reader know:
-
-- this is not a component with any functionality, it is only being named for style purposes
-- what type of native element is being used to prevent any html semantic mistakes
-
-## Using the theme
-
-If you need to use a `theme` value inside of a component, use the `useTheme` hook from `design/hooks/useTheme` instead of importing theme directly.
-
-The `useTheme` hooks pulls directly from the `DesignProvider`, which will enable global changes to theme across the application without needing to refresh the page. `DesignProvider` is the source of truth for the app.
-
-```typescript
-// Bad
-import { theme } from '...';
-
-function MyComponent() {
-  return <Comp color={theme.palette.primary} />;
+-  return (
+-    <StyledDiv>
+-      <AppBar />
+-
+-      <main>
+-        <Router />
+-      </main>
+-    </StyledDiv>
+-  );
++ return <YourNewAppStructure/ >
 }
 
-// Good
-import { useTheme } from 'design/hooks/useTheme';
-
-function MyComponent() {
-  const theme = useTheme();
-
-  return <Comp color={theme.palette.primary} />;
-}
+export default App;
 ```
 
-For `styled-components`, use the injected theme:
+## Topics
 
-```typescript
-// Bad
-import { theme } from '...';
-
-const StyledDiv = styled.div`
-  color: ${theme.baseColors.someColor};
-`;
-
-// Good
-const StyledDiv = styled.div`
-  color: ${({ theme }) => theme.baseColors.someColor};
-`;
-```
-
-## [HTTP requests](./docs/HTTP.md)
-
-## [Fonts](./docs/FONTS.md)
-
-## Icons
-
-**Material Icons**
-
-- Get from https://mui.com/material-ui/material-icons/
-- Follow [this example](./src/examples/components/main-content/Catalog/Icons/icons/ClipboardIcon.tsx)
-
-**Feather Icons**
-
-- Get from https://feathericons.com/
-- Follow [this example](./src/examples/components/main-content/Catalog/Icons/icons/NotificationIcon.tsx)
+- [Best Practices](./docs/BEST_PRACTICES.md)
+- [Theme](./docs/THEME.md)
+- [HTTP requests and Validation](./docs/HTTP.md)
+- [Fonts](./docs/FONTS.md)
+- [Icons](./docs/ICONS.md)
 
 # Advanced
 
@@ -181,19 +138,19 @@ The pub-sub implementation should be used from the `utilities` folder.
 
 ## Blockchain Integration
 
-- Supported networks
+- **Supported networks**
 
   - In order to change the supported networks, change the array inside each injector and then if the network is in there it will work as desired otherwise a error toast will show.
   - Under the same folder, inside the networks file is where you need to add your supported networks so when the user changes the network it changes on the wallet or otherwise if the network is not already added it takes the information from there to add it to the wallet.
 
-- Connection to wallet
+- **Connection to wallet**
 
   - Once inside the connectModal component is where we map all the possible wallets to connect to the app. We use the activate method from useWeb3react in order to inject the provider for each case, we also save the connection method in the local in order to reconnect the wallet when refreshing.
 
-- Wrong networks
+- **Wrong networks**
 
   - In order to know whether a network is valid or not we use the error property from useWeb3react that return an error message with the supported networks whenever the user changes to a non-supported netwok.
 
-- Change networks
+- **Change networks**
 
   - To trigger the network change from inside the app we use the library.provider.request method from object library taken again from web3React and send the wallet_switchEthereumChain string. In case the network is already added this will open the change network modal, otherwise it will return am error and in the catch we will send wallet_addEthereumChain string and add the chain with information from the networks file. This is a helper function in which you have to pass the library object from web3React and the name of the chain you want to change to
