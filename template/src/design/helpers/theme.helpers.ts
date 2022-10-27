@@ -9,8 +9,12 @@ export function getStoredThemeMode(): ThemeMode | null {
   return storage.local.get(StorageItem.THEME_MODE);
 }
 
+export const isDarkPreferred =
+  window.matchMedia('(prefers-color-scheme: dark)').matches &&
+  config.theme.supportedThemeModes.includes(ThemeMode.DARK);
+
 export function getPreferedThemeMode(): ThemeMode {
-  return config.themeModes.isDarkPreferred ? ThemeMode.DARK : ThemeMode.LIGHT;
+  return isDarkPreferred ? ThemeMode.DARK : ThemeMode.LIGHT;
 }
 
 export function mapColorToMaterial(color: Color) {
