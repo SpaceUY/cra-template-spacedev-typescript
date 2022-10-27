@@ -1,11 +1,18 @@
+import { styled as styledMaterial } from '@mui/material';
 import { useWeb3React } from '@web3-react/core';
+import { toast } from 'components/Toast/Toast';
 import { Button, Text } from 'design';
 import { DesignContext } from 'design/DesignContext';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { AppRoute } from 'enums/app-route.enum';
+import { StorageItem } from 'enums/storage-item.enum';
+import { SideNavBar } from 'examples/components/AppBar/SideNavBar';
+import { ConnectModal } from 'examples/components/ConnectModal/ConnectModal';
 import { removeAuthTokenAction } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
 import { rgba } from 'helpers/color.helpers';
+import { genericErrorHandler } from 'helpers/error.helpers';
+import { storage } from 'helpers/storage.helpers';
 import { Align } from 'layout';
 import {
   FC,
@@ -17,16 +24,10 @@ import {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import { toast } from 'components/Toast/Toast';
 import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
 import spaceLogoDarkPath from './assets/spacedev-logo-dark.svg';
 import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
-import { StorageItem } from 'enums/storage-item.enum';
-import { genericErrorHandler } from 'helpers/error.helpers';
-import { noop } from 'helpers/nodash.helpers';
-import { storage } from 'helpers/storage.helpers';
-import { ConnectModal } from '../ConnectModal/ConnectModal';
 
 const StyledAlign = styled(Align)`
   margin-bottom: 2rem;
@@ -77,6 +78,26 @@ const StyledNavLink = styled(NavLink)`
     background-color: ${({ theme }) => rgba(theme.palette.primary.main, 0.8)};
     color: ${({ theme }) => theme.palette.primary.invert};
   }
+`;
+
+const StyledNavDiv = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    display: none;
+  }
+`;
+
+const StyledSideNavBarDiv = styled.div`
+  display: none;
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    display: flex;
+  }
+`;
+
+const StyledButton = styledMaterial(Button)`
+  font-size: medium;
 `;
 
 export const AppBar: FC = () => {
@@ -147,13 +168,13 @@ export const AppBar: FC = () => {
             rel="noopener noreferrer"
             aria-label="SpaceDev CRA Template"
           >
-            <img src={spaceLogoPath} alt="" height="48" />
+            <img src={spaceLogoPath} alt="" height="40" />
           </StyledA>
         </StyledH1>
 
         {authToken && (
           <Align v-center gap={0.5}>
-            <nav>
+            <StyledNavDiv>
               <StyledNavLink to={AppRoute.HOME}>
                 {intl.translate({ id: 'Home' })}
               </StyledNavLink>
@@ -168,17 +189,19 @@ export const AppBar: FC = () => {
               <StyledNavLink to={AppRoute.BLOCKCHAIN}>
                 {intl.translate({ id: 'Blockchain' })}
               </StyledNavLink>
-            </nav>
-
-            <Button color="primary" onClick={handleLogout}>
-              {intl.translate({ id: 'Logout' })}
-            </Button>
+              <StyledButton color="primary" onClick={handleLogout}>
+                {intl.translate({ id: 'Logout' })}
+              </StyledButton>
+            </StyledNavDiv>
+            {pathname === AppRoute.BLOCKCHAIN && (
+              <Button color="primary" onClick={getFunction}>
+                {BlockchainButtonLabel}
+              </Button>
+            )}
+            <StyledSideNavBarDiv>
+              <SideNavBar />
+            </StyledSideNavBarDiv>
           </Align>
-        )}
-        {pathname === AppRoute.BLOCKCHAIN && (
-          <Button color="primary" onClick={getFunction}>
-            {BlockchainButtonLabel}
-          </Button>
         )}
       </StyledAlign>
     </>
