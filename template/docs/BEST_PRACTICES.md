@@ -5,3 +5,38 @@ Create React App Starter Template by:
 **[Go Back](../README.md)**
 
 # Best Practices
+
+## Styled Components
+
+**Naming Scheme**
+
+`Styled` + `OptionalDescription` + `HtmlElementName_OR_ComponentBeingExtended`
+
+**Examples:**
+
+```typescript
+// navite components
+const StyledDiv = styled.div;
+const StyledP = styled.p;
+```
+
+```typescript
+// custom components
+const StyledButton = styled(Button);
+const StyledModalFooter = styled(ModalFooter);
+```
+
+If you are styling multiple elements of the same type or think one needs some clarification then you should include an OptionalDescription
+
+**Examples:**
+
+```typescript
+const StyledFooDiv = styled.div;
+const StyledBarDiv = styled.div;
+const StyledBatDiv = styled.div;
+```
+
+This structure immediately lets any reader know:
+
+- this is not a component with any functionality, it is only being named for style purposes
+- what type of native element is being used to prevent any html semantic mistakes
