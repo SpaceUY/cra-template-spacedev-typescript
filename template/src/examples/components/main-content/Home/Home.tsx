@@ -1,3 +1,4 @@
+import { config } from 'config';
 import { Card, Select, Text, Well } from 'design';
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
@@ -19,6 +20,8 @@ const StyledPre = styled.pre`
 
 export const Home: FC = () => {
   const designContext = useContext(DesignContext);
+
+  const isMultiThemeEnabled = config.theme.supportedThemeModes.length > 1;
 
   useEffect(() => {
     http
@@ -84,24 +87,26 @@ export const Home: FC = () => {
               variant="outlined"
             />
 
-            <Select
-              label={intl.translate({ id: 'Theme' })}
-              name="theme"
-              id="theme-select"
-              value={designContext.theme.mode}
-              options={[
-                {
-                  label: intl.translate({ id: 'Light Theme' }),
-                  value: ThemeMode.LIGHT,
-                },
-                {
-                  label: intl.translate({ id: 'Dark Theme' }),
-                  value: ThemeMode.DARK,
-                },
-              ]}
-              onChange={(evt) => designContext.setTheme(evt.target.value)}
-              variant="outlined"
-            />
+            {isMultiThemeEnabled && (
+              <Select
+                label={intl.translate({ id: 'Theme' })}
+                name="theme"
+                id="theme-select"
+                value={designContext.theme.mode}
+                options={[
+                  {
+                    label: intl.translate({ id: 'Light Theme' }),
+                    value: ThemeMode.LIGHT,
+                  },
+                  {
+                    label: intl.translate({ id: 'Dark Theme' }),
+                    value: ThemeMode.DARK,
+                  },
+                ]}
+                onChange={(evt) => designContext.setTheme(evt.target.value)}
+                variant="outlined"
+              />
+            )}
           </Align>
         </Card.Body>
       </Card.Base>
