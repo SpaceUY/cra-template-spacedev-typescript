@@ -6,7 +6,6 @@ Create React App Starter Template by:
 
 ## To Do
 
-- force theme
 - breakpoints
 - inputs
   - checkbox
@@ -130,6 +129,8 @@ const StyledDiv = styled.div`
 ```
 
 ## [HTTP requests](./docs/HTTP.md)
+
+## [Theme modes](./docs/THEMEMODES.md)
 
 ## [Fonts](./docs/FONTS.md)
 
