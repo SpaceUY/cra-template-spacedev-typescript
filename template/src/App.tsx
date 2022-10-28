@@ -1,6 +1,6 @@
 import { AppBar } from 'examples/components/AppBar/AppBar';
+import { Router } from 'examples/Router';
 import { useContext } from 'react';
-import { Router } from 'Router';
 import styled from 'styled-components';
 import { IntlContext } from 'utilities/i18n/intl.context';
 
@@ -21,6 +21,7 @@ function App() {
   return (
     <StyledDiv>
       <AppBar />
+
       <main>
         <Router />
       </main>
