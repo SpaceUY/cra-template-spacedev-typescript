@@ -1,3 +1,4 @@
+import { config } from 'config';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { Color } from 'design/types/color';
 import { Theme } from 'design/types/theme';
@@ -9,10 +10,10 @@ export function getStoredThemeMode(): ThemeMode | null {
 }
 
 export function getPreferedThemeMode(): ThemeMode {
-  const isDarkPreferred = window.matchMedia(
-    '(prefers-color-scheme: dark)',
-  ).matches;
-
+  const isDarkPreferred =
+    window.matchMedia('(prefers-color-scheme: dark)').matches &&
+    config.theme.supportedThemeModes.includes(ThemeMode.DARK);
+      
   return isDarkPreferred ? ThemeMode.DARK : ThemeMode.LIGHT;
 }
 

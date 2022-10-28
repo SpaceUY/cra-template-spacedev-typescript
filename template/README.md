@@ -6,7 +6,6 @@ Create React App Starter Template by:
 
 ## To Do
 
-- force theme
 - breakpoints
 - inputs
   - checkbox
