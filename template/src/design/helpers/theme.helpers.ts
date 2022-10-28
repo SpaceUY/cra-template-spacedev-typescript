@@ -5,15 +5,38 @@ import { Theme } from 'design/types/theme';
 import { StorageItem } from 'enums/storage-item.enum';
 import { storage } from 'helpers/storage.helpers';
 
+/**
+ * # getStoredThemeMode
+ *
+ * Retrieves the stored ThemeMode (if any)
+ *
+ * Checks if it is supported and either
+ * - clears the stored value and retuns `null`
+ * - resurns the stored value
+ *
+ * @returns ThemeMode
+ */
 export function getStoredThemeMode(): ThemeMode | null {
-  return storage.local.get(StorageItem.THEME_MODE);
+  const storedThemeMode = storage.local.get<ThemeMode>(StorageItem.THEME_MODE);
+
+  const isStoredThemeModeSupported =
+    storedThemeMode &&
+    config.theme.supportedThemeModes.includes(storedThemeMode);
+
+  if (isStoredThemeModeSupported) {
+    return storedThemeMode;
+  }
+
+  storage.local.remove(StorageItem.THEME_MODE);
+
+  return null;
 }
 
 export function getPreferedThemeMode(): ThemeMode {
   const isDarkPreferred =
     window.matchMedia('(prefers-color-scheme: dark)').matches &&
     config.theme.supportedThemeModes.includes(ThemeMode.DARK);
-      
+
   return isDarkPreferred ? ThemeMode.DARK : ThemeMode.LIGHT;
 }
 
