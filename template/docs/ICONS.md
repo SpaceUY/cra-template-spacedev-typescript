@@ -5,3 +5,13 @@ Create React App Starter Template by:
 **[Go Back](../README.md)**
 
 # Icons
+
+**Material Icons**
+
+- Get from https://mui.com/material-ui/material-icons/
+- Follow [this example](./src/examples/components/main-content/Catalog/Icons/icons/ClipboardIcon.tsx)
+
+**Feather Icons**
+
+- Get from https://feathericons.com/
+- Follow [this example](./src/examples/components/main-content/Catalog/Icons/icons/NotificationIcon.tsx)
