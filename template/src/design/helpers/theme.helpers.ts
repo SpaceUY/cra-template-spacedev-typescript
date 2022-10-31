@@ -1,6 +1,7 @@
 import { config } from 'config';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { Color } from 'design/types/color';
+import { InputVariantProp } from 'design/types/input-variant-prop';
 import { Theme } from 'design/types/theme';
 import { StorageItem } from 'enums/storage-item.enum';
 import { storage } from 'helpers/storage.helpers';
@@ -64,4 +65,51 @@ export function mapThemeToMaterial(theme: Theme) {
       fontFamily: theme.fontFamily,
     },
   };
+}
+
+export function mapVariantToMaterialButton(
+  value?: InputVariantProp,
+): 'outlined' | 'contained' | 'text' | undefined {
+  switch (value) {
+    case 'filled':
+      return 'contained';
+    case 'default':
+      return 'text';
+    case 'outlined':
+      return 'outlined';
+    default:
+      break;
+  }
+}
+
+export function mapVariantToMaterialInput(
+  value?: InputVariantProp,
+): 'outlined' | 'filled' | 'standard' | undefined {
+  switch (value) {
+    case 'filled':
+      return 'filled';
+    case 'default':
+      return 'standard';
+    case 'outlined':
+      return 'outlined';
+    default:
+      break;
+  }
+}
+
+export function mapSizeToMaterial(
+  small?: boolean,
+  medium?: boolean,
+  large?: boolean,
+): 'small' | 'medium' | 'large' | undefined {
+  switch (true) {
+    case small:
+      return 'small';
+    case medium:
+      return 'medium';
+    case large:
+      return 'large';
+    default:
+      return;
+  }
 }

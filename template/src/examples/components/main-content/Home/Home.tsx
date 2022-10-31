@@ -32,7 +32,7 @@ export const Home: FC = () => {
         }),
       )
       .then((users) =>
-        console.log('users:', users.map((item) => item.name).join(', ')),
+        console.info('users:', users.map((item) => item.name).join(', ')),
       )
       .catch(genericErrorHandler);
   }, []);
@@ -169,7 +169,7 @@ useEffect(() => {
       }),
     )
     .then((users) =>
-      console.log('users:', users.map((item) => item.name).join(', ')),
+      console.info('users:', users.map((item) => item.name).join(', ')),
     )
     .catch(genericErrorHandler);
 }, []);

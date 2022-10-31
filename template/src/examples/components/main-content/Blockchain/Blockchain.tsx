@@ -1,11 +1,11 @@
 import { useWeb3React } from '@web3-react/core';
-import { useEffect, useState } from 'react';
-import { Select, Text } from 'design';
-import { intl } from 'utilities/i18n/intl.utility';
-import { genericErrorHandler } from 'helpers/error.helpers';
-import { getWalletConnected, switchNetwork } from 'helpers/blockchain.helpers';
 import { CHAINS_INFO } from 'connectors/networks';
 import { ChainInfo } from 'connectors/types/chain-info';
+import { Select, Text } from 'design';
+import { getWalletConnected, switchNetwork } from 'helpers/blockchain.helpers';
+import { genericErrorHandler } from 'helpers/error.helpers';
+import { useEffect, useState } from 'react';
+import { intl } from 'utilities/i18n/intl.utility';
 const options: {
   label: string;
   value: ChainInfo | null;
@@ -58,7 +58,7 @@ const Blockchain = () => {
           onChange={(evt) => {
             const value = evt.target.value;
             if (value) {
-              console.log(value);
+              console.info(value);
               switchNetwork(library, value);
               setSelectedChain(value);
             }

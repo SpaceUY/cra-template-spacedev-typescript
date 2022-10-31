@@ -2,12 +2,15 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
-import { mapColorToMaterial } from 'design/helpers/theme.helpers';
+import {
+  mapColorToMaterial,
+  mapSizeToMaterial,
+  mapVariantToMaterialButton,
+} from 'design/helpers/theme.helpers';
 import { isColor } from 'design/helpers/type.helpers';
 import { ButtonProps } from 'design/types/button-props';
 import { Color } from 'design/types/color';
 import { FC, useContext, useMemo } from 'react';
-import { mapVariantToMaterialButton } from './button.helpers';
 
 const MuiColorButton: FC<Omit<ButtonProps, 'color'> & { color: Color }> = ({
   children,
@@ -18,6 +21,9 @@ const MuiColorButton: FC<Omit<ButtonProps, 'color'> & { color: Color }> = ({
   fullWidth,
   disabled,
   type,
+  small,
+  medium,
+  large,
 }) => {
   const theme = useMemo(() => {
     return createTheme({
@@ -39,6 +45,7 @@ const MuiColorButton: FC<Omit<ButtonProps, 'color'> & { color: Color }> = ({
         disabled={disabled}
         color="primary"
         type={type}
+        size={mapSizeToMaterial(small, medium, large)}
       >
         {children}
       </MuiButton>
@@ -55,6 +62,9 @@ export const Button: FC<ButtonProps> = ({
   fullWidth = false,
   disabled = false,
   type,
+  small,
+  medium,
+  large,
 }) => {
   const { system } = useContext(DesignContext);
 
@@ -69,6 +79,9 @@ export const Button: FC<ButtonProps> = ({
           disabled={disabled}
           type={type}
           color={color}
+          small={small}
+          medium={medium}
+          large={large}
         >
           {children}
         </MuiColorButton>
@@ -84,6 +97,7 @@ export const Button: FC<ButtonProps> = ({
         disabled={disabled}
         color={color}
         type={type}
+        size={mapSizeToMaterial(small, medium, large)}
       >
         {children}
       </MuiButton>
