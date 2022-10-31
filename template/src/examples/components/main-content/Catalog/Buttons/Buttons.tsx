@@ -1,90 +1,78 @@
 import { Button, Card, Text } from 'design';
-import { FC } from 'react';
+import { InlineCode } from 'design/InlineCode/InlineCode';
+import { ColorProp } from 'design/types/color-prop';
+import { InputVariantProp } from 'design/types/input-variant-prop';
+import { ColorSelector } from 'examples/components/ColorSelector/ColorSelector';
+import { StyledH2 } from 'examples/components/main-content/Catalog/catalog.styled';
+import { VariantSelector } from 'examples/components/VariantSelector/VariantSelector';
+import { Align } from 'layout';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
 
-const StyledGrid = styled.div`
-  display: grid;
-  grid-template-columns: auto repeat(8, 1fr);
-  gap: 1rem;
-  align-items: center;
+const StyledAlign = styled(Align)`
+  width: fit-content;
 `;
 
-const yellow = {
-  main: '#FFB003',
-  dark: '#FFB003',
-  light: '#FFB003',
-  invert: '#fff',
-};
+const StyledGridDiv = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 1rem;
+  align-items: center;
+  justify-items: start;
+`;
 
 export const Buttons: FC = () => {
+  const [color, setColor] = useState<ColorProp | undefined>();
+  const [variant, setVariant] = useState<InputVariantProp>('default');
+
   return (
     <Card.Base>
-      <Card.Heading h2>{intl.translate({ id: 'Buttons' })}</Card.Heading>
+      <Card.Heading>
+        <Align v-center gap={1}>
+          <StyledH2>{intl.translate({ id: 'Buttons' })}</StyledH2>
+
+          <ColorSelector
+            value={color}
+            onChange={(evt) => setColor(evt.target.value)}
+          />
+
+          <VariantSelector
+            value={variant}
+            onChange={(evt) => setVariant(evt.target.value)}
+          />
+        </Align>
+      </Card.Heading>
 
       <Card.Body>
-        <StyledGrid>
-          <Text.p>Default</Text.p>
+        <StyledAlign column gap={1}>
+          <Text.h3>
+            {intl.translate({
+              id: 'Standard Buttons',
+            })}
+          </Text.h3>
 
-          <Button>Default</Button>
-          <Button color="primary">Primary</Button>
-          <Button color="secondary">Secondary</Button>
-          <Button color="error">Error</Button>
-          <Button color="info">Info</Button>
-          <Button color="success">Success</Button>
-          <Button color="warning">Warning</Button>
-          <Button color={yellow}>Custom</Button>
+          <StyledGridDiv>
+            <Text.p>Small</Text.p>
+            <Text.p>Medium</Text.p>
+            <Text.p>Large</Text.p>
+            <Text.p>Custom 40px</Text.p>
 
-          <Text.p>Outlined</Text.p>
+            <Button color={color} variant={variant} small>
+              {intl.translate({ id: '{variant} button' }, { variant })}
+            </Button>
 
-          <Button variant="outlined">Default</Button>
-          <Button variant="outlined" color="primary">
-            Primary
-          </Button>
-          <Button variant="outlined" color="secondary">
-            Secondary
-          </Button>
-          <Button variant="outlined" color="error">
-            Error
-          </Button>
-          <Button variant="outlined" color="info">
-            Info
-          </Button>
-          <Button variant="outlined" color="success">
-            Success
-          </Button>
-          <Button variant="outlined" color="warning">
-            Warning
-          </Button>
-          <Button variant="outlined" color={yellow}>
-            Custom
-          </Button>
+            <Button color={color} variant={variant} medium>
+              {intl.translate({ id: '{variant} button' }, { variant })}
+            </Button>
 
-          <Text.p>Filled</Text.p>
+            <Button color={color} variant={variant} large>
+              {intl.translate({ id: '{variant} button' }, { variant })}
+            </Button>
 
-          <Button variant="filled">Default</Button>
-          <Button variant="filled" color="primary">
-            Primary
-          </Button>
-          <Button variant="filled" color="secondary">
-            Secondary
-          </Button>
-          <Button variant="filled" color="error">
-            Error
-          </Button>
-          <Button variant="filled" color="info">
-            Info
-          </Button>
-          <Button variant="filled" color="success">
-            Success
-          </Button>
-          <Button variant="filled" color="warning">
-            Warning
-          </Button>
-          <Button variant="filled" color={yellow}>
-            Custom
-          </Button>
-        </StyledGrid>
+            <InlineCode>NULL</InlineCode>
+          </StyledGridDiv>
+        </StyledAlign>
       </Card.Body>
     </Card.Base>
   );

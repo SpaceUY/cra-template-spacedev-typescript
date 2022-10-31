@@ -12,4 +12,8 @@ export type ButtonProps = Omit<
   fullWidth?: boolean;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  size?: number;
+  small?: boolean;
+  medium?: boolean;
+  large?: boolean;
 };

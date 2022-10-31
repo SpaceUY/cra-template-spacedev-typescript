@@ -1,7 +1,7 @@
-import { InputVariantProp } from 'design/types/input-variant-prop';
 import { config } from 'config';
 import { ThemeMode } from 'design/enums/theme-mode.enum';
 import { Color } from 'design/types/color';
+import { InputVariantProp } from 'design/types/input-variant-prop';
 import { Theme } from 'design/types/theme';
 import { StorageItem } from 'enums/storage-item.enum';
 import { storage } from 'helpers/storage.helpers';
@@ -97,6 +97,19 @@ export function mapVariantToMaterialInput(
   }
 }
 
-export function mapSizeToMaterial() {
-  // todo
+export function mapSizeToMaterial(
+  small?: boolean,
+  medium?: boolean,
+  large?: boolean,
+): 'small' | 'medium' | 'large' | undefined {
+  switch (true) {
+    case small:
+      return 'small';
+    case medium:
+      return 'medium';
+    case large:
+      return 'large';
+    default:
+      return;
+  }
 }

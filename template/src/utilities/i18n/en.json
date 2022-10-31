@@ -15,6 +15,8 @@
   "Paragraph <strong>Paragraph</strong> <small>Paragraph</small>": "Paragraph <strong>Paragraph</strong> <small>Paragraph</small>",
   "Label <strong>Label</strong> <small>Label</small>": "Label <strong>Label</strong> <small>Label</small>",
   "Buttons": "Buttons",
+  "{variant} button": "{variant} button",
+  "Standard Buttons": "Standard Buttons",
   "Design System": "Design System",
   "Login Example": "Login Example",
   "Email Address": "Email Address",
