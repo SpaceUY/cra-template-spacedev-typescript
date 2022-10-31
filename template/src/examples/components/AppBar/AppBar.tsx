@@ -1,4 +1,3 @@
-import { styled as styledMaterial } from '@mui/material';
 import { useWeb3React } from '@web3-react/core';
 import { toast } from 'components/Toast/Toast';
 import { Button, Text } from 'design';
@@ -69,7 +68,7 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const StyledNavDiv = styled.nav`
+const StyledNav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,10 +82,6 @@ const StyledSideNavBarDiv = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     display: flex;
   }
-`;
-
-const StyledButton = styledMaterial(Button)`
-  font-size: medium;
 `;
 
 export const AppBar: FC = () => {
@@ -164,7 +159,7 @@ export const AppBar: FC = () => {
 
         {authToken && (
           <Align v-center gap={0.5}>
-            <StyledNavDiv>
+            <StyledNav>
               <StyledNavLink to={AppRoute.HOME} end>
                 {intl.translate({ id: 'Home' })}
               </StyledNavLink>
@@ -179,17 +174,21 @@ export const AppBar: FC = () => {
               <StyledNavLink to={AppRoute.BLOCKCHAIN}>
                 {intl.translate({ id: 'Blockchain' })}
               </StyledNavLink>
-              <StyledButton color="primary" onClick={handleLogout}>
+              <Button color="primary" onClick={handleLogout} large>
                 {intl.translate({ id: 'Logout' })}
-              </StyledButton>
-            </StyledNavDiv>
-            {pathname === AppRoute.BLOCKCHAIN && (
-              <Button color="primary" onClick={getFunction}>
-                {BlockchainButtonLabel}
               </Button>
-            )}
+              {pathname === AppRoute.BLOCKCHAIN && (
+                <Button color="primary" onClick={getFunction} large>
+                  {BlockchainButtonLabel}
+                </Button>
+              )}
+            </StyledNav>
             <StyledSideNavBarDiv>
-              <SideNavBar />
+              <SideNavBar
+                pathname={pathname}
+                getFunction={getFunction}
+                blockchainButtonLabel={BlockchainButtonLabel}
+              />
             </StyledSideNavBarDiv>
           </Align>
         )}

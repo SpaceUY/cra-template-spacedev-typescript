@@ -1,16 +1,13 @@
-import { styled as styledMaterial } from '@mui/material';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Button } from 'design';
+import Drawer from 'design/Drawer/Drawer';
 import { MenuIcon } from 'design/Icon/MenuIcon';
 import { AppRoute } from 'enums/app-route.enum';
 import { removeAuthTokenAction } from 'global-state/actions';
 import { rgba } from 'helpers/color.helpers';
 import { Align } from 'layout';
-import * as React from 'react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
@@ -21,7 +18,6 @@ const StyledAlign = styled(Align)`
 `;
 
 const StyledMenuIconDiv = styled.div`
-  width: 100%;
   height: 2.25rem;
   margin-top: 2.5rem;
   margin-left: 1.8rem;
@@ -54,77 +50,77 @@ const StyledButtonDiv = styled.div`
   width: 100%;
 `;
 
-const StyledButton = styledMaterial(Button)`
-  font-size: medium;
-`;
-
-export const SideNavBar: FC = () => {
-  const [menuOpen, setMenuOpen] = React.useState(false);
+export const SideNavBar: FC<{
+  pathname: string;
+  getFunction: () => void;
+  blockchainButtonLabel: string;
+}> = ({ pathname, getFunction, blockchainButtonLabel }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(removeAuthTokenAction());
   };
 
-  const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
-
-      setMenuOpen(open);
-    };
-
-  const getMenuItems = () => (
-    <Box sx={{ width: 260 }} onClick={toggleDrawer(false)}>
-      <StyledAlign column>
-        <StyledMenuIconDiv>
-          <MenuIcon large color="primary" />
-        </StyledMenuIconDiv>
-        <List>
-          <ListItem>
-            <StyledNavLink to={AppRoute.HOME} end>
-              {intl.translate({ id: 'Home' })}
-            </StyledNavLink>
-          </ListItem>
-          <ListItem>
-            <StyledNavLink to={AppRoute.CATALOG}>
-              {intl.translate({ id: 'Catalog' })}
-            </StyledNavLink>
-          </ListItem>
-          <ListItem>
-            <StyledNavLink to={AppRoute.STATE}>
-              {intl.translate({ id: 'State' })}
-            </StyledNavLink>
-          </ListItem>
-          <ListItem>
-            <StyledNavLink to={AppRoute.BLOCKCHAIN}>
-              {intl.translate({ id: 'Blockchain' })}
-            </StyledNavLink>
-          </ListItem>
-          <ListItem>
-            <StyledButtonDiv>
-              <StyledButton color="primary" onClick={handleLogout}>
-                {intl.translate({ id: 'Logout' })}
-              </StyledButton>
-            </StyledButtonDiv>
-          </ListItem>
-        </List>
-      </StyledAlign>
-    </Box>
-  );
+  const handleOnClick = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
     <>
-      <Button onClick={toggleDrawer(true)}>
+      <Button onClick={() => setMenuOpen(true)}>
         <MenuIcon color="primary" large />
       </Button>
-      <Drawer anchor="right" open={menuOpen} onClose={toggleDrawer(false)}>
-        {getMenuItems()}
+      <Drawer anchor="right" open={menuOpen} onClick={handleOnClick}>
+        <StyledAlign column>
+          <StyledMenuIconDiv onClick={handleOnClick}>
+            <MenuIcon large color="primary" />
+          </StyledMenuIconDiv>
+
+          <List>
+            <ListItem>
+              <StyledNavLink to={AppRoute.HOME} end onClick={handleOnClick}>
+                {intl.translate({ id: 'Home' })}
+              </StyledNavLink>
+            </ListItem>
+
+            <ListItem>
+              <StyledNavLink to={AppRoute.CATALOG} onClick={handleOnClick}>
+                {intl.translate({ id: 'Catalog' })}
+              </StyledNavLink>
+            </ListItem>
+
+            <ListItem>
+              <StyledNavLink to={AppRoute.STATE} onClick={handleOnClick}>
+                {intl.translate({ id: 'State' })}
+              </StyledNavLink>
+            </ListItem>
+
+            <ListItem>
+              <StyledNavLink to={AppRoute.BLOCKCHAIN} onClick={handleOnClick}>
+                {intl.translate({ id: 'Blockchain' })}
+              </StyledNavLink>
+            </ListItem>
+
+            <ListItem>
+              <StyledButtonDiv>
+                <Button color="primary" onClick={handleLogout} large>
+                  {intl.translate({ id: 'Logout' })}
+                </Button>
+              </StyledButtonDiv>
+            </ListItem>
+
+            {pathname === AppRoute.BLOCKCHAIN && (
+              <ListItem>
+                <StyledButtonDiv onClick={handleOnClick}>
+                  <Button color="primary" onClick={getFunction} large>
+                    {blockchainButtonLabel}
+                  </Button>
+                </StyledButtonDiv>
+              </ListItem>
+            )}
+          </List>
+        </StyledAlign>
       </Drawer>
     </>
   );
