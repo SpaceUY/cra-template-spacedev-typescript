@@ -5,10 +5,12 @@ import {
   ThemeProvider,
   useTheme,
 } from '@mui/material';
-import { mapVariantToMaterialInput } from 'design/Button/button.helpers';
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
-import { mapColorToMaterial } from 'design/helpers/theme.helpers';
+import {
+  mapColorToMaterial,
+  mapVariantToMaterialInput,
+} from 'design/helpers/theme.helpers';
 import { isColor } from 'design/helpers/type.helpers';
 import { MuiTextFieldInvert } from 'design/input/MuiTextFieldInvert/MuiTextFieldInvert';
 import { StatusText } from 'design/input/StatusText/StatusText';
