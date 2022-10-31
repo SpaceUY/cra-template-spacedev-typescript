@@ -15,6 +15,8 @@
   "Paragraph <strong>Paragraph</strong> <small>Paragraph</small>": "Párrafo <strong>Párrafo</strong> <small>Párrafo</small>",
   "Label <strong>Label</strong> <small>Label</small>": "Etiqueta <strong>Etiqueta</strong> <small>Etiqueta</small>",
   "Buttons": "Botones",
+  "{variant} button": "Botón {variant}",
+  "Standard Buttons": "Botones Estándar",
   "Design System": "Sistema de Diseño",
   "Login Example": "Ejemplo de Inicio de Sesión",
   "Email Address": "Correo Electrónico",
