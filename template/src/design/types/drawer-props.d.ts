@@ -1,10 +1,8 @@
-export type AnchorProps = {
-  anchor: 'left' | 'right';
-}
+export type AnchorProps = 'left' | 'right';
 
 export type DrawerProps = {
-  open: boolean,
-  anchor?: AnchorProps.anchor,
-  children?: React.ReactNode,
-  onClick?: React.MouseEventHandler<HTMLDivElement>,
+  isOpen: boolean;
+  anchor?: AnchorProps;
+  children?: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 };

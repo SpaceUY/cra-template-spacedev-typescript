@@ -1,12 +1,12 @@
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Button } from 'design';
-import Drawer from 'design/Drawer/Drawer';
 import { MenuIcon } from 'design/Icon/MenuIcon';
 import { AppRoute } from 'enums/app-route.enum';
 import { removeAuthTokenAction } from 'global-state/actions';
 import { rgba } from 'helpers/color.helpers';
 import { Align } from 'layout';
+import Drawer from 'layout/Drawer/Drawer';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -71,7 +71,7 @@ export const SideNavBar: FC<{
       <Button onClick={() => setMenuOpen(true)}>
         <MenuIcon color="primary" large />
       </Button>
-      <Drawer anchor="right" open={menuOpen} onClick={handleOnClick}>
+      <Drawer anchor="right" isOpen={menuOpen} onClick={handleOnClick}>
         <StyledAlign column>
           <StyledMenuIconDiv onClick={handleOnClick}>
             <MenuIcon large color="primary" />
