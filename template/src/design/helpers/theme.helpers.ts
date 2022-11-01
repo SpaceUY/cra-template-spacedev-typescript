@@ -33,11 +33,11 @@ export function getStoredThemeMode(): ThemeMode | null {
   return null;
 }
 
-export const isDarkPreferred =
-  window.matchMedia('(prefers-color-scheme: dark)').matches &&
-  config.theme.supportedThemeModes.includes(ThemeMode.DARK);
-
 export function getPreferedThemeMode(): ThemeMode {
+  const isDarkPreferred =
+    window.matchMedia('(prefers-color-scheme: dark)').matches &&
+    config.theme.supportedThemeModes.includes(ThemeMode.DARK);
+
   return isDarkPreferred ? ThemeMode.DARK : ThemeMode.LIGHT;
 }
 

@@ -163,7 +163,7 @@ class UserDto extends BaseDto {
 
 const responseValidator = new ResponseValidator(
   UserDto,
-  { validateList: true }, // this option will comunicate to the validation process that the  validations should be done over a list of objects with type Todo. If the response only returns a single object omit the option.
+  { validateList: true }, // this option will comunicate to the validation process that the validations should be done over a list of objects with type Todo. If the response only returns a single object omit the option.
 );
 
 ...
@@ -177,7 +177,7 @@ useEffect(() => {
       }),
     )
     .then((users) =>
-      console.log('users:', users.map((item) => item.name).join(', ')),
+      console.info('users:', users.map((item) => item.name).join(', ')),
     )
     .catch(genericErrorHandler);
 }, []);
