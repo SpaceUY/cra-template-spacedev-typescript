@@ -9,7 +9,6 @@ import { SideNavBar } from 'examples/components/AppBar/SideNavBar';
 import { ConnectModal } from 'examples/components/ConnectModal/ConnectModal';
 import { removeAuthTokenAction } from 'global-state/actions';
 import { selectAuthToken } from 'global-state/selectors';
-import { rgba } from 'helpers/color.helpers';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { storage } from 'helpers/storage.helpers';
 import { Align } from 'layout';
@@ -22,15 +21,13 @@ import {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { intl } from 'utilities/i18n/intl.utility';
+import { StyledAlign, StyledNavLink } from './appbar.styled';
 import spaceLogoDarkPath from './assets/spacedev-logo-dark.svg';
 import spaceLogoLightPath from './assets/spacedev-logo-light.svg';
-
-const StyledAlign = styled(Align)`
-  margin-bottom: 2rem;
-`;
+import { navItems } from './nav-items';
 
 const StyledH1 = styled(Text.h1)`
   line-height: 1.5rem;
@@ -39,33 +36,6 @@ const StyledH1 = styled(Text.h1)`
 const StyledA = styled.a`
   text-decoration: none;
   line-height: 1.5rem;
-`;
-
-const StyledNavLink = styled(NavLink)`
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: ${({ theme }) => theme.borderRadius.small}rem;
-  transition: all 200ms linear;
-  color: ${({ theme }) => theme.palette.primary.main};
-  text-transform: uppercase;
-  font-family: ${({ theme }) => theme.fontFamily};
-
-  &:not(:last-child) {
-    margin-right: 0.5rem;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => rgba(theme.palette.primary.light, 0.15)};
-  }
-
-  &:focus {
-    background-color: ${({ theme }) => rgba(theme.palette.primary.light, 0.15)};
-    outline-color: ${({ theme }) => theme.palette.primary.main};
-  }
-  &.active {
-    background-color: ${({ theme }) => rgba(theme.palette.primary.main, 0.8)};
-    color: ${({ theme }) => theme.palette.primary.invert};
-  }
 `;
 
 const StyledNav = styled.nav`
@@ -160,29 +130,23 @@ export const AppBar: FC = () => {
         {authToken && (
           <Align v-center gap={0.5}>
             <StyledNav>
-              <StyledNavLink to={AppRoute.HOME} end>
-                {intl.translate({ id: 'Home' })}
-              </StyledNavLink>
+              {navItems.map((item) => (
+                <StyledNavLink key={item.label} to={item.to} end>
+                  {item.label}
+                </StyledNavLink>
+              ))}
 
-              <StyledNavLink to={AppRoute.CATALOG}>
-                {intl.translate({ id: 'Catalog' })}
-              </StyledNavLink>
-
-              <StyledNavLink to={AppRoute.STATE}>
-                {intl.translate({ id: 'State' })}
-              </StyledNavLink>
-              <StyledNavLink to={AppRoute.BLOCKCHAIN}>
-                {intl.translate({ id: 'Blockchain' })}
-              </StyledNavLink>
               <Button color="primary" onClick={handleLogout} large>
                 {intl.translate({ id: 'Logout' })}
               </Button>
+
               {pathname === AppRoute.BLOCKCHAIN && (
                 <Button color="primary" onClick={getFunction} large>
                   {BlockchainButtonLabel}
                 </Button>
               )}
             </StyledNav>
+
             <StyledSideNavBarDiv>
               <SideNavBar
                 pathname={pathname}

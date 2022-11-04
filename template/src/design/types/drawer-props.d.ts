@@ -1,8 +1,11 @@
-export type AnchorProps = 'left' | 'right';
+import { ModalProps } from '@mui/material';
 
 export type DrawerProps = {
   isOpen: boolean;
-  anchor?: AnchorProps;
+  left?: boolean;
+  right?: boolean;
+  top?: boolean;
+  bottom?: boolean;
   children?: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClose?: ModalProps['onClose'];
 };

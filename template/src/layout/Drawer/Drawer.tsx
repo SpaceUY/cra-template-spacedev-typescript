@@ -1,43 +1,33 @@
-import { AnchorProps, DrawerProps } from 'design/types/drawer-props';
-import { FC } from 'react';
-import styled from 'styled-components';
-
-const StyledDrawer = styled.div<{ anchor: AnchorProps }>`
-  left: ${({ anchor }) => (anchor === 'left' ? `0` : `auto`)};
-  right: ${({ anchor }) => (anchor === 'right' ? `0` : `auto`)};
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  background-color: ${({ theme }) => theme.background.front};
-`;
-
-const StyledDrawerDiv = styled.div<DrawerProps>`
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  position: fixed;
-`;
-
-const handleChildClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-  e.stopPropagation();
-};
+import MuiDrawer from '@mui/material/Drawer';
+import { DesignContext } from 'design/DesignContext';
+import { DesignSystem } from 'design/enums/design-system.enum';
+import { mapAnchorToMaterialDrawer } from 'design/helpers/theme.helpers';
+import { DrawerProps } from 'design/types/drawer-props';
+import { FC, useContext } from 'react';
 
 const Drawer: FC<DrawerProps> = ({
-  anchor = 'left',
+  left,
+  right,
+  top,
+  bottom,
   isOpen,
-  onClick,
+  onClose,
   children,
 }) => {
-  return (
-    <StyledDrawerDiv isOpen={isOpen} onClick={onClick}>
-      <StyledDrawer anchor={anchor} onClick={handleChildClick}>
+  const { system } = useContext(DesignContext);
+
+  if (system === DesignSystem.MATERIAL_UI) {
+    return (
+      <MuiDrawer
+        anchor={mapAnchorToMaterialDrawer(left, right, top, bottom)}
+        open={isOpen}
+        onClose={onClose}
+      >
         {children}
-      </StyledDrawer>
-    </StyledDrawerDiv>
-  );
+      </MuiDrawer>
+    );
+  }
+
+  return null;
 };
 export default Drawer;
