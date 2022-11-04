@@ -1,8 +1,8 @@
 import { Button } from 'design';
 import { MenuIcon } from 'design/Icon/MenuIcon';
 import { AppRoute } from 'enums/app-route.enum';
+import Drawer from 'examples/components/Drawer/Drawer';
 import { removeAuthTokenAction } from 'global-state/actions';
-import Drawer from 'layout/Drawer/Drawer';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -73,7 +73,7 @@ export const SideNavBar: FC<{
           </StyledButtonDiv>
 
           {pathname === AppRoute.BLOCKCHAIN && (
-            <StyledButtonDiv onClick={handleOnClick}>
+            <StyledButtonDiv>
               <Button color="primary" onClick={getFunction} large>
                 {blockchainButtonLabel}
               </Button>

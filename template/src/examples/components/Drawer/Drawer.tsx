@@ -1,9 +1,9 @@
 import MuiDrawer from '@mui/material/Drawer';
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
-import { mapAnchorToMaterialDrawer } from 'design/helpers/theme.helpers';
-import { DrawerProps } from 'design/types/drawer-props';
 import { FC, useContext } from 'react';
+import { mapAnchorToMaterialDrawer } from './drawer.helper';
+import { DrawerProps } from './types/drawer-props';
 
 const Drawer: FC<DrawerProps> = ({
   left,
