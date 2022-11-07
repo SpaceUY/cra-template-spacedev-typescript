@@ -84,4 +84,11 @@ export const getBaseTheme = (
     medium: 0.5,
     small: 0.25,
   },
+  breakpoints: {
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+    xxl: 1400,
+  },
 });
