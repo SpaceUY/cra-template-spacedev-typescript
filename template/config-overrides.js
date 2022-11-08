@@ -12,6 +12,14 @@ module.exports = function override(config) {
     os: require.resolve('os-browserify'),
     url: require.resolve('url'),
   });
+  /**
+   * Ignore warnings raised by source-map-loader
+   * If you are using create-react-app version >=5 you may run into issues building. This is because NodeJS polyfills are not included in the latest version of create-react-app.
+   * See:
+   * - https://github.com/web3/web3.js#troubleshooting-and-known-issues
+   * - https://github.com/facebook/create-react-app/pull/11752
+   */
+  config.ignoreWarnings = [/Failed to parse source map/];
   config.resolve.fallback = fallback;
   config.plugins = (config.plugins || []).concat([
     new webpack.ProvidePlugin({
@@ -19,5 +27,6 @@ module.exports = function override(config) {
       Buffer: ['buffer', 'Buffer'],
     }),
   ]);
+
   return config;
 };
