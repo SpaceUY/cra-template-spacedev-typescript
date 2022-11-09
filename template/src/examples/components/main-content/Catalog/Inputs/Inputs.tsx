@@ -1,12 +1,15 @@
 import { Card, NumberInput, Select, Text, TextInput } from 'design';
 import { cardHeadingStyles } from 'design/Card/CardHeading';
 import { InlineCode } from 'design/InlineCode/InlineCode';
+import { Checkbox } from 'design/input/Checkbox/Checkbox';
 import { DateInput } from 'design/input/DateTime/DateInput';
 import { DateTimeInput } from 'design/input/DateTime/DateTimeInput';
 import { TimeInput } from 'design/input/DateTime/TimeInput';
+import { RadioGroup } from 'design/input/RadioGroup/RadioGroup';
 import { ColorProp } from 'design/types/color-prop';
 import { InputVariantProp } from 'design/types/input-variant-prop';
 import { ColorSelector } from 'examples/components/ColorSelector/ColorSelector';
+import { LanguageSelector } from 'examples/components/LanguageSelector/LanguageSelector';
 import { VariantSelector } from 'examples/components/VariantSelector/VariantSelector';
 import { DateFormat, formatDate } from 'helpers/date.helpers';
 import { Align } from 'layout';
@@ -44,18 +47,19 @@ const StyledAlign = styled(Align)`
   width: fit-content;
 `;
 
-const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => ({
+const options = [1, 2, 3].map((index) => ({
   label: intl.translate({ id: 'Option {index}' }, { index }),
-  value: index,
+  value: { index },
 }));
 
 export const Inputs: FC = () => {
-  const [value, setValue] = useState(options[0].value);
+  const [option, setOption] = useState(options[0].value);
   const [color, setColor] = useState<ColorProp | undefined>();
   const [variant, setVariant] = useState<InputVariantProp>('default');
   const [text, setText] = useState('');
   const [date, setDate] = useState<Date | null>(null);
   const [number, setNumber] = useState<number | ''>('');
+  const [checkboxBoolean, setCheckboxBoolean] = useState(false);
 
   return (
     <Card.Base>
@@ -174,46 +178,6 @@ export const Inputs: FC = () => {
             />
           </StyledColoredInputWrapperDiv>
 
-          <Text.h3>Select</Text.h3>
-
-          <Text.p>
-            {intl.translate(
-              {
-                id: "The <code><Select /></code> component will take any type as an option's type, and return the same value type.",
-              },
-              {
-                code: (label) => <InlineCode>{label}</InlineCode>,
-              },
-            )}
-          </Text.p>
-
-          <StyledInputWrapperDiv>
-            <Select
-              label="<Select />"
-              name="demo-select"
-              options={options}
-              value={value}
-              onChange={(evt) => setValue(evt.target.value)}
-              color={color}
-              variant={variant}
-              fullWidth
-            />
-          </StyledInputWrapperDiv>
-
-          <StyledColoredInputWrapperDiv>
-            <Select
-              label="<Select invert/>"
-              name="demo-select-invert"
-              options={options}
-              value={value}
-              onChange={(evt) => setValue(evt.target.value)}
-              color={color}
-              variant={variant}
-              fullWidth
-              invert
-            />
-          </StyledColoredInputWrapperDiv>
-
           <Text.h3>
             DateTime{' '}
             {date ? (
@@ -308,6 +272,128 @@ export const Inputs: FC = () => {
               invert
             />
           </StyledColoredInputWrapperDiv>
+
+          <Text.h3>Checkbox</Text.h3>
+
+          <Text.p>
+            {intl.translate(
+              {
+                id: 'The <code><Checkbox /></code> component allows for the selection of a simple boolean value.',
+              },
+              {
+                code: (label) => <InlineCode>{label}</InlineCode>,
+              },
+            )}
+          </Text.p>
+
+          <StyledInputWrapperDiv>
+            <Checkbox
+              label="<Checkbox />"
+              name="demo-checkbox"
+              value={checkboxBoolean}
+              onChange={(evt) => setCheckboxBoolean(evt.target.value)}
+            />
+          </StyledInputWrapperDiv>
+
+          <StyledColoredInputWrapperDiv>
+            <Checkbox
+              label="<Checkbox invert/>"
+              name="demo-checkbox-invert"
+              value={checkboxBoolean}
+              onChange={(evt) => setCheckboxBoolean(evt.target.value)}
+              invert
+            />
+          </StyledColoredInputWrapperDiv>
+
+          <Text.h3>RadioGroup</Text.h3>
+
+          <Text.p>
+            {intl.translate(
+              {
+                id: "The <code><RadioGroup /></code> component will take any type as an option's type, and return the same value type.",
+              },
+              {
+                code: (label) => <InlineCode>{label}</InlineCode>,
+              },
+            )}
+          </Text.p>
+
+          <StyledInputWrapperDiv>
+            <RadioGroup
+              label="<RadioGroup />"
+              name="demo-radio-group"
+              options={options}
+              value={option}
+              onChange={(evt) => setOption(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+            />
+          </StyledInputWrapperDiv>
+
+          <StyledColoredInputWrapperDiv>
+            <RadioGroup
+              label="<RadioGroup invert/>"
+              name="demo-radio-group-invert"
+              options={options}
+              value={option}
+              onChange={(evt) => setOption(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+              invert
+            />
+          </StyledColoredInputWrapperDiv>
+
+          <Text.h3>Select</Text.h3>
+
+          <Text.p>
+            {intl.translate(
+              {
+                id: "The <code><Select /></code> component will take any type as an option's type, and return the same value type.",
+              },
+              {
+                code: (label) => <InlineCode>{label}</InlineCode>,
+              },
+            )}
+          </Text.p>
+
+          <StyledInputWrapperDiv>
+            <Select
+              label="<Select />"
+              name="demo-select"
+              options={options}
+              value={option}
+              onChange={(evt) => setOption(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+            />
+          </StyledInputWrapperDiv>
+
+          <StyledColoredInputWrapperDiv>
+            <Select
+              label="<Select invert/>"
+              name="demo-select-invert"
+              options={options}
+              value={option}
+              onChange={(evt) => setOption(evt.target.value)}
+              color={color}
+              variant={variant}
+              fullWidth
+              invert
+            />
+          </StyledColoredInputWrapperDiv>
+
+          <Text.p>
+            {intl.translate({
+              id: 'Custom Example',
+            })}
+          </Text.p>
+
+          <StyledInputWrapperDiv>
+            <LanguageSelector variant={variant} fullWidth />
+          </StyledInputWrapperDiv>
         </StyledAlign>
       </Card.Body>
     </Card.Base>

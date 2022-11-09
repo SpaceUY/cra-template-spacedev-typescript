@@ -1,4 +1,5 @@
 import { Select } from 'design';
+import { InputVariantProp } from 'design/types/input-variant-prop';
 import { useContext } from 'react';
 import { Locale } from 'utilities/i18n/enums/locale.enum';
 import { IntlContext } from 'utilities/i18n/intl.context';
@@ -10,7 +11,19 @@ const OPTIONS = [
   { label: 'Español', value: Locale.es },
 ];
 
-export const LanguageSelector = (): JSX.Element => {
+export const LanguageSelector = ({
+  disabled,
+  required,
+  fullWidth,
+  size,
+  variant,
+}: {
+  disabled?: boolean;
+  required?: boolean;
+  fullWidth?: boolean;
+  size?: 'small' | 'medium';
+  variant?: InputVariantProp;
+}): JSX.Element => {
   const { locale, setLocale } = useContext(IntlContext);
 
   return (
@@ -21,7 +34,11 @@ export const LanguageSelector = (): JSX.Element => {
       options={OPTIONS}
       onChange={(evt) => setLocale(evt.target.value)}
       label={intl.translate({ id: 'Language' })}
-      variant="outlined"
+      variant={variant}
+      disabled={disabled}
+      fullWidth={fullWidth}
+      required={required}
+      size={size}
     >
       {OPTIONS.map((opt) => (
         <Option key={opt.label} label={opt.label} value={opt.value} />

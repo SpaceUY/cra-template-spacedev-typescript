@@ -73,5 +73,8 @@
   "No date selected": "No date selected",
   "The <code><DateTimeInput /></code>, <code><DateInput /></code> and <code><TimeInput /></code> components will take any <code>Date</code> as their value.": "The <code><DateTimeInput /></code>, <code><DateInput /></code> and <code><TimeInput /></code> components will take any <code>Date</code> as their value.",
   "The date display above is localized and will react to the locale being updated on the app.": "The date display above is localized and will react to the locale being updated on the app.",
-  "Connect Wallet": "Connect Wallet"
+  "Connect Wallet": "Connect Wallet",
+  "The <code><RadioGroup /></code> component will take any type as an option's type, and return the same value type.": "The <code><RadioGroup /></code> component will take any type as an option's type, and return the same value type.",
+  "The <code><Checkbox /></code> component allows for the selection of a simple boolean value.": "The <code><Checkbox /></code> component allows for the selection of a simple boolean value.",
+  "Custom Example": "Custom Example"
 }

@@ -19,4 +19,5 @@ export type InputProps<T> = {
   variant?: InputVariantProp;
   invert?: boolean;
   placeholder?: string;
+  className?: string;
 };
