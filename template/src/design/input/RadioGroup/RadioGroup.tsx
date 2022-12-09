@@ -10,6 +10,7 @@ import { ChangeEvent, useCallback, useContext } from 'react';
 import styled from 'styled-components';
 import { FcDefaultProps } from 'types/fc-default-props';
 import { v4 as uuidv4 } from 'uuid';
+import { RadioGroupCustomOption } from './RadioGroupCustomOption';
 
 const StyledTextP = styled(Text.p)`
   margin-bottom: 0.5rem;
@@ -21,7 +22,16 @@ type Props<T> = Omit<FcDefaultProps, 'children'> &
       label: string;
       value: T;
     }[];
-    children?: JSX.Element[];
+    children?: (
+      option: {
+        label: string;
+        value: T;
+      },
+      index: number,
+      isChecked: boolean,
+      isFocused: boolean,
+      isDisabled?: boolean,
+    ) => JSX.Element;
     row?: boolean;
   };
 
@@ -67,64 +77,80 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
     [name, onChange, options],
   );
 
-  if (system === DesignSystem.MATERIAL_UI) {
-    if (invert) {
-      return (
-        <Align column>
-          <Text.label>
-            <StyledTextP color="invert">{label}</StyledTextP>
-
-            <Align column>
-              {options.map((opt, i) => {
-                return (
-                  <Align key={i} gap={0.5} v-center>
-                    <Radio
-                      name={name}
-                      value={i}
-                      id={id}
-                      onChange={handleChange}
-                      disabled={disabled}
-                      checked={opt.value === value}
-                      sx={{
-                        color: theme.components.text.p.color.invert,
-                        '&.Mui-checked': {
-                          color: theme.components.text.p.color.invert,
-                        },
-                      }}
-                    />
-
-                    <Text.label htmlFor={id} color="invert">
-                      <strong>{opt.label}</strong>
-                    </Text.label>
-                  </Align>
-                );
-              })}
-            </Align>
-          </Text.label>
-
-          <StatusText error={error} helperText={helperText} />
-        </Align>
-      );
-    }
+  if (children) {
     return (
-      <Align column>
+      <Align column id={id}>
         <span>
-          <StyledTextP>{label}</StyledTextP>
+          <StyledTextP color={invert ? 'invert' : undefined}>
+            {label}
+            {required ?? ' *'}
+          </StyledTextP>
 
           <Align column>
             {options.map((opt, i) => {
+              const _id = `${name}-${i}`;
+
+              return (
+                <RadioGroupCustomOption
+                  key={_id}
+                  id={_id}
+                  option={opt}
+                  name={name}
+                  onChange={handleChange}
+                  isDisabled={disabled}
+                  isChecked={opt.value === value}
+                  index={i}
+                >
+                  {children}
+                </RadioGroupCustomOption>
+              );
+            })}
+          </Align>
+        </span>
+
+        <StatusText error={error} helperText={helperText} />
+      </Align>
+    );
+  }
+
+  if (system === DesignSystem.MATERIAL_UI) {
+    return (
+      <Align column id={id}>
+        <span>
+          <StyledTextP color={invert ? 'invert' : undefined}>
+            {label}
+            {required ?? ' *'}
+          </StyledTextP>
+
+          <Align column>
+            {options.map((opt, i) => {
+              const _id = `${name}-${i}`;
+
               return (
                 <Align key={i} gap={0.5} v-center>
                   <Radio
                     name={name}
                     value={i}
-                    id={id}
+                    id={_id}
                     onChange={handleChange}
                     disabled={disabled}
                     checked={opt.value === value}
+                    sx={
+                      invert
+                        ? {
+                            color: theme.components.text.p.color.invert,
+                            '&.Mui-checked': {
+                              color: theme.components.text.p.color.invert,
+                            },
+                          }
+                        : undefined
+                    }
                   />
 
-                  <Text.label htmlFor={id}>
+                  <Text.label
+                    htmlFor={_id}
+                    color={invert ? 'invert' : undefined}
+                  >
                     <strong>{opt.label}</strong>
                   </Text.label>
                 </Align>
@@ -140,29 +166,34 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
 
   return (
     <Align column>
-      <Text.label>
-        <StyledTextP>{label}</StyledTextP>
+      <span>
+        <StyledTextP>
+          {label}
+          {required ?? ' *'}
+        </StyledTextP>
 
         <Align column>
           {options.map((opt, i) => {
+            const _id = `${name}-${i}`;
+
             return (
-              <Align key={id} gap={0.5} v-center>
+              <Align key={i} gap={0.5} v-center>
                 <input
                   type="radio"
                   name={name}
                   value={i}
-                  id={id}
+                  id={_id}
                   onChange={handleChange}
                   disabled={disabled}
                   checked={opt.value === value}
                 />
 
-                <Text.label htmlFor={id}>{opt.label}</Text.label>
+                <Text.label htmlFor={_id}>{opt.label}</Text.label>
               </Align>
             );
           })}
         </Align>
-      </Text.label>
+      </span>
 
       <StatusText error={error} helperText={helperText} />
     </Align>

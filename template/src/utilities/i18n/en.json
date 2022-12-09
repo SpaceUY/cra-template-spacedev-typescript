@@ -76,5 +76,7 @@
   "Connect Wallet": "Connect Wallet",
   "The <code><RadioGroup /></code> component will take any type as an option's type, and return the same value type.": "The <code><RadioGroup /></code> component will take any type as an option's type, and return the same value type.",
   "The <code><Checkbox /></code> component allows for the selection of a simple boolean value.": "The <code><Checkbox /></code> component allows for the selection of a simple boolean value.",
-  "Custom Example": "Custom Example"
+  "Custom Example": "Custom Example",
+  "This field is required": "This field is required",
+  "Submit": "Submit"
 }
