@@ -16,6 +16,10 @@ const StyledTextP = styled(Text.p)`
   margin-bottom: 0.5rem;
 `;
 
+const StyledSpan = styled.span<{ fullWidth: boolean }>`
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'initial')};
+`;
+
 type Props<T> = Omit<FcDefaultProps, 'children'> &
   InputProps<T> & {
     options: {
@@ -80,7 +84,7 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
   if (children) {
     return (
       <Align column id={id}>
-        <span>
+        <StyledSpan fullWidth={fullWidth}>
           <StyledTextP color={invert ? 'invert' : undefined}>
             {label}
             {required ?? ' *'}
@@ -106,7 +110,7 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
               );
             })}
           </Align>
-        </span>
+        </StyledSpan>
 
         <StatusText error={error} helperText={helperText} />
       </Align>
@@ -116,7 +120,7 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
   if (system === DesignSystem.MATERIAL_UI) {
     return (
       <Align column id={id}>
-        <span>
+        <StyledSpan fullWidth={fullWidth}>
           <StyledTextP color={invert ? 'invert' : undefined}>
             {label}
             {required ?? ' *'}
@@ -157,7 +161,7 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
               );
             })}
           </Align>
-        </span>
+        </StyledSpan>
 
         <StatusText error={error} helperText={helperText} />
       </Align>
@@ -166,7 +170,7 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
 
   return (
     <Align column>
-      <span>
+      <StyledSpan fullWidth={fullWidth}>
         <StyledTextP>
           {label}
           {required ?? ' *'}
@@ -193,7 +197,7 @@ export const RadioGroup = <T,>(props: Props<T>): JSX.Element => {
             );
           })}
         </Align>
-      </span>
+      </StyledSpan>
 
       <StatusText error={error} helperText={helperText} />
     </Align>
