@@ -116,7 +116,7 @@ type FormValues = {
   demoRadioGroupInvert: typeof options[0]['value'] | null;
   demoRadioGroupCustom: typeof options[0]['value'] | null;
   demoSelect: typeof options[0]['value'] | null;
-  demoSelectInvert: typeof options[0]['value'] | null;
+  demoSelectInvert: typeof options[0]['value'];
 };
 
 export const Inputs: FC = () => {
@@ -140,7 +140,7 @@ export const Inputs: FC = () => {
     demoRadioGroupInvert: null,
     demoRadioGroupCustom: null,
     demoSelect: null,
-    demoSelectInvert: null,
+    demoSelectInvert: options[0].value,
   };
 
   return (
@@ -518,6 +518,7 @@ export const Inputs: FC = () => {
                       onChange={handleChange}
                       color={color}
                       variant={variant}
+                      placeholder={intl.translate({ id: 'Pick an option' })}
                       fullWidth
                     />
                   </StyledInputWrapperDiv>
