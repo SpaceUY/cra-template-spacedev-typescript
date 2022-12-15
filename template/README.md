@@ -125,7 +125,7 @@ We indentified 3 different types or levels of state
   - Reserved for data that has to be accessed on different nesting levels, but is not needed app-whide.
   - This pattern should be avoided for data that updates too frequently.
   - Handled with [React Context API](https://reactjs.org/docs/context.html)
-- Local State
+- Component State
   - Located on the component level
   - Handled with the `useState` hook
 
