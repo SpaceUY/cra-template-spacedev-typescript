@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { TextProps } from '../types/text-props';
 import { baseStyles } from './text.styled';
 
-export const Paragraph = styled.p<TextProps>`
+export const textBaseStyles = css<TextProps>`
   ${baseStyles}
   font-size: ${({ theme }) => theme.components.text.p.fontSize}rem;
   font-weight: ${({ theme }) => theme.components.text.p.fontWeight};
@@ -11,4 +11,8 @@ export const Paragraph = styled.p<TextProps>`
     color === 'inherit' ? 'inherit' : theme.components.text.p.color[color]};
 
   font-family: ${({ theme }) => theme.components.text.p.fontFamily};
+`;
+
+export const Paragraph = styled.p`
+  ${textBaseStyles}
 `;

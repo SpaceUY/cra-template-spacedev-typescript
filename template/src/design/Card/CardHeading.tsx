@@ -99,7 +99,7 @@ export const CardHeading: FC<Props> = ({
     return getHeadingLevel(h1, h2, h3, h4, h5, h6);
   }, [h1, h2, h3, h4, h5, h6]);
 
-  const HeadingComponent = StyledHeadings[level];
+  const HeadingComponent = StyledHeadings[level - 1];
 
   if (isString(children)) {
     return (
