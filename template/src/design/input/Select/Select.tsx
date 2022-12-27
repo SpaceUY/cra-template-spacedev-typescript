@@ -48,6 +48,7 @@ export const Select = <T,>(props: Props<T>): JSX.Element => {
     size,
     variant = 'default',
     invert,
+    placeholder,
   } = props;
 
   const materialTheme = useTheme();
@@ -74,7 +75,7 @@ export const Select = <T,>(props: Props<T>): JSX.Element => {
   );
 
   const _value = useMemo(() => {
-    let index = 0;
+    let index = -1;
 
     for (let i = 0; i < options.length; i++) {
       const opt = options[i];
@@ -120,6 +121,12 @@ export const Select = <T,>(props: Props<T>): JSX.Element => {
           variant={mapVariantToMaterialInput(variant)}
           select
         >
+          {_value === -1 ? (
+            <MenuItem key={-1} value={-1} disabled>
+              {placeholder ? <Text.p color="light">{placeholder}</Text.p> : ''}
+            </MenuItem>
+          ) : null}
+
           {options.map((opt, i) => (
             <MenuItem key={i} value={i}>
               {children ? children[i] : opt.label}
@@ -143,6 +150,12 @@ export const Select = <T,>(props: Props<T>): JSX.Element => {
           disabled={disabled}
           required={required}
         >
+          {_value === -1 ? (
+            <option key={-1} value={-1} disabled>
+              {placeholder ? <Text.p color="light">{placeholder}</Text.p> : ''}
+            </option>
+          ) : null}
+
           {options.map((opt, i) => (
             <option key={i} value={i}>
               {opt.label}

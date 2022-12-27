@@ -7,7 +7,7 @@ const textColor: Color = {
   dark: '#aaa',
   main: '#fff',
   light: '#aaa',
-  invert: '#555',
+  invert: '#fff',
 };
 
 export const darkTheme: Theme = {

@@ -47,11 +47,7 @@ export const TextInput = (props: Props): JSX.Element | null => {
   const materialTheme = useMuiTheme();
 
   const handleChange = useCallback(
-    (
-      evt: ChangeEvent<
-        HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement
-      >,
-    ) => {
+    (evt: ChangeEvent<HTMLInputElement>) => {
       onChange({
         target: {
           name,

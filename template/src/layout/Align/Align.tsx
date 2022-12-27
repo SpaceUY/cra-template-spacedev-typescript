@@ -29,7 +29,8 @@ type Props = FcDefaultProps & {
     | 'header'
     | 'footer'
     | 'main'
-    | 'aside';
+    | 'aside'
+    | 'label';
   ['v-start']?: boolean;
   ['v-end']?: boolean;
   ['v-center']?: boolean;

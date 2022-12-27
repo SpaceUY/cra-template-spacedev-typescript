@@ -73,5 +73,11 @@
   "No date selected": "No se ha seleccionado una fecha",
   "The <code><DateTimeInput /></code>, <code><DateInput /></code> and <code><TimeInput /></code> components will take any <code>Date</code> as their value.": "Los componentes <code><DateTimeInput /></code>, <code><DateInput /></code> y <code><TimeInput /></code> aceptan cualquier valor de tipo <code>Date</code>.",
   "The date display above is localized and will react to the locale being updated on the app.": "La fecha que se puede ver arriba es localizada y responde a los cambios de locale de la aplicación.",
-  "Connect Wallet": "Connect Wallet"
+  "Connect Wallet": "Conectar Billetera",
+  "The <code><RadioGroup /></code> component will take any type as an option's type, and return the same value type.": "El componente <code><RadioGroup /></code> aceptará cualquier tipo de valor en sus opciones, y retornará el mismo typo de valor.",
+  "The <code><Checkbox /></code> component allows for the selection of a simple boolean value.": "El componente <code><Checkbox /></code> permite la selección de un simple valor booleano.",
+  "Custom Example": "Ejemplo personalizado",
+  "This field is required": "Este campo es requerido",
+  "Submit": "Enviar",
+  "Pick an option": "Selecciona una opción"
 }

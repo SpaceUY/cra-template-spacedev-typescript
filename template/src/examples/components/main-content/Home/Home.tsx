@@ -66,7 +66,7 @@ export const Home: FC = () => {
 
         <Card.Body>
           <Align gap={1}>
-            <LanguageSelector />
+            <LanguageSelector variant="outlined" />
 
             <Select
               label={intl.translate({ id: 'Design System' })}

@@ -14,11 +14,7 @@ export const NumberInput = (props: InputProps<number | ''>): JSX.Element => {
   const { system } = useContext(DesignContext);
 
   const handleChange = useCallback(
-    (
-      evt: ChangeEvent<
-        HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement
-      >,
-    ) => {
+    (evt: ChangeEvent<HTMLInputElement>) => {
       onChange({
         target: {
           name,
