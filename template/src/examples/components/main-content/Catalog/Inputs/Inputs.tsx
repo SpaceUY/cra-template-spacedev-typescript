@@ -439,10 +439,7 @@ export const Inputs: FC = () => {
                       options={options}
                       value={values.demoRadioGroup}
                       error={errors.demoRadioGroup}
-                      onChange={(evt) => {
-                        console.log(evt);
-                        handleChange(evt);
-                      }}
+                      onChange={handleChange}
                       color={color}
                       variant={variant}
                       fullWidth

@@ -2,6 +2,8 @@ import { Card, List, ListItem, Text } from 'design';
 import { InlineCode } from 'design/InlineCode/InlineCode';
 import { FC } from 'react';
 import { intl } from 'utilities/i18n/intl.utility';
+import { GlobalCounterDisplay } from './GlobalCounterDisplay';
+import { GlobalCounterForm } from './GlobalCounterForm';
 
 export const State: FC = () => {
   return (
@@ -25,13 +27,19 @@ export const State: FC = () => {
 
             <ListItem>
               {intl.translate({
-                id: 'No UI related data (the app theme is an exception here).',
+                id: 'No UI related data (the app theme is an exception here, for now).',
               })}
             </ListItem>
 
             <ListItem>
               {intl.translate({
                 id: 'No error handling.',
+              })}
+            </ListItem>
+
+            <ListItem>
+              {intl.translate({
+                id: 'No fetching logic.',
               })}
             </ListItem>
           </List>
@@ -107,7 +115,7 @@ export const State: FC = () => {
 
                 <ListItem>
                   {intl.translate({
-                    id: 'Reserved for data that has to be accessed on different nesting levels, but is not needed app-whide.',
+                    id: 'Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.',
                   })}
                 </ListItem>
 
@@ -175,7 +183,23 @@ export const State: FC = () => {
 
       <Card.Base>
         <Card.Heading h2>{intl.translate({ id: 'Global State' })}</Card.Heading>
-        <Card.Body></Card.Body>
+        <Card.Body>
+          <Text.h3>{intl.translate({ id: 'The Humble Counter' })}</Text.h3>
+
+          <br />
+
+          <Text.p>
+            {intl.translate({
+              id: 'Submiting the following form will update the counter value globally and the value will be reflected here: ',
+            })}
+          </Text.p>
+
+          <GlobalCounterDisplay />
+
+          <br />
+
+          <GlobalCounterForm />
+        </Card.Body>
       </Card.Base>
     </>
   );

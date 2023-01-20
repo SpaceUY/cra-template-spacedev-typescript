@@ -97,5 +97,11 @@
   "Handled with the <code>useState</code> hook.": "Handled with the <code>useState</code> hook.",
   "The <i>state</i> is the business-related data.": "The <i>state</i> is the business-related data.",
   "No UI related data (the app theme is an exception here).": "No UI related data (the app theme is an exception here).",
-  "No error handling.": "No error handling."
+  "No error handling.": "No error handling.",
+  "The Humble Counter": "The Humble Counter",
+  "Submiting the following form will update the counter value globally and the value will be reflected here: ": "Submiting the following form will update the counter value globally and the value will be reflected here: ",
+  "No UI related data (the app theme is an exception here, for now).": "No UI related data (the app theme is an exception here, for now).",
+  "No fetching logic.": "No fetching logic.",
+  "Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.": "Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.",
+  "Global Counter": "Global Counter"
 }

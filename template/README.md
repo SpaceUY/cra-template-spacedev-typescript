@@ -79,13 +79,14 @@ function App() {
   useContext(IntlContext);
 
 -  return (
--    <StyledDiv>
--      <AppBar />
--
--      <main>
--        <Router />
--      </main>
--    </StyledDiv>
+-   <ExampleGlobalStateProvider>
+-     <StyledDiv>
+-       <AppBar />
+-       <main>
+-         <Router />
+-       </main>
+-     </StyledDiv>
+-   </ExampleGlobalStateProvider>
 -  );
 + return <YourNewAppStructure/ >
 }
@@ -119,7 +120,8 @@ We indentified 3 different types or levels of state
 - Global State
   - Accessible throughout the whole app
   - Reserved for data that we want to fetch as little as possible. e.g.: authenticated user's data, app theme, etc.
-  - Probably handled with [Redux](https://redux.js.org/) and [Redux-Toolkit](https://redux-toolkit.js.org/)
+  - Handled with [Redux](https://redux.js.org/) and [Redux-Toolkit](https://redux-toolkit.js.org/)
+  - [How to implement in this template](./docs/GLOBAL_STATE.md)
 - Scoped State
   - Available only to a selected branch of the app's tree and positioned on the upper common node to all served child nodes
   - Reserved for data that has to be accessed on different nesting levels, but is not needed app-whide.

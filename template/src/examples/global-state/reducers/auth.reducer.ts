@@ -3,7 +3,7 @@ import { StorageItem } from 'enums/storage-item.enum';
 import {
   removeAuthTokenAction,
   setAuthTokenAction,
-} from 'global-state/actions/auth.actions';
+} from 'examples/global-state/actions/auth.actions';
 import { storage } from 'helpers/storage.helpers';
 
 export type AuthState = {

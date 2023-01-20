@@ -7,8 +7,8 @@ import { AppRoute } from 'enums/app-route.enum';
 import { StorageItem } from 'enums/storage-item.enum';
 import { SideNavBar } from 'examples/components/AppBar/SideNavBar';
 import { ConnectModal } from 'examples/components/ConnectModal/ConnectModal';
-import { removeAuthTokenAction } from 'global-state/actions';
-import { selectAuthToken } from 'global-state/selectors';
+import { removeAuthTokenAction } from 'examples/global-state/actions';
+import { selectAuthToken } from 'examples/global-state/selectors';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { storage } from 'helpers/storage.helpers';
 import { Align } from 'layout';
@@ -70,21 +70,23 @@ export const AppBar: FC = () => {
     dispatch(removeAuthTokenAction());
   };
 
-  const disconnect = () => {
+  const disconnect = useCallback(() => {
     try {
       deactivate();
+
       storage.local.remove(StorageItem.WALLETCONNECTED);
     } catch (error) {
       genericErrorHandler(error);
     }
-  };
+  }, [deactivate]);
 
   useEffect(() => {
     if (web3Error?.message) {
       disconnect();
+
       toast.error('Chain not supported');
     }
-  }, [web3Error?.message]);
+  }, [disconnect, web3Error?.message]);
 
   const BlockchainButtonLabel = useMemo(() => {
     if (web3Error?.message) {
@@ -106,7 +108,7 @@ export const AppBar: FC = () => {
     }
 
     setBlockchainModal(true);
-  }, [web3Error, account]);
+  }, [web3Error?.message, account, disconnect]);
 
   const { pathname } = location;
   return (
