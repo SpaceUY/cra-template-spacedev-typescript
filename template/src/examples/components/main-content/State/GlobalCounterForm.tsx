@@ -2,6 +2,7 @@ import { Form } from 'components/Form/Form';
 import { Button, NumberInput } from 'design';
 import { InlineCode } from 'design/InlineCode/InlineCode';
 import { setCounterValueAction } from 'examples/global-state/actions';
+import { isNumber } from 'helpers/nodash.helpers';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { intl } from 'utilities/i18n/intl.utility';
@@ -25,7 +26,9 @@ export const GlobalCounterForm: FC = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = ({ count }: FormValues) => {
-    dispatch(setCounterValueAction(count));
+    if (isNumber(count)) {
+      dispatch(setCounterValueAction(count));
+    }
   };
 
   return (

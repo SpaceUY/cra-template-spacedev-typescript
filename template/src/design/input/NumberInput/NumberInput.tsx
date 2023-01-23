@@ -16,10 +16,12 @@ export const NumberInput = (props: InputProps<number | ''>): JSX.Element => {
 
   const handleChange = useCallback(
     (evt: ChangeEvent<HTMLInputElement>) => {
+      const { value } = evt.target;
+
       onChange({
         target: {
           name,
-          value: Number(evt.target.value),
+          value: value === '' ? value : Number(value),
         },
       });
     },

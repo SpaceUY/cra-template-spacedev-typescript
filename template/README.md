@@ -124,7 +124,7 @@ We indentified 3 different types or levels of state
   - [How to implement in this template](./docs/GLOBAL_STATE.md)
 - Scoped State
   - Available only to a selected branch of the app's tree and positioned on the upper common node to all served child nodes
-  - Reserved for data that has to be accessed on different nesting levels, but is not needed app-whide.
+  - Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.
   - This pattern should be avoided for data that updates too frequently.
   - Handled with [React Context API](https://reactjs.org/docs/context.html)
 - Component State

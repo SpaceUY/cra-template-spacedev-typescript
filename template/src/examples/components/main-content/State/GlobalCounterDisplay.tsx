@@ -34,7 +34,7 @@ export const GlobalCounterDisplay: FC = () => {
 
   return (
     <StyledTextP className={didValueCahnge ? 'animate' : undefined}>
-      <strong>{value}</strong>
+      <strong>{value.toLocaleString('es-UY')}</strong>
     </StyledTextP>
   );
 };
