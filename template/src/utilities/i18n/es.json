@@ -101,5 +101,6 @@
   "No UI related data (the app theme is an exception here, for now).": "No datos relacionados a la IU (el tema de la aplicación es una excepción aquí, por ahora).",
   "No fetching logic.": "No loǵica de solicitudes.",
   "Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.": "Reservado para datos que queremos acceder a distintos niveles de anidado, pero que no estarán disponibles para toda la app.",
-  "Global Counter": "Contador Global"
+  "Global Counter": "Contador Global",
+  "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point.": "<strong>Nota:</strong> No hay un límite claro entre el uso de prop drilling y pasar a usar Context, en este punto cada desarrollador/a deberá usar su propio criterio."
 }

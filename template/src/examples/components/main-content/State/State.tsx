@@ -149,6 +149,7 @@ export const State: FC = () => {
                       },
                     },
                   )}
+                  *
                 </ListItem>
               </List>
             </ListItem>
@@ -176,6 +177,20 @@ export const State: FC = () => {
               </List>
             </ListItem>
           </List>
+
+          <br />
+
+          <Text.p>
+            <small>
+              *
+              {intl.translate(
+                {
+                  id: "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point.",
+                },
+                { strong: (label) => <strong>{label}</strong> },
+              )}
+            </small>
+          </Text.p>
         </Card.Body>
       </Card.Base>
 
