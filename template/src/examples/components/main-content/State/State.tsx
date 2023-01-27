@@ -1,11 +1,16 @@
 import { Card, List, ListItem, Text } from 'design';
+import { useTheme } from 'design/hooks/use-theme';
 import { InlineCode } from 'design/InlineCode/InlineCode';
 import { FC } from 'react';
 import { intl } from 'utilities/i18n/intl.utility';
 import { GlobalCounterDisplay } from './GlobalCounterDisplay';
 import { GlobalCounterForm } from './GlobalCounterForm';
+import { ScopedStateConsumer } from './ScopedStateConsumer';
+import { ScopedStateProvider } from './ScopedStateProvider';
 
 export const State: FC = () => {
+  const theme = useTheme();
+
   return (
     <>
       <Card.Base>
@@ -214,6 +219,71 @@ export const State: FC = () => {
           <br />
 
           <GlobalCounterForm />
+        </Card.Body>
+      </Card.Base>
+
+      <br />
+
+      <Card.Base>
+        <Card.Heading h2>{intl.translate({ id: 'Scoped State' })}</Card.Heading>
+        <Card.Body>
+          <Text.h3>{intl.translate({ id: 'Nesting Contexts' })}</Text.h3>
+
+          <br />
+
+          <Text.p>
+            {intl.translate({
+              id: "Using a Context means that the Context API will do a lookup up the component's tree and use the first one available.",
+            })}
+          </Text.p>
+
+          <br />
+
+          <Text.p>
+            {intl.translate({
+              id: "This means that we can nest providers and by doing that change the Context its children will use, even if up the component's tree we have already placed another Provider.",
+            })}
+          </Text.p>
+
+          <br />
+
+          <Text.p>
+            {intl.translate({
+              id: 'In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level.',
+            })}
+          </Text.p>
+
+          <ScopedStateProvider
+            value={{
+              providerName: intl.translate({ id: 'First Level' }),
+              level: 1,
+              color: theme.palette.primary,
+            }}
+          >
+            <ScopedStateConsumer>
+              <ScopedStateProvider
+                value={{
+                  providerName: intl.translate({ id: 'Second Level' }),
+                  level: 2,
+                  color: theme.palette.secondary,
+                }}
+              >
+                <ScopedStateConsumer>
+                  <ScopedStateProvider
+                    value={{
+                      providerName: intl.translate({
+                        id: 'Third Level',
+                      }),
+                      level: 3,
+                      color: theme.palette.warning,
+                    }}
+                  >
+                    <ScopedStateConsumer />
+                  </ScopedStateProvider>
+                </ScopedStateConsumer>
+              </ScopedStateProvider>
+            </ScopedStateConsumer>
+          </ScopedStateProvider>
         </Card.Body>
       </Card.Base>
     </>

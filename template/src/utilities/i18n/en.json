@@ -102,5 +102,13 @@
   "No fetching logic.": "No fetching logic.",
   "Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.": "Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.",
   "Global Counter": "Global Counter",
-  "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point.": "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point."
+  "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point.": "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point.",
+  "Provider Name:": "Provider Name:",
+  "First Level": "First Level",
+  "Second Level": "Second Level",
+  "Third Level": "Third Level",
+  "Nesting Contexts": "Nesting Contexts",
+  "Using a Context means that the Context API will do a lookup up the component's tree and use the first one available.": "Using a Context means that the Context API will do a lookup up the component's tree and use the first one available.",
+  "This means that we can nest providers and by doing that change the Context its children will use, even if up the component's tree we have already placed another Provider.": "This means that we can nest providers and by doing that change the Context it's children will use, even if up the component's tree we have already placed another Provider.",
+  "In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level.": "In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level."
 }

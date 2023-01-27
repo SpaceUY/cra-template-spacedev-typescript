@@ -87,7 +87,7 @@
   "Accessible throughout the whole app.": "Accessible en toda la app.",
   "Reserved for data that we want to fetch as little as possible. e.g.: authenticated user's data, app theme, etc.": "Reserved for data that we want to fetch as little as possible. e.g.: authenticated user's data, app theme, etc.",
   "Handled by default with <a>Redux,https://redux.js.org</a> and <a>Redux-Toolkit,https://redux-toolkit.js.org</a>.": "Handled by default with <a>Redux,https://redux.js.org</a> and <a>Redux-Toolkit,https://redux-toolkit.js.org</a>.",
-  "Scoped State": "Scoped State",
+  "Scoped State": "Estado de Alcance Acotado (scoped)",
   "Available only to a selected branch of the app's tree and positioned on the upper common node to all served child nodes.": "Available only to a selected branch of the app's tree and positioned on the upper common node to all served child nodes.",
   "This pattern should be avoided for data that updates too frequently.": "Este patrón se debe evitar para datos que actualicen con demasiada frecuencia.",
   "Handled with <a>React Context API,https://reactjs.org/docs/context.html</a>.": "Manejado con <a>React Context API,https://es.reactjs.org/docs/context.html</a>.",
@@ -102,5 +102,13 @@
   "No fetching logic.": "No loǵica de solicitudes.",
   "Reserved for data that has to be accessed on different nesting levels, but is not needed app-wide.": "Reservado para datos que queremos acceder a distintos niveles de anidado, pero que no estarán disponibles para toda la app.",
   "Global Counter": "Contador Global",
-  "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point.": "<strong>Nota:</strong> No hay un límite claro entre el uso de prop drilling y pasar a usar Context, en este punto cada desarrollador/a deberá usar su propio criterio."
+  "<strong>Note:</strong> there is no hard limit in which we know to stop doing prop drilling and start using a Context, every developer will have to use it's own criteria at this point.": "<strong>Nota:</strong> No hay un límite claro entre el uso de prop drilling y pasar a usar Context, en este punto cada desarrollador/a deberá usar su propio criterio.",
+  "Provider Name:": "Nombre del Proveedor:",
+  "First Level": "Primer Nivel",
+  "Second Level": "Segundo Nivel",
+  "Third Level": "Tercer Nivel",
+  "Nesting Contexts": "Anidando Contextos",
+  "Using a Context means that the Context API will do a lookup up the component's tree and use the first one available.": "Usar un Contexto significa que Context API va a buscar hacia arriba en el árbol de componentes hasta encontrar el primer Contexto disponible.",
+  "This means that we can nest providers and by doing that change the Context its children will use, even if up the component's tree we have already placed another Provider.": "Esto significa que anidando Contextos podemos cambiar el Contexto que los hijos van a usar, incluso si ya esxite otro contexto más arriba en el árbol de componentes.",
+  "In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level.": "En el siguiente ejemplo se puede observar que, a pesar de que se usa siempre el mismo componente como consumidor, cada nivel tiene diferentes valores, y que además los cambios realizados en un nivel sólo afecta ese nivel."
 }
