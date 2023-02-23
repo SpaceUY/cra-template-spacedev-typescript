@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { intl } from 'utilities/i18n/intl.utility';
 import { GlobalCounterDisplay } from './GlobalCounterDisplay';
 import { GlobalCounterForm } from './GlobalCounterForm';
+import { LocalStateExample } from './LocalStateExample';
 import { ScopedStateConsumer } from './ScopedStateConsumer';
 import { ScopedStateProvider } from './ScopedStateProvider';
 
@@ -15,6 +16,7 @@ export const State: FC = () => {
     <>
       <Card.Base>
         <Card.Heading h2>{intl.translate({ id: 'Intro' })}</Card.Heading>
+
         <Card.Body>
           <Text.h3>{intl.translate({ id: 'What is State?' })}</Text.h3>
 
@@ -203,6 +205,7 @@ export const State: FC = () => {
 
       <Card.Base>
         <Card.Heading h2>{intl.translate({ id: 'Global State' })}</Card.Heading>
+
         <Card.Body>
           <Text.h3>{intl.translate({ id: 'The Humble Counter' })}</Text.h3>
 
@@ -226,6 +229,7 @@ export const State: FC = () => {
 
       <Card.Base>
         <Card.Heading h2>{intl.translate({ id: 'Scoped State' })}</Card.Heading>
+
         <Card.Body>
           <Text.h3>{intl.translate({ id: 'Nesting Contexts' })}</Text.h3>
 
@@ -284,6 +288,18 @@ export const State: FC = () => {
               </ScopedStateProvider>
             </ScopedStateConsumer>
           </ScopedStateProvider>
+        </Card.Body>
+      </Card.Base>
+
+      <br />
+
+      <Card.Base>
+        <Card.Heading h2>
+          {intl.translate({ id: 'Component State' })}
+        </Card.Heading>
+
+        <Card.Body>
+          <LocalStateExample />
         </Card.Body>
       </Card.Base>
     </>

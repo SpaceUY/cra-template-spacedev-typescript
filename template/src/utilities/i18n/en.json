@@ -110,5 +110,8 @@
   "Nesting Contexts": "Nesting Contexts",
   "Using a Context means that the Context API will do a lookup up the component's tree and use the first one available.": "Using a Context means that the Context API will do a lookup up the component's tree and use the first one available.",
   "This means that we can nest providers and by doing that change the Context its children will use, even if up the component's tree we have already placed another Provider.": "This means that we can nest providers and by doing that change the Context it's children will use, even if up the component's tree we have already placed another Provider.",
-  "In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level.": "In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level."
+  "In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level.": "In the following example you will notice that, even though we use the same consumer component, each one will have different values, and the changes triggered on any given level will only affect such level.",
+  "Local state can't be reached outside of the component": "Local state can't be reached outside of the component",
+  "Type anything in the input below": "Type anything in the input below",
+  "Text for header above": "Text for header above"
 }
