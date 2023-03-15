@@ -9,7 +9,7 @@ import { selectAuthToken } from 'global-state/selectors';
 import { genericErrorHandler } from 'helpers/error.helpers';
 import { isPath } from 'helpers/navigation.helpers';
 import { Align } from 'layout';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -47,12 +47,15 @@ export const Login: FC<FcDefaultProps> = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authToken = useSelector(selectAuthToken);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (
     values: FormValues,
     helpers: FormikHelpers<FormValues>,
   ) => {
     try {
+      setIsLoading(true);
+
       const token = await login(values.email, values.password);
 
       dispatch(setAuthTokenAction(token));
@@ -71,6 +74,8 @@ export const Login: FC<FcDefaultProps> = () => {
       helpers.resetForm();
     } catch (error) {
       genericErrorHandler(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -131,7 +136,7 @@ export const Login: FC<FcDefaultProps> = () => {
               </Card.Body>
 
               <Card.Footer>
-                <Button type="submit" color="primary">
+                <Button type="submit" color="primary" disabled={isLoading}>
                   {intl.translate({ id: 'Login' })}
                 </Button>
               </Card.Footer>
