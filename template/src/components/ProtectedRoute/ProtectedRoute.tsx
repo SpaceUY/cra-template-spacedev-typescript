@@ -1,5 +1,5 @@
 import { AppRoute } from 'enums/app-route.enum';
-import { selectAuthToken } from 'global-state/selectors';
+import { selectAuthToken } from 'examples/global-state/selectors';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';

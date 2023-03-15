@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { DesignContext } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
 import { StatusText } from 'design/input/StatusText/StatusText';
@@ -15,10 +16,12 @@ export const NumberInput = (props: InputProps<number | ''>): JSX.Element => {
 
   const handleChange = useCallback(
     (evt: ChangeEvent<HTMLInputElement>) => {
+      const { value } = evt.target;
+
       onChange({
         target: {
           name,
-          value: evt.target.value,
+          value: value === '' ? value : Number(value),
         },
       });
     },

@@ -2,7 +2,7 @@ import { Button } from 'design';
 import { MenuIcon } from 'design/Icon/MenuIcon';
 import { AppRoute } from 'enums/app-route.enum';
 import Drawer from 'examples/components/Drawer/Drawer';
-import { removeAuthTokenAction } from 'global-state/actions';
+import { removeAuthTokenAction } from 'examples/global-state/actions';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';

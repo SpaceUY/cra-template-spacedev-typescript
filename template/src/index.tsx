@@ -2,11 +2,9 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { ToastContainer } from 'components/Toast/Toast';
 import { DesignProvider } from 'design/DesignContext';
 import { DesignSystem } from 'design/enums/design-system.enum';
-import { reduxStore } from 'global-state';
 import { getLibrary } from 'helpers/blockchain.helpers';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import 'reflect-metadata';
 import { IntlProvider } from 'utilities/i18n/intl.context';
@@ -22,13 +20,11 @@ root.render(
     <Web3ReactProvider getLibrary={getLibrary}>
       <DesignProvider system={DesignSystem.MATERIAL_UI}>
         <IntlProvider>
-          <ReduxProvider store={reduxStore}>
-            <BrowserRouter>
-              <App />
+          <BrowserRouter>
+            <App />
 
-              <ToastContainer position="bottom-right" />
-            </BrowserRouter>
-          </ReduxProvider>
+            <ToastContainer position="bottom-right" />
+          </BrowserRouter>
         </IntlProvider>
       </DesignProvider>
     </Web3ReactProvider>

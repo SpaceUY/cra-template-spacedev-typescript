@@ -1,4 +1,5 @@
 import { AppBar } from 'examples/components/AppBar/AppBar';
+import { ExampleGlobalStateProvider } from 'examples/global-state';
 import { Router } from 'examples/Router';
 import { useContext } from 'react';
 import styled from 'styled-components';
@@ -19,13 +20,15 @@ function App() {
   useContext(IntlContext);
 
   return (
-    <StyledDiv>
-      <AppBar />
+    <ExampleGlobalStateProvider>
+      <StyledDiv>
+        <AppBar />
 
-      <main>
-        <Router />
-      </main>
-    </StyledDiv>
+        <main>
+          <Router />
+        </main>
+      </StyledDiv>
+    </ExampleGlobalStateProvider>
   );
 }
 

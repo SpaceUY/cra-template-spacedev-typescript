@@ -1,6 +1,6 @@
 import * as headings from './Headings';
 import { Label } from './Label';
-import { Paragraph } from './Paragraph';
+import { Paragraph, textBaseStyles } from './Paragraph';
 
 export const Text = {
   h1: headings.H1,
@@ -12,3 +12,5 @@ export const Text = {
   p: Paragraph,
   label: Label,
 };
+
+export { textBaseStyles };
